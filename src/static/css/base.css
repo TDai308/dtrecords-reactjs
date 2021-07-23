@@ -1,0 +1,131 @@
+:root {
+    --header-height: 100px;
+    --font-link: 20px;
+    --black-color: #1e1e1e;
+    --gray-coler: #6e7073;
+    --background-color: #eeeeee;
+    --red-color: #f73119;
+    --cyan-color: #5EAFB9;
+    --pink-color: rgb(241, 29, 107);
+    --blue-color: #172480
+}
+
+* {
+    box-sizing: inherit;
+}
+
+.min-width__860 {
+    min-width: 860px !important;
+}
+
+html {
+    font-size: 18px;
+    line-height: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: var(--black-color);
+}
+
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.grid__row--no_wrap {
+    display: flex;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.button__blue__with-a,
+.button__balck__with-a,
+.button__red__with-a {
+    min-width: 120px;
+    height: 50px;
+    text-decoration: none;
+    color: white;
+    font-size: var(--font-link);
+    line-height: 50px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.button__balck__with-a {
+    border: 1px solid white;
+    background: var(--black-color);
+}
+
+.button__balck__with-a:hover {
+    background: white;
+    color: var(--black-color);
+}
+
+.button__blue__with-a {
+    background: #32b6dd;
+    margin: 0 5px 0 5px;
+}
+
+.button__red__with-a {
+    margin: 0 5px;
+    display: block;
+    background: var(--red-color);
+}
+
+.button__red__with-a:hover {
+    background: #e21f08;
+}
+
+.button__blue__with-a:hover {
+    background: #21a2c8;
+}
+
+.font_weight_500 {
+    font-weight: 500;
+}
+
+.display_none {
+    display: none;
+}
+
+.display_block {
+    display: block;
+}
+
+.height_42px {
+    height: 42px;
+}
+
+.margin-10px {
+    margin: 10px;
+}
+
+.margin-30px-top {
+    margin-top: 30px;
+}
+
+.margin-0px {
+    margin: 0!important;
+}
+
+.background-signup-loggin {
+    background: url("../img/coollogo_com-242333430.png") round;
+}
+
+.background-error-404 {
+    background: url("../img/glitch-error-404-page_23-2148105404.jpg") round;
+    background-size: 20%;
+}
+
+.width_100 {
+    width: 100%;
+}
+
+.width_45 {
+    width: 45% !important;
+}

@@ -1,13 +1,18 @@
 import React from 'react';
 import './App.css';
+import './grid.css'
+import './static/icon/fontawesome/css/all.min.css'
 
-import Hello from "./components/Hello";
+import {BrowserRouter as Router} from "react-router-dom";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <Hello/>
-    </div>
+      <Router>
+          <div className="App">
+              <Header/>
+          </div>
+      </Router>
   );
 }
 
