@@ -1,8 +1,8 @@
 import React from "react";
 import {Route} from "react-router-dom";
 
-import HomeContent from "./sub-components/content/HomeContent";
-import ProductListContent from "./sub-components/content/ProductListContent";
+import HomeContent from "../sub-components/content/HomeContent";
+import ProductListContent from "../sub-components/content/ProductListContent";
 
 const ContentBody = () => {
     return(

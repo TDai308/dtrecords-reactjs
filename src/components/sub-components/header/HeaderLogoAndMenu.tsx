@@ -6,16 +6,16 @@ import ProductMenu from "./ProductMenu";
 import BlogMenu from "./BlogMenu";
 
 const HeaderLogoAndMenu = () => {
-    const [showmenu,setShowmenu] = useState(false);
+    const [showMenu,setShowMenu] = useState(false);
 
     const handleHoverMenu = () => {
-        setShowmenu(!showmenu);
+        setShowMenu(!showMenu);
     }
 
-    const [showblog,setShowblog] = useState(false);
+    const [showBlog,setShowBlog] = useState(false);
 
     const handleHoverBlog = () => {
-        setShowblog(!showblog);
+        setShowBlog(!showBlog);
     }
 
     return(
@@ -28,14 +28,14 @@ const HeaderLogoAndMenu = () => {
             <div className="header__menu" onMouseEnter={handleHoverMenu} onMouseLeave={handleHoverMenu}>
                 <Link to="/all-vinyl-product" className="header__menu-link">
                     Cửa Hàng
-                    <i className={classNames("fas", {"fa-angle-down": !showmenu}, {"fa-angle-up": showmenu})}/>
+                    <i className={classNames("fas", {"fa-angle-down": !showMenu}, {"fa-angle-up": showMenu})}/>
                 </Link>
                 <ProductMenu/>
             </div>
             <div className="header__menu" onMouseEnter={handleHoverBlog} onMouseLeave={handleHoverBlog}>
                 <Link to="/all-vinyl-product" className="header__menu-link">
                     Bản Tin Trọng Đại
-                    <i className={classNames("fas", {"fa-angle-down": !showblog}, {"fa-angle-up": showblog})}/>
+                    <i className={classNames("fas", {"fa-angle-down": !showBlog}, {"fa-angle-up": showBlog})}/>
                 </Link>
                 <BlogMenu/>
             </div>

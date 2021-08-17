@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderLogoAndMenu from "./sub-components/header/HeaderLogoAndMenu";
+import HeaderLogoAndMenu from "../sub-components/header/HeaderLogoAndMenu";
 
 const Header = () => {
     return(

@@ -3,16 +3,15 @@ import './App.css';
 import './grid.css'
 import './static/icon/fontawesome/css/all.min.css'
 
-import {BrowserRouter as Router} from "react-router-dom";
-import Header from "./components/Header";
-import ContentBody from "./components/ContentBody";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import homePage from "./components/homePage";
 
 function App() {
   return (
       <Router>
           <div className="App">
-              <Header/>
-              <ContentBody/>
+              <Route path="/" exact component={homePage}/>
+              <Route path="/login" exact component={homePage}/>
           </div>
       </Router>
   );
