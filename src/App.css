@@ -31,7 +31,8 @@
 }
 
 .header__account_cart,
-.button_checkout{
+.button_checkout,
+.header__login-signup{
   display: flex;
   align-items: center;
   justify-content: space-between;
