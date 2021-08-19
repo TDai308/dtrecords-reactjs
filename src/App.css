@@ -1465,3 +1465,8 @@
   margin: 15px 0;
 }
 
+.login-error {
+  margin: 20px 0 0;
+  color: var(--red-color);
+}
+

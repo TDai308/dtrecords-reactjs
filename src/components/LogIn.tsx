@@ -7,6 +7,7 @@ export default function LogIn() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const setParameter = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "email") {
@@ -37,11 +38,11 @@ export default function LogIn() {
             })
             .then(result => {
                 console.log(result);
-                // localStorage.setItem("access_token",result.);
+                localStorage.setItem("access_token",result.access_token);
             })
             .catch(error => {
                 console.log('error', error);
-                alert("Username or password are wrong");
+                setError("Username or password are wrong!!!");
             });
     }
 
@@ -52,7 +53,7 @@ export default function LogIn() {
     return(
         <div className="background-signup-loggin">
             <div className="oval">
-                <form className="sign_up__form" action="/login" method="post" onSubmit={handleSubmit}>
+                <form className="sign_up__form" onSubmit={handleSubmit}>
                     <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
                     <h2>Chào Mừng Quay Trở Lại.</h2>
                     <p className="log-in__title">Đăng nhập để tận hưởng những dịch vụ tốt</p>
@@ -65,6 +66,13 @@ export default function LogIn() {
                         <input className="sign_up__input" name="password" required type="password" onChange={setParameter}/>
                         <span>Mật Khẩu *</span>
                     </label>
+
+                    {
+                        error.length > 0 &&
+                        <div>
+                            <p className="login-error">{error}</p>
+                        </div>
+                    }
 
                     <button className="button_Login_Signup" onClick={login} type="submit">Đăng Nhập</button>
                     <span className="margin-10px">Hoặc</span>
