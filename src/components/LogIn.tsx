@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import SuccessfulLogging from "./sub-components/header/SuccessfulLogging";
 
 export default function LogIn() {
     const handleSignUp = () => {
@@ -8,6 +9,7 @@ export default function LogIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [logged,setLogged] = useState(localStorage.getItem("access_token") != null);
 
     const setParameter = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "email") {
@@ -20,7 +22,7 @@ export default function LogIn() {
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
         const urlencoded = new URLSearchParams();
-        urlencoded.append("username", email);
+        urlencoded.append("email", email);
         urlencoded.append("password", password);
 
         const requestOptions : RequestInit= {
@@ -37,8 +39,8 @@ export default function LogIn() {
                 } throw Error(response.status.toString())
             })
             .then(result => {
-                console.log(result);
                 localStorage.setItem("access_token",result.access_token);
+                setLogged(true);
             })
             .catch(error => {
                 console.log('error', error);
@@ -53,31 +55,38 @@ export default function LogIn() {
     return(
         <div className="background-signup-loggin">
             <div className="oval">
-                <form className="sign_up__form" onSubmit={handleSubmit}>
-                    <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
-                    <h2>Chào Mừng Quay Trở Lại.</h2>
-                    <p className="log-in__title">Đăng nhập để tận hưởng những dịch vụ tốt</p>
-                    <label className="has-float-label">
-                        <input className="sign_up__input" name="email" required type="text" onChange={setParameter}/>
-                        <span>Email *</span>
-                    </label>
+                {
+                    logged ?
+                        <SuccessfulLogging/> :
+                        <form className="sign_up__form" onSubmit={handleSubmit}>
+                            <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
+                            <h2>Chào Mừng Quay Trở Lại.</h2>
+                            <p className="log-in__title">Đăng nhập để tận hưởng những dịch vụ tốt</p>
+                            <label className="has-float-label">
+                                <input className="sign_up__input" name="email" required type="text"
+                                       onChange={setParameter}/>
+                                <span>Email *</span>
+                            </label>
 
-                    <label className="has-float-label">
-                        <input className="sign_up__input" name="password" required type="password" onChange={setParameter}/>
-                        <span>Mật Khẩu *</span>
-                    </label>
+                            <label className="has-float-label">
+                                <input className="sign_up__input" name="password" required type="password"
+                                       onChange={setParameter}/>
+                                <span>Mật Khẩu *</span>
+                            </label>
 
-                    {
-                        error.length > 0 &&
-                        <div>
-                            <p className="login-error">{error}</p>
-                        </div>
-                    }
+                            {
+                                error.length > 0 &&
+                                <div>
+                                    <p className="login-error">{error}</p>
+                                </div>
+                            }
 
-                    <button className="button_Login_Signup" onClick={login} type="submit">Đăng Nhập</button>
-                    <span className="margin-10px">Hoặc</span>
-                    <button type="button" className="button_Login_Signup" onClick={handleSignUp}>Đăng Ký</button>
-                </form>
+                            <button className="button_Login_Signup" onClick={login} type="submit">Đăng Nhập</button>
+                            <span className="margin-10px">Hoặc</span>
+                            <button type="button" className="button_Login_Signup" onClick={handleSignUp}>Đăng Ký
+                            </button>
+                        </form>
+                }
             </div>
         </div>
     );
