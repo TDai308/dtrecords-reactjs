@@ -8,7 +8,7 @@ export default function SuccessfulLogging() {
     });
     const history = useHistory();
 
-    const loggOut = () => {
+    const logOut = () => {
         localStorage.removeItem("access_token");
         history.push("/");
     };
@@ -34,7 +34,7 @@ export default function SuccessfulLogging() {
             })
             .catch(error => {
                 console.log('error', error);
-                loggOut();
+                logOut();
             });
     }
 
@@ -53,7 +53,7 @@ export default function SuccessfulLogging() {
                 <p>Bạn đã đăng nhập với tài khoản {user.userName}</p>
                 <p>Bạn muốn đăng xuất khỏi tài khoản này hay trờ về trang chủ???</p>
             </div>
-            <button className="button_Login_Signup" onClick={loggOut}>Đăng Xuất</button>
+            <button className="button_Login_Signup" onClick={logOut}>Đăng Xuất</button>
             <span className="margin-10px">Hoặc</span>
             <button type="button" className="button_Login_Signup" onClick={homePage}>Trở Về Trang Chủ
             </button>
