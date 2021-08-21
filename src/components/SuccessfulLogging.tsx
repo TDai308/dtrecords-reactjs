@@ -7,9 +7,7 @@ export default function SuccessfulLogging() {
 
     const history = useHistory();
 
-    useEffect(() => {
-        loadUserInformation();
-    }, []);
+    useEffect(loadUserInformation);
 
     const homePage = () => {
         history.push("/");
