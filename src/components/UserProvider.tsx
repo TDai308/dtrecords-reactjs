@@ -62,7 +62,7 @@ const UserProvider: FC = ({children}) => {
                 loadUserInformation
             }
         }>
-
+            {children}
         </UserContext.Provider>
     );
 };
