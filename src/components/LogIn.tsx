@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import SuccessfulLogging from "./SuccessfulLogging";
+import SuccessfulLogging from "./sub-components/logIn/SuccessfulLogging";
 import  {useHistory} from 'react-router-dom'
 
 export default function LogIn() {

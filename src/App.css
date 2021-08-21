@@ -103,7 +103,8 @@
   width: 100%;
 }
 
-.header__account__category-list a:hover {
+.header__account__category-list a:hover,
+.header__account__category-list:last-of-type p:hover {
   background: var(--background-color);
 }
 

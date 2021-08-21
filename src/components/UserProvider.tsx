@@ -53,7 +53,6 @@ const UserProvider: FC = ({children}) => {
             });
     }
 
-
     return (
         <UserContext.Provider value={
             {
