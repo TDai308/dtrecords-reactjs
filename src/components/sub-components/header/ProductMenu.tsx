@@ -68,9 +68,9 @@ const ProductMenu = () => {
         <div className="product_menu">
             <ul className="product_menu__selectors">
                 {
-                    headerMenu.map(menu => {
+                    headerMenu.map((menu, index) => {
                         return(
-                            <li className="product_menu__selector">
+                            <li className="product_menu__selector" key={index}>
                                 <ul className="product_menu__list">
                                     <li>
                                         <h2 className="product__selector__header">{menu.headerTitle}</h2>
@@ -78,7 +78,7 @@ const ProductMenu = () => {
                                     {
                                         menu.ProductMenuList.map((productType,index) => {
                                             return(
-                                                <li>
+                                                <li key={index}>
                                                     <Link to={productType.url} className={classNames("product__selector", {"font_weight_500": index===(menu.ProductMenuList.length-1)})}>{productType.title}</Link>
                                                 </li>
                                             );

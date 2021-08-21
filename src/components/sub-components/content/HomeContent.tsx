@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-const HomeContent = () => {
-    return(
+export default function HomeContent() {
+    useEffect(() => {
+        document.title = "DTrecords";
+    }, []);
+
+    return (
         <div className="container">
             Home Content
         </div>
     );
 }
-
-export default HomeContent;

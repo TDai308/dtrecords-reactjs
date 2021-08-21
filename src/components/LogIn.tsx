@@ -1,21 +1,27 @@
-import React, {useState} from "react";
-import SuccessfulLogging from "./sub-components/header/SuccessfulLogging";
+import React, {useEffect, useState} from "react";
+import SuccessfulLogging from "./SuccessfulLogging";
+import  {useHistory} from 'react-router-dom'
 
 export default function LogIn() {
-    const handleSignUp = () => {
-      window.location.href = "/signup";
-    };
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [logged,setLogged] = useState(localStorage.getItem("access_token") != null);
+    const logged = localStorage.getItem("access_token") != null;
+    const history = useHistory();
 
     const setParameter = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "email") {
             setEmail(event.target.value);
         } else setPassword(event.target.value);
     };
+
+    const handleSignUp = () => {
+        window.location.href = "/signup";
+    };
+
+    useEffect(() => {
+        document.title = "Login";
+    }, []);
 
     const login = () => {
         const myHeaders = new Headers();
@@ -40,10 +46,10 @@ export default function LogIn() {
             })
             .then(result => {
                 localStorage.setItem("access_token",result.access_token);
-                setLogged(true);
+                history.push("/");
             })
             .catch(error => {
-                console.log('error', error);
+                console.log(error);
                 setError("Username or password are wrong!!!");
             });
     }

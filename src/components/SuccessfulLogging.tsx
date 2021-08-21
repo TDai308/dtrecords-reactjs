@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from "react";
-import  {Redirect} from 'react-router-dom'
+import  {useHistory} from 'react-router-dom'
 
 
 export default function SuccessfulLogging() {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        userName: ""
+    });
+    const history = useHistory();
 
     const loggOut = () => {
         localStorage.removeItem("access_token");
-        return <Redirect to="/"/>
+        history.push("/");
     };
     
     function loadUserInformation() {
@@ -27,7 +30,6 @@ export default function SuccessfulLogging() {
                 } throw new Error(response.status.toString());
             })
             .then(result => {
-                console.log(result);
                 setUser(result);
             })
             .catch(error => {
@@ -38,17 +40,17 @@ export default function SuccessfulLogging() {
 
     useEffect(() => {
        loadUserInformation();
-    });
+    }, []);
 
     const homePage = () => {
-        return <Redirect to="/"/>
+        history.push("/");
     };
 
     return (
         <div className="sign_up__form">
             <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
             <div className="sign_up__note">
-                <p>Bạn đã đăng nhập với tài khoản</p>
+                <p>Bạn đã đăng nhập với tài khoản {user.userName}</p>
                 <p>Bạn muốn đăng xuất khỏi tài khoản này hay trờ về trang chủ???</p>
             </div>
             <button className="button_Login_Signup" onClick={loggOut}>Đăng Xuất</button>
