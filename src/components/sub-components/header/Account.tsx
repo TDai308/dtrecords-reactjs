@@ -1,13 +1,9 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import {Link} from "react-router-dom";
-import {UserContext} from "../../UserProvider";
+import {UserContext} from "../../context/UserProvider";
 
 export default function Account() {
-    const {user, logOut, loadUserInformation} = useContext(UserContext);
-
-    useEffect(() => {
-        loadUserInformation();
-    }, []);
+    const {user, logOut} = useContext(UserContext);
 
     return (
         <div className="header__account">

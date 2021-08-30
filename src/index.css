@@ -75,6 +75,12 @@ a {
   background: var(--black-color);
 }
 
+.display_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .button__balck__with-a:hover {
   background: white;
   color: var(--black-color);
@@ -119,6 +125,10 @@ a {
   margin: 10px;
 }
 
+.margin-20px-top {
+  margin: 20px 0 0;
+}
+
 .margin-30px-top {
   margin-top: 30px;
 }
@@ -133,11 +143,11 @@ a {
   right: 0;
   left: 0;
   bottom: 0;
-  background: url("static/img/coollogo_com-242333430.png") round;
+  background: url("static/img/logo/coollogo_com-242333430.png") round;
 }
 
 .background-error-404 {
-  background: url("static/img/glitch-error-404-page_23-2148105404.jpg") round;
+  background: url("static/img/admin/glitch-error-404-page_23-2148105404.jpg") round;
   background-size: 20%;
 }
 

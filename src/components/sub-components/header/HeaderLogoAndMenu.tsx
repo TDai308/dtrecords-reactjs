@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import logo from "../../../static/img/logo.png"
+import logo from "../../../static/img/logo/logo.png"
 import classNames from "classnames";
 import ProductMenu from "./ProductMenu";
 import BlogMenu from "./BlogMenu";

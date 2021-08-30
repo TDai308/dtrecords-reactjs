@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from "react";
-import SuccessfulLogging from "./sub-components/logIn/SuccessfulLogging";
+import React, {useContext, useEffect, useState} from 'react';
+import SuccessfulLogging from "./SuccessfulLogging";
 import  {useHistory} from 'react-router-dom'
+import {tokenApi} from "../../api/tokenApi";
+import {UserContext} from "../context/UserProvider";
 
 export default function LogIn() {
     const [email, setEmail] = useState("");
@@ -8,6 +10,7 @@ export default function LogIn() {
     const [error, setError] = useState("");
     const logged = localStorage.getItem("access_token") != null;
     const history = useHistory();
+    const {setIsLogged} = useContext(UserContext);
 
     const setParameter = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "email") {
@@ -23,35 +26,17 @@ export default function LogIn() {
         document.title = "Login";
     }, []);
 
-    const login = () => {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-        const urlencoded = new URLSearchParams();
-        urlencoded.append("email", email);
-        urlencoded.append("password", password);
-
-        const requestOptions : RequestInit= {
-            method: 'POST',
-            headers: myHeaders,
-            body: urlencoded,
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:8080/api/login", requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } throw Error(response.status.toString())
-            })
-            .then(result => {
-                localStorage.setItem("access_token",result.access_token);
-                history.push("/");
-            })
-            .catch(error => {
-                console.log(error);
-                setError("Username or password are wrong!!!");
-            });
+    const login = async () => {
+        try {
+            const response = await tokenApi.logIn(email,password);
+            localStorage.setItem("access_token",response.data.access_token);
+            localStorage.setItem("refresh_token",response.data.refresh_token);
+            setIsLogged(true);
+            history.push("/");
+        } catch (error) {
+            console.log(error);
+            setError("Email hoặc mật khẩu của bạn đã bị sai!!!");
+        }
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -87,7 +72,7 @@ export default function LogIn() {
                                 </div>
                             }
 
-                            <button className="button_Login_Signup" onClick={login} type="submit">Đăng Nhập</button>
+                            <button className="button_Login_Signup" onClick={login} type="button">Đăng Nhập</button>
                             <span className="margin-10px">Hoặc</span>
                             <button type="button" className="button_Login_Signup" onClick={handleSignUp}>Đăng Ký
                             </button>

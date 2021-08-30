@@ -1,15 +1,11 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import  {useHistory} from 'react-router-dom'
-import {UserContext} from "../../UserProvider";
+import {UserContext} from "../context/UserProvider";
 
 export default function SuccessfulLogging() {
-    const {user, logOut, loadUserInformation} = useContext(UserContext);
+    const {user, logOut} = useContext(UserContext);
 
     const history = useHistory();
-
-    useEffect(() => {
-        loadUserInformation();
-    },[]);
 
     const homePage = () => {
         history.push("/");
