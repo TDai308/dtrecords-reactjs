@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {UserForSignUp} from "../types/UserForSignUp";
 import {userApi} from "../../api/userApi";
 import {useHistory} from "react-router-dom";
+import ReactPhoneInput from "react-phone-input-2"
+import 'react-phone-input-2/lib/style.css'
 
 export default function SignUp() {
     const [newUser,setNewUser] = useState<UserForSignUp>({
@@ -21,6 +23,10 @@ export default function SignUp() {
         setNewUser({...newUser,[event.currentTarget.name]: event.target.value});
     };
 
+    const handleChangePhoneNumber = (value:string) => {
+        setNewUser({...newUser,phoneNumber: value});
+    }
+
     const goToLogIn = () => {
         window.location.href = "/login";
     };
@@ -37,37 +43,63 @@ export default function SignUp() {
         }
     }
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
+
     return (
         <div className="background-signup-loggin">
             <div className="oval">
-                <form className="sign_up__form" >
+                <form className="sign_up__form" onSubmit={handleSubmit}>
                     <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
                     <h2>Tạo tài khoản.</h2>
                     <div className="has-float-label">
                         <input className="sign_up__input" name="userName" required type="text" onChange={handleChange}/>
-                        <span>Tên Tài Khoản *</span>
+                        <span>Tên Tài Khoản</span>
                     </div>
 
                     <div className="has-float-label">
                         <input className="sign_up__input" name="password" required type="password" onChange={handleChange}/>
-                        <span>Mật Khẩu *</span>
+                        <span>Mật Khẩu</span>
                     </div>
 
                     <div className="width_100 display_flex margin-20px-top" >
                         <div className="has-float-label width_45 margin-0px" style={{flex: "unset"}}>
                             <input className="sign_up__input" name="name" required type="text" onChange={handleChange}/>
-                            <span>Họ Tên *</span>
+                            <span>Họ Tên</span>
                         </div>
 
                         <div className="has-float-label width_45 margin-0px" style={{flex: "unset"}}>
-                            <input className="sign_up__input" name="phoneNumber" required type="tel" onChange={handleChange}/>
-                                <span>Số Điện Thoại *</span>
+                            <ReactPhoneInput containerClass="sign_up__input"
+                                             containerStyle={{
+                                                 // paddingLeft: 0
+                                             }}
+                                             inputStyle={{
+                                                 fontSize: "1rem",
+                                                 border: "none"
+                                             }}
+                                             buttonStyle={{
+                                                 background: "none",
+                                                 border: "none",
+                                                 fontSize: "1rem"
+                                             }}
+                                             inputProps={{
+                                                 name: "phoneNumber",
+                                                 required: true
+                                             }}
+                                             placeholder={""}
+                                             country={"vn"}
+                                             value={newUser.phoneNumber}
+                                             onChange={handleChangePhoneNumber}/>
+                                <span style={{
+                                    transform: "translateX(10px) translateY(-24px)"
+                                }}>Số Điện Thoại</span>
                         </div>
                     </div>
 
                     <div className="has-float-label">
                         <input className="sign_up__input" name="email" required type="email" onChange={handleChange}/>
-                            <span>Email *
+                            <span>Email
                                 {
                                 emailError.length !== 0 &&
                                     <p className="message_Email_Error">{emailError}</p>
@@ -77,10 +109,10 @@ export default function SignUp() {
 
                     <div className="has-float-label">
                         <input className="sign_up__input" name="address" required type="text" onChange={handleChange}/>
-                            <span>Địa Chỉ *</span>
+                            <span>Địa Chỉ</span>
                     </div>
 
-                    <button className="button_Login_Signup" onClick={signUp} type="button">Đăng Ký</button>
+                    <button className="button_Login_Signup" onClick={signUp} type="submit">Đăng Ký</button>
                     <span className="margin-10px">Hoặc</span>
                     <button type="button" className="button_Login_Signup" onClick={goToLogIn}>Đăng Nhập</button>
                 </form>
