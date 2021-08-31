@@ -33,9 +33,7 @@ export default function SignUp() {
 
     const signUp = async () => {
         try {
-            console.log("hahaha");
             const fetchSignUp = await userApi.signUp(newUser);
-            console.log("hahaha1");
             console.log(fetchSignUp);
             history.push("/login");
         } catch (error) {

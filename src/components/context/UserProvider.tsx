@@ -40,7 +40,7 @@ const UserProvider: FC = ({children}) => {
             const fetchAccessToken = await tokenApi.refreshToken();
             localStorage.setItem("access_token",fetchAccessToken.data.access_token);
             console.log("Refreshed token, new access token was created");
-            loadUserInformation();
+            await loadUserInformation();
         } catch (error) {
             localStorage.removeItem("access_token");
             localStorage.removeItem("refresh_token");
@@ -57,7 +57,7 @@ const UserProvider: FC = ({children}) => {
             const fetchUser = await userApi.getUserWithToken();
             setUser(fetchUser.data);
         } catch (error) {
-            refreshToken();
+            await refreshToken();
             console.log('error', error);
             console.log('refreshing access token');
         }

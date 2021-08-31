@@ -4,6 +4,7 @@ import mainPage from "./main-page/mainPage";
 import LogIn from "./LoginAndSignUp/LogIn";
 import SignUp from "./LoginAndSignUp/SignUp";
 import {UserContext} from "./context/UserProvider";
+import Admin from "./admin/Admin";
 
 export default function DTrecords() {
     const {isLogged,loadUserInformation} = useContext(UserContext);
@@ -19,7 +20,7 @@ export default function DTrecords() {
             <Route path="/" exact component={mainPage}/>
             <Route path="/login" exact component={LogIn}/>
             <Route path="/signup" exact component={SignUp}/>
-            {/*<Route path="/admin" exact component={}/>*/}
+            <Route path="/admin" exact component={Admin}/>
         </div>
     );
 }

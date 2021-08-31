@@ -149,6 +149,11 @@ a {
 .background-error-404 {
   background: url("static/img/admin/glitch-error-404-page_23-2148105404.jpg") round;
   background-size: 20%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .width_100 {
