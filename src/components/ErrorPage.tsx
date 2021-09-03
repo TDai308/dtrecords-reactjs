@@ -9,7 +9,7 @@ export default function ErrorPage() {
                 } else {
                     window.location.href = "/";
                 }
-            },1000);
+            },500);
         };
         alertLogin();
     },[])

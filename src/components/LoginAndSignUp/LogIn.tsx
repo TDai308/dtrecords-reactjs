@@ -64,15 +64,13 @@ export default function LogIn() {
                                        onChange={setParameter}/>
                                 <span>Mật Khẩu *</span>
                             </label>
-
                             {
                                 error.length > 0 &&
                                 <div>
                                     <p className="login-error">{error}</p>
                                 </div>
                             }
-
-                            <button className="button_Login_Signup" onClick={login} type="button">Đăng Nhập</button>
+                            <button className="button_Login_Signup" onClick={login} type="submit">Đăng Nhập</button>
                             <span className="margin-10px">Hoặc</span>
                             <button type="button" className="button_Login_Signup" onClick={handleSignUp}>Đăng Ký
                             </button>

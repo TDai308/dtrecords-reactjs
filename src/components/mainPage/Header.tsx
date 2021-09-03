@@ -1,6 +1,6 @@
 import React from "react";
-import HeaderLogoAndMenu from "../sub-components/header/HeaderLogoAndMenu";
-import AccountAndCart from "../sub-components/header/AccountAndCart";
+import HeaderLogoAndMenu from "../subComponents/header/HeaderLogoAndMenu";
+import AccountAndCart from "../subComponents/header/AccountAndCart";
 
 const Header = () => {
     return(
