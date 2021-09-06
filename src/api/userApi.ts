@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import {UserForSignUp} from "../components/types/UserForSignUp";
+import {UserForSigningUp} from "../components/types/User";
 
 export const userApi = {
     getUserWithToken: () => {
@@ -22,7 +22,7 @@ export const userApi = {
         return axiosClient.get(url);
     },
 
-    signUp: (newUser:UserForSignUp) => {
+    signUp: (newUser:UserForSigningUp) => {
         const url = "/user";
         const data = JSON.stringify(newUser);
         return axiosClient.post(url,data);

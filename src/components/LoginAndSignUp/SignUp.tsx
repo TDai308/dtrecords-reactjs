@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {UserForSignUp} from "../types/UserForSignUp";
+import {UserForSigningUp} from "../types/User";
 import {userApi} from "../../api/userApi";
 import {useHistory} from "react-router-dom";
 import ReactPhoneInput from "react-phone-input-2"
 import 'react-phone-input-2/lib/style.css'
 
 export default function SignUp() {
-    const [newUser,setNewUser] = useState<UserForSignUp>({
+    const [newUser,setNewUser] = useState<UserForSigningUp>({
         name: "",
         password: "",
         userName: "",

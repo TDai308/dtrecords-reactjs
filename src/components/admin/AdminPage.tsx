@@ -11,7 +11,7 @@ export default function AdminPage() {
             }}>
                 <Route path="/admin" exact component={AdminMenu}/>
             </div>
-            <Route path="/admin/vinyl" exact component={AdminVinyl}/>
+            <Route path="/admin/vinyl" component={AdminVinyl}/>
         </div>
     );
 }

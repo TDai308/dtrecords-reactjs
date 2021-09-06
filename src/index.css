@@ -21,7 +21,8 @@ code {
   --red-color: #f73119;
   --cyan-color: #5EAFB9;
   --pink-color: rgb(241, 29, 107);
-  --blue-color: #172480
+  --blue-color: #172480;
+  --turquoise-color: #32b6dd;
 }
 
 * {
@@ -68,6 +69,7 @@ a {
   text-align: center;
   border-radius: 5px;
   padding: 0 10px;
+  cursor: pointer;
 }
 
 .button__balck__with-a {
@@ -92,6 +94,7 @@ a {
 }
 
 .button__red__with-a {
+  border: none;
   margin: 0 5px;
   display: block;
   background: var(--red-color);

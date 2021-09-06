@@ -15,3 +15,15 @@ export type Vinyl = {
     discount: number,
     realPrice: number
 }
+
+export type VinylForCreating = {
+    vinylName: string,
+    artist: Artist,
+    thumbnail1: string,
+    thumbnail2: string,
+    quantity: number,
+    price: number,
+    genres: Genre[],
+    nation: Nation,
+    discount: number
+}

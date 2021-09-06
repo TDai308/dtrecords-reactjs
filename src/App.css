@@ -1117,15 +1117,20 @@
 }
 
 .delete__button:hover {
-  color: var(--red-color);
+  background: var(--red-color);
+  color: white;
 }
 
 .edit__button {
   cursor: pointer;
 }
 
+.edit__button:hover{
+  background: var(--turquoise-color);
+}
+
 .edit__button:hover a{
-  color: blue;
+  color: white;
 }
 
 .oval__notification {
@@ -1481,5 +1486,19 @@
 .login-error {
   margin: 20px 0 0;
   color: var(--red-color);
+}
+
+table,
+table td,
+table th {
+  border: 0.5px solid var(--gray-coler);
+  text-align: center;
+  padding: 5px;
+}
+
+th {
+  text-transform: uppercase;
+  color: white;
+  background: var(--turquoise-color);
 }
 
