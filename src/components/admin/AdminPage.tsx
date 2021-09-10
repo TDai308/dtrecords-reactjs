@@ -9,8 +9,8 @@ export default function AdminPage() {
             <div className="oval" style={{
                 zIndex: -1
             }}>
-                <Route path="/admin" exact component={AdminMenu}/>
             </div>
+            <Route path="/admin" exact component={AdminMenu}/>
             <Route path="/admin/vinyl" component={AdminVinyl}/>
         </div>
     );

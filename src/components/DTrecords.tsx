@@ -13,7 +13,7 @@ export default function DTrecords() {
         if (isLogged) {
             loadUserInformation();
         }
-    }, []);
+    }, [isLogged]);
 
     return (
         <div>

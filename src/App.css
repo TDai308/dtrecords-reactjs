@@ -151,7 +151,7 @@
   padding: 20px 30px 50px 250px;
   background: rgba(255,255,255,0.8);
   transform-origin: top;
-  animation: productMenuAppear ease-in 0.2s;
+  animation: productMenuAppear ease-in .2s;
   z-index: 1;
 }
 
@@ -1091,6 +1091,7 @@
 .admin_page__menu__manager {
   width: 90%;
   background: white;
+  position: relative;
   border-radius: 10px;
   padding: 30px;
   display: flex;
@@ -1320,6 +1321,76 @@
   outline: none;
   height: 2.75rem;
   padding: 6px 12px;
+}
+
+.button--adding {
+  text-align: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  background: var(--turquoise-color);
+  opacity: 0.5;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.button--adding:hover {
+  opacity: 1;
+}
+
+.adminPageVinyl__genreItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  background: var(--turquoise-color);
+}
+
+.adminPageVinyl__genreItem:first-child {
+  margin-left: 0;
+}
+
+.adminPageVinyl__genreItem > svg {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.adminPageVinyl__selectMenuGenres {
+    position: absolute;
+    padding: 10px;
+    width: 120px;
+    right: -15%;
+    bottom: 4%;
+    background: white;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    border: solid 0.5px var(--gray-coler);
+    animation: productMenuAppear ease-in .2s;
+}
+
+.adminPage__selectMenu__selectInput {
+  margin-bottom: 5px;
+}
+
+.adminPage__selectMenu--closeButton {
+  font-size: 1rem;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background: var(--red-color);
+  cursor: pointer;
+}
+
+.adminPage__selectMenu--closeButton:hover {
+  background: #e21f08;
 }
 
 .validate_message {

@@ -141,11 +141,8 @@ a {
 }
 
 .background-signup-loggin {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  overflow: auto;
+  height: 100vh;
   background: url("static/img/logo/coollogo_com-242333430.png") round;
 }
 
@@ -166,3 +163,4 @@ a {
 .width_45 {
   width: 45% !important;
 }
+
