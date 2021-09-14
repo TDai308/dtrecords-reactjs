@@ -49,23 +49,19 @@ export default function AdminVinylList() {
         getVinylList();
     }, []);
 
-    let deleteButton = document.getElementsByClassName("delete__button");
-    let ovalNotification = document.getElementsByClassName("oval__notification");
-    let NoButton = document.getElementsByClassName("button__red__with-a");
-    for (let i=0; i<deleteButton.length;i++) {
-        deleteButton[i].addEventListener("click", function () {
-            ovalNotification[i].setAttribute("style", "display:block");
-        })
-        NoButton[i+1].addEventListener("click", function () {
-            ovalNotification[i].setAttribute("style", "display:none");
-        })
+    const removeNotification = document.getElementsByClassName("oval__notification");
+
+    function handleOpenRemoveNotification(index:number) {
+        removeNotification[index].setAttribute("style", "display:block");
+    }
+
+    function handleCloseRemoveNotification(index:number) {
+        removeNotification[index].setAttribute("style", "display:none");
     }
 
     const deleteVinyl = async (id:number)=> {
         try {
-            const fetchDeleteVinyl = await vinylApi.deleteVinyl(id);
-            console.log(fetchDeleteVinyl);
-            setVinyls(defaultVinyls);
+            await vinylApi.deleteVinyl(id);
             getVinylList();
         } catch (error) {
             console.log("error", error);
@@ -117,7 +113,7 @@ export default function AdminVinylList() {
                                     <td>{vinyl.discount}</td>
                                     <td>{vinyl.realPrice}</td>
                                     <td className="edit__button"><Link to={"/admin/vinyl/edit-vinyl/"+vinyl.id}>Sửa</Link></td>
-                                    <td className="delete__button">Xóa</td>
+                                    <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>Xóa</td>
                                 </tr>
                             );
                         })
@@ -132,7 +128,7 @@ export default function AdminVinylList() {
                                 <p>Bạn có chắc muốn xóa???</p>
                                 <p>{vinyl.vinylName} - {vinyl.artist.nameArtist}</p>
                                 <div className="admin_page__notification_delete_btn">
-                                    <button className="button__red__with-a">Không</button>
+                                    <button className="button__red__with-a" onClick={() => handleCloseRemoveNotification(index)}>Không</button>
                                     <button className="button__blue__with-a" onClick={() => deleteVinyl(vinyl.id)}>Xóa</button>
                                 </div>
                             </div>

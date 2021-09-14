@@ -58,7 +58,7 @@ a {
 }
 
 .button__blue__with-a,
-.button__balck__with-a,
+.button__black__with-a,
 .button__red__with-a {
   min-width: 120px;
   height: 50px;
@@ -72,7 +72,7 @@ a {
   cursor: pointer;
 }
 
-.button__balck__with-a {
+.button__black__with-a {
   border: 1px solid white;
   background: var(--black-color);
 }
@@ -83,12 +83,14 @@ a {
   align-items: center;
 }
 
-.button__balck__with-a:hover {
+.button__black__with-a:hover {
   background: white;
   color: var(--black-color);
 }
 
 .button__blue__with-a {
+  border: none;
+  border: none;
   background: #32b6dd;
   margin: 0 5px 0 5px;
 }
