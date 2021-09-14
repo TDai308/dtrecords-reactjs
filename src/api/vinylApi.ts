@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import {VinylForCreating} from "../components/types/Vinyl";
+import {Vinyl, VinylForCreating} from "../components/types/Vinyl";
 
 export const vinylApi = {
     getVinylList: () => {
@@ -7,9 +7,24 @@ export const vinylApi = {
         return axiosClient.get(url);
     },
 
+    getVinyl: (id:number) => {
+        const url = `/vinyl/${id}`;
+        return axiosClient.get(url);
+    },
+
     deleteVinyl: (id:number) => {
         const url = `/admin/vinyl/${id}`;
         return axiosClient.delete(url,{
+            headers: {
+                'Authorization': "Bearer "+ localStorage.getItem("access_token")
+            }
+        });
+    },
+
+    updateVinyl: (id:number, vinyl:Vinyl) => {
+        const url = `/admin/vinyl/${id}`;
+        const data = JSON.stringify(vinyl);
+        return axiosClient.put(url,data,{
             headers: {
                 'Authorization': "Bearer "+ localStorage.getItem("access_token")
             }

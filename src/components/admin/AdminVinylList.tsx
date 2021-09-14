@@ -112,7 +112,7 @@ export default function AdminVinylList() {
                                     <td>{vinyl.nation.nation}</td>
                                     <td>{vinyl.discount}</td>
                                     <td>{vinyl.realPrice}</td>
-                                    <td className="edit__button"><Link to={"/admin/vinyl/edit-vinyl/"+vinyl.id}>Sửa</Link></td>
+                                    <td className="edit__button"><Link to={"/admin/vinyl/edit/"+vinyl.id}>Sửa</Link></td>
                                     <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>Xóa</td>
                                 </tr>
                             );

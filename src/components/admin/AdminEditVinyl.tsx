@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {VinylForCreating} from "../types/Vinyl";
+import {Link, useHistory, useParams} from "react-router-dom";
+import {Vinyl, VinylForEditingDefault} from "../types/Vinyl";
 import {Artist} from "../types/Artist";
 import {Genre} from "../types/Genre";
 import {Nation} from "../types/Nation";
@@ -9,23 +9,35 @@ import {nationApi} from "../../api/nationApi";
 import {genreApi} from "../../api/genreApi";
 import {vinylApi} from "../../api/vinylApi";
 import {UserContext} from "../context/UserProvider";
-import {VinylForCreatingDefault} from "../types/Vinyl";
 
-export default function AdminCreateVinyl() {
+export default function AdminEditVinyl() {
+    const [vinyl,setVinyl] = useState<Vinyl>(VinylForEditingDefault)
     const [artists, setArtists] = useState<Artist[]>([]);
     const [genres, setGenres] = useState<Genre[]>([]);
     const [nations, setNations] = useState<Nation[]>([]);
-    const [newVinyl, setNewVinyl] = useState<VinylForCreating>(VinylForCreatingDefault);
     const [showAddingMenu, setShowAddingMenu] = useState<boolean>(false);
-    const [creatingSuccessful, setCreatingSuccessful] = useState<boolean>(false);
+    const [editingSuccessful, setEditingSuccessful] = useState<boolean>(false);
+
+    const {id} = useParams<{id:string}>();
+    const {refreshToken} = useContext(UserContext);
+    const history = useHistory();
+
+    const getVinyl = async () => {
+        try {
+            const fetchVinyl = await vinylApi.getVinyl(parseInt(id));
+            setVinyl(fetchVinyl.data);
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
 
     const getArtistList = async () => {
-      try {
-          const fetchArtistList = await artistApi.getArtists();
-          setArtists(fetchArtistList.data);
-      } catch (error) {
-          console.log("error", error);
-      }
+        try {
+            const fetchArtistList = await artistApi.getArtists();
+            setArtists(fetchArtistList.data);
+        } catch (error) {
+            console.log("error", error);
+        }
     };
 
     const getNationList = async () => {
@@ -50,34 +62,11 @@ export default function AdminCreateVinyl() {
         getNationList();
         getArtistList();
         getGenreList();
+        getVinyl();
     }, []);
 
-    useEffect(() => {
-        setNewVinyl({...newVinyl, artist: artists[0]});
-        VinylForCreatingDefault.artist = artists[0];
-    }, [artists]);
-
-    useEffect(() => {
-        setNewVinyl({...newVinyl, nation: nations[0]});
-        VinylForCreatingDefault.nation = nations[0];
-    }, [nations]);
-
-    const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-    };
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
-        if (event.target.tagName === "INPUT") {
-            setNewVinyl({...newVinyl, [event.currentTarget.name]: event.target.value})
-        }
-        if (event.target.tagName === "SELECT") {
-            if (event.currentTarget.name === "artist") {
-                setNewVinyl({...newVinyl, artist: artists.find(artist => artist.id === parseInt(event.target.value))!})
-            }
-            if (event.currentTarget.name === "nation") {
-                setNewVinyl({...newVinyl, nation: nations.find(nation => nation.id === parseInt(event.target.value))!})
-            }
-        }
+    const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
     }
 
     const handleAddOpenButtonClick = () => {
@@ -88,41 +77,51 @@ export default function AdminCreateVinyl() {
         setShowAddingMenu(false);
     }
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
+        if (event.target.tagName === "INPUT") {
+            setVinyl({...vinyl, [event.currentTarget.name]: event.target.value})
+        }
+        if (event.target.tagName === "SELECT") {
+            if (event.currentTarget.name === "artist") {
+                setVinyl({...vinyl, artist: artists.find(artist => artist.id === parseInt(event.target.value))!})
+            }
+            if (event.currentTarget.name === "nation") {
+                setVinyl({...vinyl, nation: nations.find(nation => nation.id === parseInt(event.target.value))!})
+            }
+        }
+    }
+
     const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let genreSelected : Genre[];
         if (event.target.checked) {
-            genreSelected = newVinyl.genres.concat({
+            genreSelected = vinyl.genres.concat({
                 id: parseInt(event.currentTarget.value),
                 genreName: event.target.name
             });
-            setNewVinyl({...newVinyl,genres: genreSelected});
+            setVinyl({...vinyl,genres: genreSelected});
         } else {
-            genreSelected = newVinyl.genres;
+            genreSelected = vinyl.genres;
             const index = genreSelected.map(function (genre) {
                 return genre.id
             }).indexOf(parseInt(event.target.value));
             if (index !== -1) {
                 genreSelected.splice(index,1);
             }
-            setNewVinyl({...newVinyl,genres: genreSelected});
+            setVinyl({...vinyl,genres: genreSelected});
         }
     }
 
-    const {refreshToken} = useContext(UserContext);
-
-    const handleAddNewVinyl = async () => {
+    const handleUpdateVinyl = async () => {
         try {
-            await vinylApi.addNewVinyl(newVinyl);
-            setCreatingSuccessful(true);
-            setNewVinyl(VinylForCreatingDefault);
-            const artistInput = document.getElementById("artistInput") as HTMLSelectElement;
-            artistInput.selectedIndex = 0;
-            const nationInput = document.getElementById("nationInput") as HTMLSelectElement;
-            nationInput.selectedIndex = 0;
+            await vinylApi.updateVinyl(parseInt(id),vinyl);
+            setEditingSuccessful(true);
+            setTimeout(() => {
+                history.push("/admin/vinyl");
+            },2000);
         } catch (error) {
             if (error.response.status === 403) {
                 await refreshToken();
-                handleAddNewVinyl();
+                handleUpdateVinyl();
             } else {
                 console.log("error", error);
             }
@@ -131,19 +130,19 @@ export default function AdminCreateVinyl() {
 
     return (
         <form className="admin_page__menu__manager" style={{width: "60%"}} onSubmit={handleSubmit}>
-            <h1>Thêm thông tin sản phẩm mới</h1>
+            <h1>Chỉnh sửa thông tin sản phẩm</h1>
             <Link to="/admin/vinyl" className="button__blue__with-a">Danh sách sản phẩm</Link>
             {
-                creatingSuccessful &&
-                <p>Sản phẩm mới đã được thêm</p>
+                editingSuccessful &&
+                <p>Thông tin sản phẩm đã được cập nhật thành công</p>
             }
             <label className="has-float-label">
-                <input className="sign_up__input" name="vinylName" required type="text" value={newVinyl.vinylName} onChange={handleChange}/>
+                <input className="sign_up__input" name="vinylName" required type="text" value={vinyl.vinylName} onChange={handleChange}/>
                 <span>Tên sản phẩm</span>
             </label>
 
             <label className="has-float-label">
-                <select id={"artistInput"} name="artist" className="sign_up__input" onChange={handleChange}>
+                <select id={"artistInput"} name="artist" value={vinyl.artist.id} className="sign_up__input" onChange={handleChange}>
                     {
                         artists.map((artist,index) => {
                             return (
@@ -156,22 +155,22 @@ export default function AdminCreateVinyl() {
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" name="thumbnail1" required type="text" value={newVinyl.thumbnail1} onChange={handleChange}/>
+                <input className="sign_up__input" name="thumbnail1" required type="text" value={vinyl.thumbnail1} onChange={handleChange}/>
                 <span>Thumbnail 1</span>
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" name="thumbnail2" required type="text" value={newVinyl.thumbnail2} onChange={handleChange}/>
+                <input className="sign_up__input" name="thumbnail2" required type="text" value={vinyl.thumbnail2} onChange={handleChange}/>
                 <span>Thumbnail 2</span>
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" name="quantity" step="1" min="0" required type="number" value={newVinyl.quantity} onChange={handleChange}/>
+                <input className="sign_up__input" name="quantity" step="1" min="0" required type="number" value={vinyl.quantity} onChange={handleChange}/>
                 <span>Số lượng</span>
             </label>
 
             <label className="has-float-label">
-                <input id="input_price" className="sign_up__input" name="price" step="0.01" min="0" required type="number" value={newVinyl.price} onChange={handleChange}/>
+                <input id="input_price" className="sign_up__input" name="price" step="0.01" min="0" required type="number" value={vinyl.price} onChange={handleChange}/>
                 <span>Giá</span>
             </label>
 
@@ -183,7 +182,7 @@ export default function AdminCreateVinyl() {
                     alignItems: "center"
                 }}>
                     {
-                        newVinyl.genres.map((genre, index) => {
+                        vinyl.genres.map((genre, index) => {
                             return (
                                 <div key={index} className="adminPageVinyl__genreItem">
                                     <div>{genre.genreName}</div>
@@ -202,7 +201,7 @@ export default function AdminCreateVinyl() {
                         return (
                             <label className={"adminPage__selectMenu__selectInput"} key={index}>
                                 <input type="checkbox" checked={
-                                    newVinyl.genres.map(function (genre) {
+                                    vinyl.genres.map(function (genre) {
                                         return genre.id
                                     }).indexOf(genre.id) !== -1
                                 } value={genre.id} name={genre.genreName} onChange={handleSelectChange}/>
@@ -215,7 +214,7 @@ export default function AdminCreateVinyl() {
             </div>
 
             <label className="has-float-label">
-                <select name="nation" className="sign_up__input" id={"nationInput"} onChange={handleChange}>
+                <select name="nation" className="sign_up__input" value={vinyl.nation.id} id={"nationInput"} onChange={handleChange}>
                     {
                         nations.map((nation, index) => {
                             return (
@@ -228,11 +227,11 @@ export default function AdminCreateVinyl() {
             </label>
 
             <label className="has-float-label">
-                <input id="input_discount" className="sign_up__input" name="discount" step="0.01" min="0" required type="number" value={newVinyl.discount} onChange={handleChange}/>
+                <input id="input_discount" className="sign_up__input" name="discount" step="0.01" min="0" required type="number" value={vinyl.discount} onChange={handleChange}/>
                 <span>% Giảm Giá</span>
             </label>
 
-            <input className="button_Login_Signup" type="submit" value="Cập nhật thông tin sản phẩm" onClick={handleAddNewVinyl}/>
+            <input className="button_Login_Signup" type="submit" value="Cập nhật thông tin sản phẩm" onClick={handleUpdateVinyl}/>
         </form>
     );
 }
