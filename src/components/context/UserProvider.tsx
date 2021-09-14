@@ -18,7 +18,8 @@ const contextDefaultValues : UserContextState = {
     logOut: () => {},
     loadUserInformation: () => {},
     isLogged: false,
-    setIsLogged: () => {}
+    setIsLogged: () => {},
+    refreshToken: () => {}
 };
 
 export const UserContext = createContext<UserContextState>(contextDefaultValues);
@@ -70,7 +71,8 @@ const UserProvider: FC = ({children}) => {
                 logOut,
                 loadUserInformation,
                 isLogged,
-                setIsLogged
+                setIsLogged,
+                refreshToken
             }
         }>
             {children}

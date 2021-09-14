@@ -6,4 +6,5 @@ export type UserContextState = {
     loadUserInformation: () => void;
     isLogged: boolean;
     setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
+    refreshToken: () => void;
 };
