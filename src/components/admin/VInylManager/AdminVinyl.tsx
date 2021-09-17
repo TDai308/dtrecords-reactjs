@@ -8,8 +8,8 @@ export default function AdminVinyl() {
     return (
         <Switch>
             <Route path="/admin/vinyl" exact component={AdminVinylList}/>
-            <Route path="/admin/vinyl/createVinyl" exact component={AdminCreateVinyl}/>
-            <Route path="/admin/vinyl/edit/:id" component={AdminEditVinyl}/>
+            <Route path="/admin/vinyl/create" exact component={AdminCreateVinyl}/>
+            <Route path="/admin/vinyl/edit/:id" exact component={AdminEditVinyl}/>
         </Switch>
     );
 }

@@ -1,10 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {Vinyl} from "../types/Vinyl";
-import {vinylApi} from "../../api/vinylApi";
-import renderTableHeader from "../table/renderTableHeader";
-import {UserContext} from "../context/UserProvider";
-import AdminNavigation from "./AdminNavigation";
+import {Vinyl} from "../../types/Vinyl";
+import {vinylApi} from "../../../api/vinylApi";
+import renderTableHeader from "../../table/renderTableHeader";
+import AdminNavigation from "../AdminNavigation";
 
 const defaultVinyls = [
     {
@@ -33,7 +32,6 @@ const defaultVinyls = [
 
 export default function AdminVinylList() {
     const [vinyls, setVinyls] = useState<Vinyl[]>(defaultVinyls);
-    const {logOut} = useContext(UserContext);
 
     const getVinylList = async () => {
         try {
@@ -73,7 +71,7 @@ export default function AdminVinylList() {
         <div className="admin_page__menu__manager">
             <AdminNavigation/>
             <h1>Danh sách sản phẩm</h1>
-            <Link className="button__blue__with-a margin-10px" to="/admin/vinyl/createVinyl">Tạo sản phẩm mới</Link>
+            <Link className="button__blue__with-a margin-10px" to="/admin/vinyl/create">Tạo sản phẩm mới</Link>
             <table  className="table_of_admin">
                 <tbody>
                     <tr>

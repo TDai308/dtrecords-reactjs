@@ -1,7 +1,7 @@
 import React from "react";
 import {Route} from "react-router-dom";
 import AdminMenu from "./AdminMenu";
-import AdminVinyl from "./AdminVinyl";
+import AdminVinyl from "./VInylManager/AdminVinyl";
 
 export default function AdminPage() {
     return (

@@ -3,7 +3,7 @@ import ContentBody from "./ContentBody";
 import Footer from "./Footer";
 import Header from "./Header";
 
-export default function mainPage() {
+export default function homePage() {
     return (
         <div>
             <Header/>

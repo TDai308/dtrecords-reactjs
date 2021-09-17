@@ -1,15 +1,15 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {VinylForCreating} from "../types/Vinyl";
-import {Artist} from "../types/Artist";
-import {Genre} from "../types/Genre";
-import {Nation} from "../types/Nation";
-import {artistApi} from "../../api/artistApi";
-import {nationApi} from "../../api/nationApi";
-import {genreApi} from "../../api/genreApi";
-import {vinylApi} from "../../api/vinylApi";
-import {UserContext} from "../context/UserProvider";
-import {VinylForCreatingDefault} from "../types/Vinyl";
+import {VinylForCreating} from "../../types/Vinyl";
+import {Artist} from "../../types/Artist";
+import {Genre} from "../../types/Genre";
+import {Nation} from "../../types/Nation";
+import {artistApi} from "../../../api/artistApi";
+import {nationApi} from "../../../api/nationApi";
+import {genreApi} from "../../../api/genreApi";
+import {vinylApi} from "../../../api/vinylApi";
+import {UserContext} from "../../context/UserProvider";
+import {VinylForCreatingDefault} from "../../types/Vinyl";
 
 export default function AdminCreateVinyl() {
     const [artists, setArtists] = useState<Artist[]>([]);

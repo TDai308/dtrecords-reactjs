@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
-import {Vinyl, VinylForEditingDefault} from "../types/Vinyl";
-import {Artist} from "../types/Artist";
-import {Genre} from "../types/Genre";
-import {Nation} from "../types/Nation";
-import {artistApi} from "../../api/artistApi";
-import {nationApi} from "../../api/nationApi";
-import {genreApi} from "../../api/genreApi";
-import {vinylApi} from "../../api/vinylApi";
-import {UserContext} from "../context/UserProvider";
+import {Vinyl, VinylForEditingDefault} from "../../types/Vinyl";
+import {Artist} from "../../types/Artist";
+import {Genre} from "../../types/Genre";
+import {Nation} from "../../types/Nation";
+import {artistApi} from "../../../api/artistApi";
+import {nationApi} from "../../../api/nationApi";
+import {genreApi} from "../../../api/genreApi";
+import {vinylApi} from "../../../api/vinylApi";
+import {UserContext} from "../../context/UserProvider";
 
 export default function AdminEditVinyl() {
     const [vinyl,setVinyl] = useState<Vinyl>(VinylForEditingDefault)

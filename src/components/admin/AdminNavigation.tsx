@@ -12,6 +12,7 @@ export default function AdminNavigation() {
                 <Link className="button__blue__with-a" to="/admin/artist">Danh sách nghệ sĩ</Link>
                 <Link className="button__blue__with-a" to="/admin/order">Quản lý đơn hàng</Link>
                 <Link className="button__blue__with-a" to="/admin/customer">Quản lý khách hàng</Link>
+                <Link className="button__blue__with-a" to="/">Trang chủ</Link>
             </div>
             <div className="admin_page__menu__manager__logout">
                 <button className="button__red__with-a" onClick={logOut}>Đăng xuất</button>

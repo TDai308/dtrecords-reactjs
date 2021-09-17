@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 const ProductListContent = () => {
+    useEffect(() => {
+       document.title = "Đĩa Than Ngọt Ngào";
+    }, []);
+
     return(
         <div className="container">
-            Product list content
+
         </div>
     );
 }

@@ -26,7 +26,7 @@ const HeaderLogoAndMenu = () => {
                 </Link>
             </div>
             <div className="header__menu" onMouseEnter={handleHoverMenu} onMouseLeave={handleHoverMenu}>
-                <Link to="/all-vinyl-product" className="header__menu-link">
+                <Link to="/products" className="header__menu-link">
                     Cửa Hàng
                     <i className={classNames("fas", {"fa-angle-down": !showMenu}, {"fa-angle-up": showMenu})}/>
                 </Link>
