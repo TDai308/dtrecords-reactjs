@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {UserForSigningUp} from "../types/User";
+import {UserForSigningUp} from "../type/User";
 import {userApi} from "../../api/userApi";
 import {useHistory} from "react-router-dom";
 import ReactPhoneInput from "react-phone-input-2"
@@ -61,7 +61,7 @@ export default function SignUp() {
                         <span>Mật Khẩu</span>
                     </div>
 
-                    <div className="width_100 display_flex margin-20px-top" >
+                    <div className="width_100 display_flex--space-between margin-20px-top" >
                         <div className="has-float-label width_45 margin-0px" style={{flex: "unset"}}>
                             <input className="sign_up__input" name="name" required type="text" onChange={handleChange}/>
                             <span>Họ Tên</span>
@@ -69,9 +69,6 @@ export default function SignUp() {
 
                         <div className="has-float-label width_45 margin-0px" style={{flex: "unset"}}>
                             <ReactPhoneInput containerClass="sign_up__input"
-                                             containerStyle={{
-                                                 // paddingLeft: 0
-                                             }}
                                              inputStyle={{
                                                  fontSize: "1rem",
                                                  border: "none"

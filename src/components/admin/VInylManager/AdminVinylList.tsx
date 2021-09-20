@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {Vinyl} from "../../types/Vinyl";
+import {Vinyl} from "../../type/Vinyl";
 import {vinylApi} from "../../../api/vinylApi";
 import renderTableHeader from "../../table/renderTableHeader";
 import AdminNavigation from "../AdminNavigation";
+import CategoryPagination from "../../subComponents/CategoryPagination";
 
 const defaultVinyls = [
     {
@@ -32,12 +33,20 @@ const defaultVinyls = [
 
 export default function AdminVinylList() {
     const [vinyls, setVinyls] = useState<Vinyl[]>(defaultVinyls);
+    const [vinylsPerPage] = useState<number>(10);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [totalElements, setTotalElements] = useState<number>(0);
 
     const getVinylList = async () => {
         try {
-            const fetchVinylList = await vinylApi.getVinylList();
-            if (fetchVinylList.data.length > 0) {
-                setVinyls(fetchVinylList.data);
+            const fetchVinylList = await vinylApi.getVinylList(currentPage,vinylsPerPage);
+            const {data} = fetchVinylList;
+            if (data.content.length > 0) {
+                setVinyls(data.content);
+                setTotalPages(data.totalPages);
+                setTotalElements(data.totalElements);
+                setCurrentPage(data.number + 1);
             } else setVinyls(defaultVinyls);
         } catch (error) {
             console.log("error", error);
@@ -108,6 +117,10 @@ export default function AdminVinylList() {
                     }
                 </tbody>
             </table>
+            {
+                totalElements > 10 &&
+                CategoryPagination(currentPage,totalPages)
+            }
             {
                 vinyls.map((vinyl, index) => {
                     return (

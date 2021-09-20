@@ -663,11 +663,36 @@
 }
 
 .home_produce__category__pagination {
-  text-align: center;
+  margin-top: 50px;
+  width: 100%;
 }
 
-.home_produce__10newVinyl {
+.home_produce__category__pagination input::-webkit-outer-spin-button,
+.home_produce__category__pagination input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+.pagination__inputPage {
+  margin: 0 2.5px;
+  width: 10%;
+  cursor: default;
+  font-size: 18px;
+  text-align: center;
+  outline: none;
+  border: none;
+}
+
+.pagination__button {
+  margin: 0 2.5px;
+  outline: none;
+  background: white;
+  width: 70px;
+  height: 35px;
+  font-weight: 600;
+  color: var(--gray-coler);
+  border-radius: 5px;
+  border: solid .5px var(--gray-coler);
 }
 
 .home_produce__list {

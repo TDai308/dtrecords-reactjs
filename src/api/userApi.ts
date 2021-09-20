@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import {UserForSigningUp} from "../components/types/User";
+import {UserForSigningUp} from "../components/type/User";
 
 export const userApi = {
     getUserWithToken: () => {

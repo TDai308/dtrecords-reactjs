@@ -77,15 +77,31 @@ a {
   background: var(--black-color);
 }
 
-.display_flex {
+.display_flex--space-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.display_flex--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .button__black__with-a:hover {
   background: white;
   color: var(--black-color);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.pagination__button--hover:hover {
+  color: var(--turquoise-color);
+  border: solid .5px var(--turquoise-color);
+  text-decoration: underline;
 }
 
 .button__blue__with-a {

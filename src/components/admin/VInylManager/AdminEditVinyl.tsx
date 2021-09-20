@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
-import {Vinyl, VinylForEditingDefault} from "../../types/Vinyl";
-import {Artist} from "../../types/Artist";
-import {Genre} from "../../types/Genre";
-import {Nation} from "../../types/Nation";
+import {Vinyl, VinylForEditingDefault} from "../../type/Vinyl";
+import {Artist} from "../../type/Artist";
+import {Genre} from "../../type/Genre";
+import {Nation} from "../../type/Nation";
 import {artistApi} from "../../../api/artistApi";
 import {nationApi} from "../../../api/nationApi";
 import {genreApi} from "../../../api/genreApi";

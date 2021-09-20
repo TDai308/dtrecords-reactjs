@@ -1,9 +1,9 @@
 import axiosClient from "./axiosClient";
-import {Vinyl, VinylForCreating} from "../components/types/Vinyl";
+import {Vinyl, VinylForCreating} from "../components/type/Vinyl";
 
 export const vinylApi = {
-    getVinylList: () => {
-        const url = "/vinyls";
+    getVinylList: (page:number, size:number) => {
+        const url = `/vinyls?page=${page-1}&size=${size}`;
         return axiosClient.get(url);
     },
 

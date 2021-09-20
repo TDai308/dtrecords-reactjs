@@ -1,7 +1,7 @@
 import React, {createContext, FC, useState} from "react";
 import  {useHistory} from 'react-router-dom'
-import {UserContextState} from "../types/UserContextState";
-import {User} from "../types/User";
+import {UserContextState} from "../type/UserContextState";
+import {User} from "../type/User";
 import {userApi} from "../../api/userApi";
 import {tokenApi} from "../../api/tokenApi";
 
