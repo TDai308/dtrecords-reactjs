@@ -1,7 +1,9 @@
 import React from 'react';
+import './style/font.css';
+import './style/reset.css';
 import './App.css';
-import './grid.css'
-import './static/icon/fontawesome/css/all.min.css'
+import './style/grid.css';
+import './static/icon/fontawesome/css/all.min.css';
 
 import {BrowserRouter as Router} from "react-router-dom";
 import UserProvider from "./components/context/UserProvider";

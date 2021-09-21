@@ -1,8 +1,10 @@
 import axiosClient from "./axiosClient";
 import {Vinyl, VinylForCreating} from "../components/type/Vinyl";
 
+const size : number = 10;
+
 export const vinylApi = {
-    getVinylList: (page:number, size:number) => {
+    getVinylList: (page:number) => {
         const url = `/vinyls?page=${page-1}&size=${size}`;
         return axiosClient.get(url);
     },

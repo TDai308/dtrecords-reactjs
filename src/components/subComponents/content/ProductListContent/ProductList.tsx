@@ -5,12 +5,11 @@ import {vinylApi} from "../../../../api/vinylApi";
 
 export default function ProductList() {
     const [vinyls, setVinyls] = useState<Vinyl[]>([]);
-    const [vinylsPerPage] = useState<number>(10);
     const [currentPage] = useState<number>(1);
 
     const getVinyls = async () => {
         try {
-            const fetchVinylList = await vinylApi.getVinylList(currentPage, vinylsPerPage);
+            const fetchVinylList = await vinylApi.getVinylList(currentPage);
             setVinyls(fetchVinylList.data);
         } catch (error) {
             console.log("error", error);

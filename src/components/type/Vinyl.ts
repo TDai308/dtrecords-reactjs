@@ -1,7 +1,6 @@
 import {Genre} from "./Genre";
 import {Artist} from "./Artist";
 import {Nation} from "./Nation";
-import {useState} from "react";
 
 export type Vinyl = {
     id: number,
