@@ -45,8 +45,7 @@ export default function AdminVinylList() {
 
     const getVinylList = async (currentPage:number) => {
         try {
-            console.log("get Viny lList " + currentPage);
-            const fetchVinylList = await vinylApi.getVinylList(currentPage);
+            const fetchVinylList = await vinylApi.getVinylList(currentPage,null);
             const {data} = fetchVinylList;
             if (data.content.length > 0) {
                 setVinyls(data.content);
@@ -89,7 +88,6 @@ export default function AdminVinylList() {
     const handleFirstPage = () => {
         let firstPage = 1;
         if (currentPage > firstPage) {
-            // getVinylList(firstPage);
             history.push(`/admin/vinyl?page=${firstPage}`);
         }
     }
@@ -97,7 +95,6 @@ export default function AdminVinylList() {
     const handlePrevPage = () => {
         let prevPage = 1;
         if (currentPage > prevPage) {
-            // getVinylList(currentPage - prevPage);
             history.push(`/admin/vinyl?page=${currentPage - prevPage}`);
         }
     }
@@ -105,21 +102,18 @@ export default function AdminVinylList() {
     const handleLastPage = () => {
         let condition = Math.ceil(totalElements/ vinylsPerPage);
         if (currentPage < condition) {
-            // getVinylList(condition);
             history.push(`/admin/vinyl?page=${condition}`);
         }
     }
 
     const handleNextPage = () => {
         if (currentPage < Math.ceil(totalElements / vinylsPerPage)) {
-            // getVinylList(currentPage + 1);
             history.push(`/admin/vinyl?page=${currentPage + 1}`);
         }
     }
 
     const handleChangePage = (event :  React.ChangeEvent<HTMLInputElement>) => {
         let targetPage = parseInt(event.target.value);
-        // getVinylList(targetPage);
         history.push(`/admin/vinyl?page=${targetPage}`);
     }
 
@@ -143,7 +137,7 @@ export default function AdminVinylList() {
                             });
                             return (
                                 <tr key={index}>
-                                    <td><Link to={"/admin/vinyl/" + vinyl.id}>{vinyl.vinylName}</Link></td>
+                                    <td><Link to={"/admin/vinyl/" + vinyl.id} className={"vinylItem__hover"}>{vinyl.vinylName}</Link></td>
                                     <td>{vinyl.artist.nameArtist}</td>
                                     <td>{vinyl.thumbnail1}</td>
                                     <td>{vinyl.thumbnail2}</td>
@@ -156,8 +150,12 @@ export default function AdminVinylList() {
                                     <td>{vinyl.nation.nation}</td>
                                     <td>{vinyl.discount}</td>
                                     <td>{vinyl.realPrice}</td>
-                                    <td className="edit__button"><Link to={"/admin/vinyl/edit/"+vinyl.id}>Sửa</Link></td>
-                                    <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>Xóa</td>
+                                    <td className="edit__button"><Link to={"/admin/vinyl/edit/"+vinyl.id}>
+                                        <i className="fas fa-edit"/>
+                                    </Link></td>
+                                    <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>
+                                        <i className="fas fa-trash-alt"/>
+                                    </td>
                                 </tr>
                             );
                         })
@@ -171,22 +169,8 @@ export default function AdminVinylList() {
                         Showing Page {currentPage} of {totalPages}
                     </div>
 
-                    <div className={"display_flex--center"}>
-                        <div className={"display_flex--center"}>
-                            {/*<Link to={"/admin/vinyl?page=1"} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={(event) => {*/}
-                            {/*    if (currentPage === 1) {*/}
-                            {/*        event.preventDefault();*/}
-                            {/*    }*/}
-                            {/*}}>*/}
-                            {/*    <i className="fas fa-angle-double-left"/> First*/}
-                            {/*</Link>*/}
-                            {/*<Link to={`/admin/vinyl?page=${currentPage - 1}`} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={(event) => {*/}
-                            {/*    if (currentPage === 1) {*/}
-                            {/*        event.preventDefault();*/}
-                            {/*    }*/}
-                            {/*}}>*/}
-                            {/*    <i className="fas fa-angle-left"/> Prev*/}
-                            {/*</Link>*/}
+                    <div className={"display_flex--space-between"}>
+                        <div className={"display_flex--center pagination__buttons"}>
                             <button disabled={currentPage === 1} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={handleFirstPage}>
                                 <i className="fas fa-angle-double-left"/> First
                             </button>
@@ -198,20 +182,6 @@ export default function AdminVinylList() {
                         <input type="number" name={"currentPage"} className={"pagination__inputPage"} value={currentPage} max={totalPages} min={1} onChange={handleChangePage}/>
 
                         <div className={"display_flex--center"}>
-                            {/*<Link to={`/admin/vinyl?page=${currentPage + 1}`} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={(event) => {*/}
-                            {/*    if (currentPage === totalPages) {*/}
-                            {/*        event.preventDefault();*/}
-                            {/*    }*/}
-                            {/*}}>*/}
-                            {/*    <i className="fas fa-angle-right"/> Next*/}
-                            {/*</Link>*/}
-                            {/*<Link to={`/admin/vinyl?page=${Math.ceil(totalElements/ vinylsPerPage)}`} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={(event) => {*/}
-                            {/*    if (currentPage === totalPages) {*/}
-                            {/*        event.preventDefault();*/}
-                            {/*    }*/}
-                            {/*}}>*/}
-                            {/*    <i className="fas fa-angle-double-right"/> Last*/}
-                            {/*</Link>*/}
                             <button disabled={currentPage === totalPages} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={handleNextPage}>
                                 <i className="fas fa-angle-right"/> Next
                             </button>

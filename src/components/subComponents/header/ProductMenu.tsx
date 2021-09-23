@@ -8,27 +8,27 @@ const ProductMenu = () => {
             headerTitle: "Sản Phẩm",
             ProductMenuList: [
                 {
-                    url: "/all-vinyl-product/justAdded",
+                    url: "/products/justAdded",
                     title: "Sản phẩm mới"
                 },
                 {
-                    url: "/all-vinyl-product/under10Dollars",
+                    url: "/products/under10Dollars",
                     title: "Dưới $10"
                 },
                 {
-                    url: "/all-vinyl-product/under20Dollars",
+                    url: "/aproducts/under20Dollars",
                     title: "Dưới $20"
                 },
                 {
-                    url: "/all-vinyl-product/under30Dollars",
+                    url: "/products/under30Dollars",
                     title: "Dưới $30"
                 },
                 {
-                    url: "/all-vinyl-product/over30Dollars",
+                    url: "/products/over30Dollars",
                     title: "Trên $30"
                 },
                 {
-                    url: "/all-vinyl-product",
+                    url: "/products",
                     title: "Tất cả sản phẩm"
                 }
             ]
@@ -37,27 +37,27 @@ const ProductMenu = () => {
             headerTitle: "Thể Loại",
             ProductMenuList: [
                 {
-                    url: "/all-vinyl-product/popVinyl",
+                    url: "/products/popVinyl",
                     title: "Pop"
                 },
                 {
-                    url: "/all-vinyl-product/rockVinyl",
+                    url: "/products/rockVinyl",
                     title: "Rock"
                 },
                 {
-                    url: "/all-vinyl-product/r&bVinyl",
+                    url: "/products/r&bVinyl",
                     title: "R&B"
                 },
                 {
-                    url: "/all-vinyl-product/hiphopVinyl",
+                    url: "/products/hiphopVinyl",
                     title: "HipHop"
                 },
                 {
-                    url: "/all-vinyl-product/countryVinyl",
+                    url: "/products/countryVinyl",
                     title: "Country"
                 },
                 {
-                    url: "/all-vinyl-product",
+                    url: "/products",
                     title: "Xem toàn bộ thể loại"
                 }
             ]

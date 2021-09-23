@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Vinyl, VinylForEditingDefault} from "../../type/Vinyl";
 import {Artist} from "../../type/Artist";
 import {Genre} from "../../type/Genre";
@@ -20,7 +20,7 @@ export default function AdminEditVinyl() {
 
     const {id} = useParams<{id:string}>();
     const {refreshToken} = useContext(UserContext);
-    const history = useHistory();
+    // const history = useHistory();
 
     const getVinyl = async () => {
         try {
@@ -115,13 +115,13 @@ export default function AdminEditVinyl() {
         try {
             await vinylApi.updateVinyl(parseInt(id),vinyl);
             setEditingSuccessful(true);
-            setTimeout(() => {
-                history.push("/admin/vinyl");
-            },2000);
+            // setTimeout(() => {
+            //     history.goBack();
+            // },2000);
         } catch (error) {
             if (error.response.status === 403) {
                 await refreshToken();
-                handleUpdateVinyl();
+                await handleUpdateVinyl();
             } else {
                 console.log("error", error);
             }

@@ -1,11 +1,14 @@
 import axiosClient from "./axiosClient";
 import {Vinyl, VinylForCreating} from "../components/type/Vinyl";
 
-const size : number = 10;
+const size : number = 12;
 
 export const vinylApi = {
-    getVinylList: (page:number) => {
-        const url = `/vinyls?page=${page-1}&size=${size}`;
+    getVinylList: (page:number,sort:string|null) => {
+        let url : string;
+        if (sort == null) {
+            url = `/vinyls?page=${page-1}&size=${size}`;
+        } else url = `/vinyls?page=${page-1}&size=${size}&${sort}`;
         return axiosClient.get(url);
     },
 

@@ -27,10 +27,10 @@ export default function ProductItem(vinyl:Vinyl) {
                         }
             </div>
             <div className="home_produce__item__information">
-                <h2 className="product__name">{vinyl.vinylName}</h2>
-                <p className="product__artist_name">{vinyl.artist.nameArtist}</p>
+                <h2 className="product__name" title={vinyl.vinylName}>{vinyl.vinylName}</h2>
+                <p className="product__artist_name" title={vinyl.artist.nameArtist}>{vinyl.artist.nameArtist}</p>
                 <div className="product__nation_genre">
-                    <span>{vinyl.nation.nation}</span> - <span>{genres.toString()}</span>
+                    <span title={vinyl.nation.nation}>{vinyl.nation.nation}</span> - <span title={genres.toString()}>{genres.toString()}</span>
                 </div>
                 <div className="produce_price">
                     {

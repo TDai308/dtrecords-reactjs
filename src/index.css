@@ -89,6 +89,13 @@ a {
   justify-content: center;
 }
 
+.pagination__buttons:first-child .pagination__button:first-child {
+  margin-left: 0;
+}
+.pagination__buttons:last-child .pagination__button:last-child {
+  margin-right: 0;
+}
+
 .button__black__with-a:hover {
   background: white;
   color: var(--black-color);

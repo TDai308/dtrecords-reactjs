@@ -3,13 +3,24 @@ import {Route, Switch} from "react-router-dom";
 
 import HomeContent from "../subComponents/content/HomeContent";
 import ProductListContent from "../subComponents/content/ProductListContent";
+import ProductDetailContent from "../subComponents/content/ProductDetailContent";
+import SearchInput from "../subComponents/SearchInput";
 
 const ContentBody = () => {
     return(
-        <Switch>
-            <Route path="/" exact component={HomeContent}/>
-            <Route path="/products" exact component={ProductListContent}/>
-        </Switch>
+        <div className="container">
+            <div className="grid wide">
+                <h1 className="container__header">
+                    Thiên đường âm nhạc dành cho bạn, nơi kết nối bạn với những nghệ sỹ và ban nhạc trên toàn thế giới!!!
+                </h1>
+                <SearchInput/>
+                <Switch>
+                    <Route path="/" exact component={HomeContent}/>
+                    <Route path="/products" exact component={ProductListContent}/>
+                    <Route path="/products/:id" exact component={ProductDetailContent}/>
+                </Switch>
+            </div>
+        </div>
     );
 }
 

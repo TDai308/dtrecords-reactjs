@@ -644,10 +644,11 @@
 
 .home_produce__category {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.home_produce__category__sortby {
+.home_produce__category__sortBy {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -744,8 +745,8 @@
 
 .product__name {
   font-size: 25px;
-  height: calc(25px * 2);
-  line-height: 25px;
+  height: calc(27px * 2);
+  line-height: 26px;
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -756,6 +757,14 @@
 .product__artist_name,
 .product__nation_genre {
   margin: 0 0 5px;
+}
+
+.product__nation_genre {
+  word-break:break-all;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .produce_price {
@@ -1111,6 +1120,10 @@
 .table_of_admin {
   border-radius: 5px;
   width: 100%;
+}
+
+.vinylItem__hover:hover {
+  text-decoration: underline;
 }
 
 .admin_page__menu__manager {

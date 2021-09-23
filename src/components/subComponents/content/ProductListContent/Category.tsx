@@ -72,7 +72,7 @@ export default function Category() {
                                     {
                                         categoryItem.linkCategory.map((Category,index) => {
                                             return (
-                                                <li><Link className="category__item__link" to={Category.url}>{Category.title}</Link></li>
+                                                <li key={index}><Link className="category__item__link" to={Category.url}>{Category.title}</Link></li>
                                             );
                                         })
                                     }
