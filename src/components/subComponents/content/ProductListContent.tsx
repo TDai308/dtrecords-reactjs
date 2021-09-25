@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import SearchInput from "../SearchInput";
 import Category from "./ProductListContent/Category";
 import ProductList from "./ProductListContent/ProductList";
 

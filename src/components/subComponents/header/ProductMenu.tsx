@@ -8,15 +8,15 @@ const ProductMenu = () => {
             headerTitle: "Sản Phẩm",
             ProductMenuList: [
                 {
-                    url: "/products/justAdded",
-                    title: "Sản phẩm mới"
+                    url: "/products/saleProducts",
+                    title: "Sản phẩm giảm giá"
                 },
                 {
                     url: "/products/under10Dollars",
                     title: "Dưới $10"
                 },
                 {
-                    url: "/aproducts/under20Dollars",
+                    url: "/products/under20Dollars",
                     title: "Dưới $20"
                 },
                 {

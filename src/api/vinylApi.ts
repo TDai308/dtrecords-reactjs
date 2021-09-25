@@ -4,11 +4,17 @@ import {Vinyl, VinylForCreating} from "../components/type/Vinyl";
 const size : number = 12;
 
 export const vinylApi = {
-    getVinylList: (page:number,sort:string|null) => {
+    getVinylList: (page:number,sort:string|null,productsOption:string|undefined) => {
         let url : string;
-        if (sort == null) {
-            url = `/vinyls?page=${page-1}&size=${size}`;
-        } else url = `/vinyls?page=${page-1}&size=${size}&${sort}`;
+        if (productsOption === undefined) {
+            if (sort == null) {
+                url = `/vinyls?page=${page-1}&size=${size}`;
+            } else url = `/vinyls?page=${page-1}&size=${size}&${sort}`;
+        } else {
+            if (sort == null) {
+                url = `/vinyls/${productsOption}?page=${page-1}&size=${size}`;
+            } else url = `/vinyls/${productsOption}?page=${page-1}&size=${size}&${sort}`;
+        }
         return axiosClient.get(url);
     },
 

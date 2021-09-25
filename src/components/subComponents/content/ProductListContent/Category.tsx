@@ -8,15 +8,15 @@ export default function Category() {
             linkCategory: [
                 {
                     title: "Việt Nam",
-                    url: ""
+                    url: "/products/VietnamVinyls"
                 },
                 {
                     title: "Mỹ",
-                    url: ""
+                    url: "/products/UsUkVinyls"
                 },
                 {
                     title: "Hàn Quốc",
-                    url: ""
+                    url: "/products/KoreanVinyls"
                 }
             ]
         },
@@ -25,35 +25,35 @@ export default function Category() {
             linkCategory: [
                 {
                     title: "Pop",
-                    url: ""
+                    url: "/products/popVinyl"
                 },
                 {
                     title: "Rock",
-                    url: ""
+                    url: "/products/rockVinyl"
                 },
                 {
                     title: "R&B",
-                    url: ""
+                    url: "/products/r&bVinyl"
                 },
                 {
                     title: "HipHop",
-                    url: ""
+                    url: "/products/hiphopVinyl"
                 },
                 {
                     title: "Country",
-                    url: ""
+                    url: "/products/countryVinyl"
                 },
                 {
                     title: "EDM",
-                    url: ""
+                    url: "/products/edmVinyl"
                 },
                 {
                     title: "Indie",
-                    url: ""
+                    url: "/products/indieVinyl"
                 },
                 {
                     title: "Jazz",
-                    url: ""
+                    url: "/products/jazzVinyl"
                 }
             ]
         }

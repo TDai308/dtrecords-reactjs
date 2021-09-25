@@ -45,7 +45,7 @@ export default function AdminVinylList() {
 
     const getVinylList = async (currentPage:number) => {
         try {
-            const fetchVinylList = await vinylApi.getVinylList(currentPage,null);
+            const fetchVinylList = await vinylApi.getVinylList(currentPage,null,undefined);
             const {data} = fetchVinylList;
             if (data.content.length > 0) {
                 setVinyls(data.content);

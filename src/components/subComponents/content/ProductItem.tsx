@@ -11,20 +11,20 @@ export default function ProductItem(vinyl:Vinyl) {
     return (
         <Link to={`/products/${vinyl.id}`} className="home_produce__item">
             <div className="item__thumbnail_sale_box">
-                <img className="home_produce__item__thumbnail" src={`images/vinylImg/${vinyl.vinylName}-${vinyl.artist.nameArtist}/${vinyl.thumbnail1}`} alt={vinyl.vinylName}/>
-                    <img className="home_produce__item__thumbnail2" src={`images/vinylImg/${vinyl.vinylName}-${vinyl.artist.nameArtist}/${vinyl.thumbnail2}`} alt={vinyl.vinylName}/>
-                        {
-                            vinyl.discount !== 0 &&
-                            <div className="sale_box">
-                                <p>ON SALE</p>
-                            </div>
-                        }
-                        {
-                            vinyl.quantity === 0 &&
-                            <div className="sold_out_box">
-                                <p>SOLD OUT</p>
-                            </div>
-                        }
+                <img className="home_produce__item__thumbnail" src={`http://localhost:3000/images/vinylImg/${vinyl.vinylName}-${vinyl.artist.nameArtist}/${vinyl.thumbnail1}`} alt={vinyl.vinylName}/>
+                <img className="home_produce__item__thumbnail2" src={`http://localhost:3000/images/vinylImg/${vinyl.vinylName}-${vinyl.artist.nameArtist}/${vinyl.thumbnail2}`} alt={vinyl.vinylName}/>
+                {
+                    vinyl.discount !== 0 &&
+                    <div className="sale_box">
+                        <p>ON SALE</p>
+                    </div>
+                }
+                {
+                    vinyl.quantity === 0 &&
+                    <div className="sold_out_box">
+                        <p>SOLD OUT</p>
+                    </div>
+                }
             </div>
             <div className="home_produce__item__information">
                 <h2 className="product__name" title={vinyl.vinylName}>{vinyl.vinylName}</h2>
