@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "dotenv": "^10.0.0",
+    "jquery": "^3.6.0",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -48,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.6",
     "@types/react-phone-number-input": "^3.0.11",
     "@types/react-router-dom": "^5.1.8"
   }

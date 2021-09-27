@@ -18,7 +18,7 @@ const ContentBody = () => {
                     <Route path="/" exact component={HomeContent}/>
                     <Route path="/products" exact component={ProductListContent}/>
                     <Route path="/products/:productsOption" exact component={ProductListContent}/>
-                    <Route path="/products/:id" exact component={ProductDetailContent}/>
+                    <Route path="/product/:id" exact component={ProductDetailContent}/>
                 </Switch>
             </div>
         </div>
