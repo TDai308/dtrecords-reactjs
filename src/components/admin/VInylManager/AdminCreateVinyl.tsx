@@ -68,7 +68,7 @@ export default function AdminCreateVinyl() {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
         if (event.target.tagName === "INPUT") {
-            setNewVinyl({...newVinyl, [event.currentTarget.name]: event.target.value})
+            setNewVinyl({...newVinyl, [event.currentTarget.name]: event.target.value});
         }
         if (event.target.tagName === "SELECT") {
             if (event.currentTarget.name === "artist") {
@@ -78,6 +78,11 @@ export default function AdminCreateVinyl() {
                 setNewVinyl({...newVinyl, nation: nations.find(nation => nation.id === parseInt(event.target.value))!})
             }
         }
+    }
+
+    const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.files?.[0]);
+        // setNewVinyl({...newVinyl, [event.currentTarget.name]: event.target.files?.[0]});
     }
 
     const handleAddOpenButtonClick = () => {
@@ -156,13 +161,31 @@ export default function AdminCreateVinyl() {
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" name="thumbnail1" required type="text" value={newVinyl.thumbnail1} onChange={handleChange}/>
-                <span>Thumbnail 1</span>
+                {/*value={newVinyl.thumbnail1}*/}
+                <input className="sign_up__input" id={"thumbnail1"} name="thumbnail1" required type="file" onChange={handleChangeImage}/>
+                <div className={"file__input"}>
+                    <span className={"file__input--content"}>None</span>
+                </div>
+                <label htmlFor="thumbnail1">
+                    <i className="fas fa-upload"/> Choose a file...
+                </label>
+                <span style={{
+                    transform: "translateX(10px) translateY(-24px)"
+                }}>Thumbnail 1</span>
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" name="thumbnail2" required type="text" value={newVinyl.thumbnail2} onChange={handleChange}/>
-                <span>Thumbnail 2</span>
+                {/*value={newVinyl.thumbnail2}*/}
+                <input className="sign_up__input" id={"thumbnail2"} name="thumbnail2" required type="file" onChange={handleChangeImage}/>
+                <div className={"file__input"}>
+                    <span className={"file__input--content"}>None</span>
+                </div>
+                <label htmlFor="thumbnail2">
+                    <i className="fas fa-upload"/> Choose a file...
+                </label>
+                <span style={{
+                    transform: "translateX(10px) translateY(-24px)"
+                }}>Thumbnail 2</span>
             </label>
 
             <label className="has-float-label">

@@ -39,7 +39,7 @@ export default function AdminVinylList() {
 
     const [vinyls, setVinyls] = useState<Vinyl[]>(defaultVinyls);
     const [vinylsPerPage] = useState<number>(10);
-    const [currentPage, setCurrentPage] = useState<number>(query.get("page")===null?1:parseInt(query.get("page")!));
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [totalElements, setTotalElements] = useState<number>(0);
 
@@ -59,7 +59,7 @@ export default function AdminVinylList() {
     }
 
     useEffect(() => {
-        setCurrentPage(parseInt(query.get("page")!));
+        setCurrentPage(query.get("page")===null?1:parseInt(query.get("page")!));
     },[location]);
 
     useEffect(() => {

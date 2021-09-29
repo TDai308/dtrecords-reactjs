@@ -3,10 +3,13 @@ import {Vinyl} from "../../type/Vinyl";
 import {VinylForEditingDefault} from "../../type/Vinyl";
 import {useParams} from "react-router-dom";
 import {vinylApi} from "../../../api/vinylApi";
+import {Track} from "../../type/Track";
 import $ from "jquery";
+import {trackApi} from "../../../api/trackApi";
 
 export default function ProductDetailContent() {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylForEditingDefault);
+    const [tracks, setTracks] = useState<Track[]>([]);
 
     const {id} = useParams<{id:string}>();
 
@@ -19,13 +22,32 @@ export default function ProductDetailContent() {
         }
     }
 
+    const getTrackList = async () => {
+        try {
+            const fetchTrackList = await trackApi.getTrackListOfVinyl(vinyl.id);
+            setTracks(fetchTrackList.data);
+        } catch (error) {
+            console.log("error",error);
+        }
+    }
+
     useEffect(() => {
         getTheVinyl();
     }, []);
 
+    useEffect(() => {
+        getTrackList();
+        document.title = `${vinyl.vinylName} - ${vinyl.artist.nameArtist}`;
+    }, [vinyl]);
+
     const sliderImageWidth = $('#album_thumbnail__slider').width();
     $('.slider__image').css({
         'height': sliderImageWidth + 'px'
+    });
+
+    const genres: string[] = [];
+    vinyl.genres.forEach(genre => {
+        genres.push(genre.genreName);
     });
 
     return (
@@ -46,63 +68,68 @@ export default function ProductDetailContent() {
                     </div>
                 </div>
             </div>
-            {/*<div className="col l-6">*/}
-            {/*    <div className="album_information">*/}
-            {/*        <div className="album__artist">*/}
-            {/*            <div className="album__artist_img_name">*/}
-            {/*                <img src="@{/static/img/artistImg/__${vinyl.artist.name}__.png}" alt="${vinyl.artist.name}" className="album__artist_img"/>*/}
-            {/*                    <p className="album__artist_name" th:text="${vinyl.artist.name}"></p>*/}
-            {/*            </div>*/}
-            {/*            <div className="album__like">*/}
+            <div className="col l-6">
+                <div className="album_information">
+                    <div className="album__artist">
+                        <div className="album__artist_img_name">
+                            <img src={`http://localhost:3000/images/artistImg/${vinyl.artist.nameArtist}.png`} alt={vinyl.artist.nameArtist} className="album__artist_img"/>
+                            <p className="album__artist_name">{vinyl.artist.nameArtist}</p>
+                        </div>
+                        <div className="album__like">
 
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <div className="album__name_price">*/}
-            {/*            <h1 className="album__name" th:text="${vinyl.name}"></h1>*/}
-            {/*            <h2 className="album__nation_genre"*/}
-            {/*                th:text="${vinyl.nation}+' - '+ ${vinyl.genre.genrename}"></h2>*/}
-            {/*            <div className="produce_price" th:switch="${vinyl.onSale}">*/}
-            {/*                <div th:case="false">*/}
-            {/*                    <span className="produce_price_not_sale" th:text="${vinyl.price}+'$'"></span>*/}
-            {/*                </div>*/}
-            {/*                <div th:case="true">*/}
-            {/*                    <span className="produce_sale_price" th:text="${vinyl.salePrice}+'$'"></span>*/}
-            {/*                    <span className="produce_old_price" th:text="${vinyl.price}+'$'"></span>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <div className="album__tracklist_player">*/}
-            {/*            <h2>Danh Sách Các Bài Hát - Preview</h2>*/}
-            {/*            <div className="album__tracklist">*/}
-            {/*                <th:block th:each="track : ${tracklist}">*/}
-            {/*                    <div className="album__tracklist__player">*/}
-            {/*                        <div className="album__track_name">*/}
-            {/*                            <div th:text="${track.name}+' - '+${track.artistName}"></div>*/}
-            {/*                        </div>*/}
-            {/*                        <div className="album__track_play_pause">*/}
-            {/*                            <i th:onclick="|play(${track.trackID},event)|"*/}
-            {/*                               className="fas fa-play-circle"></i>*/}
-            {/*                            <i th:onclick="|pause(${track.trackID},event)|" className="fas fa-pause-circle"*/}
-            {/*                               style="display: none"></i>*/}
-            {/*                        </div>*/}
-            {/*                    </div>*/}
-            {/*                    <audio className="audio" th:id="${track.trackID}"*/}
-            {/*                           th:src="@{/static/trackpreview/__${vinyl.artist.name}__-__${vinyl.name}__/__${track.name}__-__${track.artistName}__.mp3}"></audio>*/}
-            {/*                </th:block>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <form className="album__buy_button" th:action="@{/addToCart/__${vinyl.vinylID}__}">*/}
-            {/*            <input th:if="${vinyl.quantity > 0}" className="album__quantity" type="number" name="quantity"*/}
-            {/*                   value="1" min="1" th:max="${vinyl.quantity}">*/}
-            {/*                <input th:if="${vinyl.quantity == 0}" className="album__quantity" type="number"*/}
-            {/*                       name="quantity" value="0" disabled>*/}
-            {/*                    <input th:if="${vinyl.quantity != 0}" className="album__add_to_cart height_42px"*/}
-            {/*                           type="submit" value="Thêm Vào Giỏ">*/}
-            {/*                        <input th:if="${vinyl.quantity == 0}" className="album__sold_out height_42px"*/}
-            {/*                               type="button" value="Hết Hàng">*/}
-            {/*        </form>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                        </div>
+                    </div>
+                    <div className="album__name_price">
+                        <h1 className="album__name">{vinyl.vinylName}</h1>
+                        <h2 className="album__nation_genre">{vinyl.nation.nation} - {genres.toString()}</h2>
+                        <div className={"produce_price"}>
+                            {
+                                vinyl.discount === 0 ?
+                                    <div>
+                                        <span className="produce_price_not_sale">{vinyl.price} $</span>
+                                    </div> :
+                                    <div>
+                                        <span className="produce_sale_price">{vinyl.realPrice} $</span>
+                                        <span className="produce_old_price">{vinyl.price} $</span>
+                                    </div>
+                            }
+                        </div>
+                    </div>
+                    <div className="album__tracklist_player">
+                        <h2>Danh Sách Các Bài Hát - Preview</h2>
+                        <div className="album__tracklist">
+                            {
+                                tracks.map((track, index) => {
+                                    return (
+                                        <div className="album__tracklist__player" key={index}>
+                                            <div className="album__track_name">
+                                                <div>{track.trackName} - {track.artists}</div>
+                                            </div>
+                                            <div className="album__track_play_pause">
+                                                {/*th:onclick="|play(${track.trackID},event)|"*/}
+                                                <i  className="fas fa-play-circle"/>
+                                                {/*th:onclick="|pause(${track.trackID},event)|"*/}
+                                                <i className="fas fa-pause-circle" style={{
+                                                    display: "none"
+                                                }}/>
+                                            </div>
+                                            <audio className="audio" id={(track.id).toString()}/>
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
+                    </div>
+                    <form className="album__buy_button">
+                        <input className="album__quantity" type="number" name="quantity" defaultValue={vinyl.quantity>0?1:0} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0}/>
+                        {
+                            vinyl.quantity !== 0 ?
+                                <input className="album__add_to_cart height_42px" type="submit" value="Thêm Vào Giỏ"/> :
+                                <input className="album__sold_out height_42px" type="button" value="Hết Hàng"/>
+                        }
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }
