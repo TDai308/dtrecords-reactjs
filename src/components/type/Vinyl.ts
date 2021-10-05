@@ -19,8 +19,6 @@ export type Vinyl = {
 export type VinylForCreating = {
     vinylName: string,
     artist: Artist,
-    thumbnail1: string,
-    thumbnail2: string,
     quantity: number,
     price: number,
     genres: Genre[],
@@ -34,8 +32,6 @@ export const VinylForCreatingDefault : VinylForCreating = {
         id: 0,
         nameArtist: ""
     },
-    thumbnail1: "",
-    thumbnail2: "",
     quantity: 0,
     price: 0,
     genres: [],

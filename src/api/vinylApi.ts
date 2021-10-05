@@ -42,9 +42,14 @@ export const vinylApi = {
         });
     },
 
-    addNewVinyl: (vinyl:VinylForCreating) => {
+    addNewVinyl: (vinyl:VinylForCreating, thumbnail1:File|undefined, thumbnail2:File|undefined) => {
         const url = "/admin/vinyl";
-        const data = JSON.stringify(vinyl);
+        const data = new FormData();
+        data.append("vinyl", JSON.stringify(vinyl));
+        if (thumbnail1 !== undefined && thumbnail2 !== undefined) {
+            data.append("thumbnail1", thumbnail1);
+            data.append("thumbnail2", thumbnail2);
+        }
         return axiosClient.post(url,data,{
             headers: {
                 'Authorization': "Bearer "+ localStorage.getItem("access_token")

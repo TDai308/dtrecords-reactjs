@@ -10,12 +10,15 @@ import {genreApi} from "../../../api/genreApi";
 import {vinylApi} from "../../../api/vinylApi";
 import {UserContext} from "../../context/UserProvider";
 import {VinylForCreatingDefault} from "../../type/Vinyl";
+import $ from "jquery";
 
 export default function AdminCreateVinyl() {
     const [artists, setArtists] = useState<Artist[]>([]);
     const [genres, setGenres] = useState<Genre[]>([]);
     const [nations, setNations] = useState<Nation[]>([]);
     const [newVinyl, setNewVinyl] = useState<VinylForCreating>(VinylForCreatingDefault);
+    const [thumbnail1, setThumbnail1] = useState<File>();
+    const [thumbnail2, setThumbnail2] = useState<File>();
     const [showAddingMenu, setShowAddingMenu] = useState<boolean>(false);
     const [creatingSuccessful, setCreatingSuccessful] = useState<boolean>(false);
 
@@ -81,8 +84,15 @@ export default function AdminCreateVinyl() {
     }
 
     const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.files?.[0]);
-        // setNewVinyl({...newVinyl, [event.currentTarget.name]: event.target.files?.[0]});
+        const nameInput = event.target.name;
+        if (nameInput === "thumbnail1") {
+            $('#file__input--thumbnail1').text(event.target.files?.[0].name!);
+            setThumbnail1(event.target.files?.[0]);
+        }
+        if (nameInput === "thumbnail2") {
+            $('#file__input--thumbnail2').text(event.target.files?.[0].name!);
+            setThumbnail2(event.target.files?.[0]);
+        }
     }
 
     const handleAddOpenButtonClick = () => {
@@ -117,13 +127,15 @@ export default function AdminCreateVinyl() {
 
     const handleAddNewVinyl = async () => {
         try {
-            await vinylApi.addNewVinyl(newVinyl);
+            await vinylApi.addNewVinyl(newVinyl, thumbnail1, thumbnail2);
             setCreatingSuccessful(true);
             setNewVinyl(VinylForCreatingDefault);
-            const artistInput = document.getElementById("artistInput") as HTMLSelectElement;
-            artistInput.selectedIndex = 0;
-            const nationInput = document.getElementById("nationInput") as HTMLSelectElement;
-            nationInput.selectedIndex = 0;
+            // const artistInput = document.getElementById("artistInput") as HTMLSelectElement;
+            // artistInput.selectedIndex = 0;
+            // const nationInput = document.getElementById("nationInput") as HTMLSelectElement;
+            // nationInput.selectedIndex = 0;
+            $("#artistInput").prop('selectedIndex', 0);
+            $("#nationInput").prop('selectedIndex', 0);
         } catch (error) {
             if (error.response.status === 403) {
                 await refreshToken();
@@ -161,10 +173,9 @@ export default function AdminCreateVinyl() {
             </label>
 
             <label className="has-float-label">
-                {/*value={newVinyl.thumbnail1}*/}
-                <input className="sign_up__input" id={"thumbnail1"} name="thumbnail1" required type="file" onChange={handleChangeImage}/>
+                <input className="sign_up__input" id={"thumbnail1"} name="thumbnail1" required type="file" accept={"image/png, image/jpeg"} onChange={handleChangeImage}/>
                 <div className={"file__input"}>
-                    <span className={"file__input--content"}>None</span>
+                    <span id={"file__input--thumbnail1"}>None</span>
                 </div>
                 <label htmlFor="thumbnail1">
                     <i className="fas fa-upload"/> Choose a file...
@@ -175,10 +186,9 @@ export default function AdminCreateVinyl() {
             </label>
 
             <label className="has-float-label">
-                {/*value={newVinyl.thumbnail2}*/}
-                <input className="sign_up__input" id={"thumbnail2"} name="thumbnail2" required type="file" onChange={handleChangeImage}/>
+                <input className="sign_up__input" id={"thumbnail2"} name="thumbnail2" required type="file" accept={"image/png, image/jpeg"} onChange={handleChangeImage}/>
                 <div className={"file__input"}>
-                    <span className={"file__input--content"}>None</span>
+                    <span id={"file__input--thumbnail2"}>None</span>
                 </div>
                 <label htmlFor="thumbnail2">
                     <i className="fas fa-upload"/> Choose a file...

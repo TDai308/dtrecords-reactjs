@@ -1352,6 +1352,10 @@
   margin-top: 10px;
 }
 
+.has-float-label i {
+  margin-right: 12px;
+}
+
 .sign_up__input {
   width: 100%;
   font-size: 1rem;
