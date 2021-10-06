@@ -16,6 +16,26 @@ export type Vinyl = {
     realPrice: number
 }
 
+export const VinylDefault : Vinyl = {
+    id: 0,
+    vinylName: "",
+    artist: {
+        id: 0,
+        nameArtist: ""
+    },
+    thumbnail1: "",
+    thumbnail2: "",
+    quantity: 0,
+    price: 0,
+    genres: [],
+    nation: {
+        id: 0,
+        nation: ""
+    },
+    discount: 0,
+    realPrice: 0
+}
+
 export type VinylForCreating = {
     vinylName: string,
     artist: Artist,

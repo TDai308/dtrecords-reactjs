@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import {Vinyl, VinylForEditingDefault} from "../../type/Vinyl";
+import {VinylForEditing, VinylForEditingDefault} from "../../type/Vinyl";
 import {Artist} from "../../type/Artist";
 import {Genre} from "../../type/Genre";
 import {Nation} from "../../type/Nation";
@@ -9,18 +9,22 @@ import {nationApi} from "../../../api/nationApi";
 import {genreApi} from "../../../api/genreApi";
 import {vinylApi} from "../../../api/vinylApi";
 import {UserContext} from "../../context/UserProvider";
+import $ from "jquery";
 
 export default function AdminEditVinyl() {
-    const [vinyl,setVinyl] = useState<Vinyl>(VinylForEditingDefault)
+    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+
+    const [vinyl,setVinyl] = useState<VinylForEditing>(VinylForEditingDefault)
     const [artists, setArtists] = useState<Artist[]>([]);
     const [genres, setGenres] = useState<Genre[]>([]);
     const [nations, setNations] = useState<Nation[]>([]);
+    const [thumbnail1, setThumbnail1] = useState<File>();
+    const [thumbnail2, setThumbnail2] = useState<File>();
     const [showAddingMenu, setShowAddingMenu] = useState<boolean>(false);
     const [editingSuccessful, setEditingSuccessful] = useState<boolean>(false);
 
     const {id} = useParams<{id:string}>();
     const {refreshToken} = useContext(UserContext);
-    // const history = useHistory();
 
     const getVinyl = async () => {
         try {
@@ -113,11 +117,8 @@ export default function AdminEditVinyl() {
 
     const handleUpdateVinyl = async () => {
         try {
-            await vinylApi.updateVinyl(parseInt(id),vinyl);
+            await vinylApi.updateVinyl(parseInt(id),vinyl,thumbnail1,thumbnail2);
             setEditingSuccessful(true);
-            // setTimeout(() => {
-            //     history.goBack();
-            // },2000);
         } catch (error) {
             if (error.response.status === 403) {
                 await refreshToken();
@@ -127,6 +128,18 @@ export default function AdminEditVinyl() {
             }
         }
     }
+    const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const nameInput = event.target.name;
+        if (nameInput === "thumbnail1") {
+            $('#file__input--thumbnail1').text(event.target.files?.[0].name!);
+            setThumbnail1(event.target.files?.[0]);
+        }
+        if (nameInput === "thumbnail2") {
+            $('#file__input--thumbnail2').text(event.target.files?.[0].name!);
+            setThumbnail2(event.target.files?.[0]);
+        }
+    }
+
 
     return (
         <form className="admin_page__menu__manager" style={{width: "60%"}} onSubmit={handleSubmit}>
@@ -155,13 +168,29 @@ export default function AdminEditVinyl() {
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" name="thumbnail1" required type="text" value={vinyl.thumbnail1} onChange={handleChange}/>
-                <span>Thumbnail 1</span>
+                <input className="sign_up__input" id={"thumbnail1"} name="thumbnail1" required type="file" accept={"image/png, image/jpeg"} onChange={handleChangeImage}/>
+                <div className={"file__input"}>
+                    <span id={"file__input--thumbnail1"}>{apiUrlDefault}{vinyl.thumbnail1}</span>
+                </div>
+                <label htmlFor="thumbnail1">
+                    <i className="fas fa-upload"/> Choose a file...
+                </label>
+                <span style={{
+                    transform: "translateX(10px) translateY(-24px)"
+                }}>Thumbnail 1</span>
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" name="thumbnail2" required type="text" value={vinyl.thumbnail2} onChange={handleChange}/>
-                <span>Thumbnail 2</span>
+                <input className="sign_up__input" id={"thumbnail2"} name="thumbnail2" required type="file" accept={"image/png, image/jpeg"} onChange={handleChangeImage}/>
+                <div className={"file__input"}>
+                    <span id={"file__input--thumbnail2"}>{apiUrlDefault}{vinyl.thumbnail2}</span>
+                </div>
+                <label htmlFor="thumbnail2">
+                    <i className="fas fa-upload"/> Choose a file...
+                </label>
+                <span style={{
+                    transform: "translateX(10px) translateY(-24px)"
+                }}>Thumbnail 2</span>
             </label>
 
             <label className="has-float-label">
@@ -231,7 +260,7 @@ export default function AdminEditVinyl() {
                 <span>% Giảm Giá</span>
             </label>
 
-            <input className="button_Login_Signup" type="submit" value="Cập nhật thông tin sản phẩm" onClick={handleUpdateVinyl}/>
+            <input className="button_Login_Signup" type="button" value="Cập nhật thông tin sản phẩm" onClick={handleUpdateVinyl}/>
         </form>
     );
 }

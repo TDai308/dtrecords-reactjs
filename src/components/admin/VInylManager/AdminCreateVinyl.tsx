@@ -130,10 +130,6 @@ export default function AdminCreateVinyl() {
             await vinylApi.addNewVinyl(newVinyl, thumbnail1, thumbnail2);
             setCreatingSuccessful(true);
             setNewVinyl(VinylForCreatingDefault);
-            // const artistInput = document.getElementById("artistInput") as HTMLSelectElement;
-            // artistInput.selectedIndex = 0;
-            // const nationInput = document.getElementById("nationInput") as HTMLSelectElement;
-            // nationInput.selectedIndex = 0;
             $("#artistInput").prop('selectedIndex', 0);
             $("#nationInput").prop('selectedIndex', 0);
         } catch (error) {

@@ -5,6 +5,7 @@ import {vinylApi} from "../../../api/vinylApi";
 import renderTableHeader from "../../table/renderTableHeader";
 import AdminNavigation from "../AdminNavigation";
 import classNames from "classnames";
+import $ from "jquery";
 
 const defaultVinyls = [
     {
@@ -35,11 +36,13 @@ export default function AdminVinylList() {
     const location = useLocation();
     let query = new URLSearchParams(location.search);
 
+    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+
     const history = useHistory();
 
     const [vinyls, setVinyls] = useState<Vinyl[]>(defaultVinyls);
     const [vinylsPerPage] = useState<number>(10);
-    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number>(query.get("page")===null?1:parseInt(query.get("page")!));
     const [totalPages, setTotalPages] = useState<number>(0);
     const [totalElements, setTotalElements] = useState<number>(0);
 
@@ -117,6 +120,11 @@ export default function AdminVinylList() {
         history.push(`/admin/vinyl?page=${targetPage}`);
     }
 
+    const sliderImageWidth = $('.adminPageVinyl__imageVinyl__box').width();
+    $('.adminPageVinyl__imageVinyl').css({
+        'height': sliderImageWidth + 'px'
+    });
+
     return (
         <div className="admin_page__menu__manager">
             <AdminNavigation/>
@@ -139,8 +147,16 @@ export default function AdminVinylList() {
                                 <tr key={index}>
                                     <td><Link to={"/admin/vinyl/" + vinyl.id} className={"vinylItem__hover"}>{vinyl.vinylName}</Link></td>
                                     <td>{vinyl.artist.nameArtist}</td>
-                                    <td>{vinyl.thumbnail1}</td>
-                                    <td>{vinyl.thumbnail2}</td>
+                                    <td>
+                                        <div className={"adminPageVinyl__imageVinyl__box"}>
+                                            <img className={"adminPageVinyl__imageVinyl"} id={"thumbnail1"} src={`${apiUrlDefault}${vinyl.thumbnail1}`} alt="thumbnail1"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className={"adminPageVinyl__imageVinyl__box"}>
+                                            <img className={"adminPageVinyl__imageVinyl"} id={"thumbnail2"} src={`${apiUrlDefault}${vinyl.thumbnail2}`} alt="thumbnail2"/>
+                                        </div>
+                                    </td>
                                     <td>{vinyl.quantity}</td>
                                     <td>{vinyl.price}</td>
                                     <td>{

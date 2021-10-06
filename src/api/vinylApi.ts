@@ -32,9 +32,16 @@ export const vinylApi = {
         });
     },
 
-    updateVinyl: (id:number, vinyl:Vinyl) => {
+    updateVinyl: (id:number, vinyl:Vinyl, thumbnail1:File|undefined, thumbnail2:File|undefined) => {
         const url = `/admin/vinyl/${id}`;
-        const data = JSON.stringify(vinyl);
+        const data = new FormData();
+        data.append("vinyl", JSON.stringify(vinyl));
+        if (thumbnail1 !== undefined) {
+            data.append("thumbnail1", thumbnail1);
+        }
+        if (thumbnail2 !== undefined) {
+            data.append("thumbnail2", thumbnail2);
+        }
         return axiosClient.put(url,data,{
             headers: {
                 'Authorization': "Bearer "+ localStorage.getItem("access_token")
@@ -55,5 +62,9 @@ export const vinylApi = {
                 'Authorization': "Bearer "+ localStorage.getItem("access_token")
             }
         });
+    },
+
+    getVinylImage: (urlImage: string) => {
+        return axiosClient({url:urlImage, baseURL:"http://localhost:8080/"});
     }
 }

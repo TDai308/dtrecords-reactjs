@@ -989,49 +989,49 @@
 
 .album__name,
 .album__nation_genre,
-.album__tracklist_player h2{
+.album__track-list_player h2{
   margin: 0 0 10px;
   line-height: 36px;
   font-weight: 300;
 }
 
-.album__tracklist_player {
+.album__track-list_player {
   border-bottom: #1e1e1e solid 1px;
   padding: 10px 0;
 }
 
-.album__tracklist {
+.album__track-list {
   max-height: 125px;
   padding: 5px;
   overflow-y: auto;
 }
-.album__tracklist::-webkit-scrollbar-track
+.album__track-list::-webkit-scrollbar-track
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   border-radius: 10px;
   background-color: #F5F5F5;
 }
 
-.album__tracklist::-webkit-scrollbar
+.album__track-list::-webkit-scrollbar
 {
   width: 12px;
   background-color: #F5F5F5;
 }
 
-.album__tracklist::-webkit-scrollbar-thumb
+.album__track-list::-webkit-scrollbar-thumb
 {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
   background-color: #555;
 }
 
-.album__tracklist__player {
+.album__track-list__player {
   display: flex;
   justify-content: space-between;
   line-height: 25px;
 }
 
-.album__tracklist__player:hover .album__track_name div{
+.album__track-list__player:hover .album__track_name div{
   text-decoration: underline;
 }
 
@@ -1402,8 +1402,13 @@
   background: #21a2c8;
 }
 
-.file__input {
-
+#file__input--thumbnail1,
+#file__input--thumbnail2 {
+  word-break:break-all;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .button--adding {
@@ -1442,6 +1447,16 @@
 .adminPageVinyl__genreItem > svg {
   margin-left: 5px;
   cursor: pointer;
+}
+
+.adminPageVinyl__imageVinyl__box {
+  width: 90%;
+  display: flex;
+  margin: 0 auto;
+}
+
+.adminPageVinyl__imageVinyl {
+  width: 100%;
 }
 
 .adminPageVinyl__selectMenuGenres {

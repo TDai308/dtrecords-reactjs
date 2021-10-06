@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Vinyl} from "../../type/Vinyl";
-import {VinylForEditingDefault} from "../../type/Vinyl";
+import {Vinyl, VinylDefault} from "../../type/Vinyl";
 import {useParams} from "react-router-dom";
 import {vinylApi} from "../../../api/vinylApi";
 import {Track} from "../../type/Track";
@@ -8,7 +7,7 @@ import $ from "jquery";
 import {trackApi} from "../../../api/trackApi";
 
 export default function ProductDetailContent() {
-    const [vinyl, setVinyl] = useState<Vinyl>(VinylForEditingDefault);
+    const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
     const [tracks, setTracks] = useState<Track[]>([]);
 
     const {id} = useParams<{id:string}>();
@@ -95,13 +94,13 @@ export default function ProductDetailContent() {
                             }
                         </div>
                     </div>
-                    <div className="album__tracklist_player">
+                    <div className="album__track-list_player">
                         <h2>Danh Sách Các Bài Hát - Preview</h2>
-                        <div className="album__tracklist">
+                        <div className="album__track-list">
                             {
                                 tracks.map((track, index) => {
                                     return (
-                                        <div className="album__tracklist__player" key={index}>
+                                        <div className="album__track-list__player" key={index}>
                                             <div className="album__track_name">
                                                 <div>{track.trackName} - {track.artists}</div>
                                             </div>
