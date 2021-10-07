@@ -140,7 +140,6 @@ export default function AdminEditVinyl() {
         }
     }
 
-
     return (
         <form className="admin_page__menu__manager" style={{width: "60%"}} onSubmit={handleSubmit}>
             <h1>Chỉnh sửa thông tin sản phẩm</h1>
