@@ -128,6 +128,7 @@ export default function AdminEditVinyl() {
             }
         }
     }
+
     const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
         const nameInput = event.target.name;
         if (nameInput === "thumbnail1") {

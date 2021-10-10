@@ -132,14 +132,24 @@ export default function AdminCreateVinyl() {
             setNewVinyl(VinylForCreatingDefault);
             $("#artistInput").prop('selectedIndex', 0);
             $("#nationInput").prop('selectedIndex', 0);
+            clearInputFile();
         } catch (error) {
             if (error.response.status === 403) {
                 await refreshToken();
-                handleAddNewVinyl();
+                await handleAddNewVinyl();
             } else {
                 console.log("error", error);
             }
         }
+    }
+
+    const clearInputFile = () => {
+        $('#thumbnail1').val('');
+        $('#thumbnail2').val('');
+        setThumbnail1(undefined);
+        setThumbnail2(undefined);
+        $('#file__input--thumbnail1').text("None");
+        $('#file__input--thumbnail2').text("None");
     }
 
     return (

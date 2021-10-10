@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, useHistory, useLocation} from "react-router-dom";
 import {Vinyl} from "../../type/Vinyl";
 import {vinylApi} from "../../../api/vinylApi";
@@ -6,6 +6,7 @@ import renderTableHeader from "../../table/renderTableHeader";
 import AdminNavigation from "../AdminNavigation";
 import classNames from "classnames";
 import $ from "jquery";
+import {UserContext} from "../../context/UserProvider";
 
 const defaultVinyls = [
     {
@@ -46,6 +47,8 @@ export default function AdminVinylList() {
     const [totalPages, setTotalPages] = useState<number>(0);
     const [totalElements, setTotalElements] = useState<number>(0);
 
+    const {refreshToken} = useContext(UserContext);
+
     const getVinylList = async (currentPage:number) => {
         try {
             const fetchVinylList = await vinylApi.getVinylList(currentPage,null,undefined);
@@ -56,6 +59,9 @@ export default function AdminVinylList() {
                 setTotalElements(data.totalElements);
                 setCurrentPage(data.number + 1);
             } else setVinyls(defaultVinyls);
+            if (data.content.length === 0 && data.totalElements > 10) {
+                history.push(`/admin/vinyl?page=${currentPage-1}`);
+            }
         } catch (error) {
             console.log("error", error);
         }
@@ -69,21 +75,24 @@ export default function AdminVinylList() {
         getVinylList(currentPage);
     }, [currentPage]);
 
-    const removeNotification = document.getElementsByClassName("oval__notification");
-
     function handleOpenRemoveNotification(index:number) {
-        removeNotification[index].setAttribute("style", "display:block");
+        $(".oval__notification")[index].setAttribute("style", "display:block");
     }
 
     function handleCloseRemoveNotification(index:number) {
-        removeNotification[index].setAttribute("style", "display:none");
+        $(".oval__notification")[index].setAttribute("style", "display:none");
     }
 
-    const deleteVinyl = async (id:number)=> {
+    const deleteVinyl = async (id:number, index:number)=> {
         try {
             await vinylApi.deleteVinyl(id);
             await getVinylList(currentPage);
+            $(".oval__notification")[index].setAttribute("style", "display:none");
         } catch (error) {
+            if (error.response.status === 403) {
+                await refreshToken();
+                await deleteVinyl(id, index);
+            }
             console.log("error", error);
         }
     }
@@ -217,7 +226,7 @@ export default function AdminVinylList() {
                                 <p>{vinyl.vinylName} - {vinyl.artist.nameArtist}</p>
                                 <div className="admin_page__notification_delete_btn">
                                     <button className="button__red__with-a" onClick={() => handleCloseRemoveNotification(index)}>Không</button>
-                                    <button className="button__blue__with-a" onClick={() => deleteVinyl(vinyl.id)}>Xóa</button>
+                                    <button className="button__blue__with-a" onClick={() => deleteVinyl(vinyl.id,index)}>Xóa</button>
                                 </div>
                             </div>
                         </div>
