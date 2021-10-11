@@ -49,14 +49,27 @@ export default function ProductDetailContent() {
         genres.push(genre.genreName);
     });
 
+    let count = 1;
+    if (count === 1) {
+        $('#radio1').prop("checked", true);
+    }
+
+    setInterval(function () {
+        count++;
+        if (count > 2) {
+            count=1
+        }
+        $(`#radio${count}`).prop("checked", true);
+    },5000);
+
     return (
         <div className="row sm-gutter app-content">
             <div className="col l-6">
                 <div className="album_thumbnail__slider" id="album_thumbnail__slider">
                     <input type="radio" name="radio-btn" id="radio1"/>
                     <input type="radio" name="radio-btn" id="radio2"/>
-                    <img className="slider__image first" src={`http://localhost:3000/images/vinylImg/${vinyl.vinylName}-${vinyl.artist.nameArtist}/${vinyl.thumbnail1}`} alt={vinyl.vinylName}/>
-                    <img className="slider__image" src={`http://localhost:3000/images/vinylImg/${vinyl.vinylName}-${vinyl.artist.nameArtist}/${vinyl.thumbnail2}`} alt={vinyl.vinylName}/>
+                    <img className="slider__image first" src={`http://localhost:8080/${vinyl.thumbnail1}`} alt={vinyl.vinylName}/>
+                    <img className="slider__image" src={`http://localhost:8080/${vinyl.thumbnail2}`} alt={vinyl.vinylName}/>
                     <div className="slider__navigation_auto">
                         <div className="auto-btn1"/>
                         <div className="auto-btn2"/>
@@ -120,7 +133,7 @@ export default function ProductDetailContent() {
                         </div>
                     </div>
                     <form className="album__buy_button">
-                        <input className="album__quantity" type="number" name="quantity" defaultValue={vinyl.quantity>0?1:0} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0}/>
+                        <input className="album__quantity" type="number" name="quantity" defaultValue={vinyl.quantity>0?1:0} min={0} max={vinyl.quantity} disabled={vinyl.quantity===0}/>
                         {
                             vinyl.quantity !== 0 ?
                                 <input className="album__add_to_cart height_42px" type="submit" value="Thêm Vào Giỏ"/> :
