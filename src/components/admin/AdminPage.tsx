@@ -1,7 +1,8 @@
 import React from "react";
 import {Route} from "react-router-dom";
 import AdminMenu from "./AdminMenu";
-import AdminVinyl from "./VInylManager/AdminVinyl";
+import AdminVinyl from "./VinylManager/AdminVinyl";
+import AdminTrack from "./TrackManager/AdminTrack";
 
 export default function AdminPage() {
     return (
@@ -12,6 +13,7 @@ export default function AdminPage() {
             </div>
             <Route path="/admin" exact component={AdminMenu}/>
             <Route path="/admin/vinyl" component={AdminVinyl}/>
+            <Route path="/admin/track" component={AdminTrack}/>
         </div>
     );
 }

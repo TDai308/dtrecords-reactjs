@@ -69,10 +69,6 @@ export default function AdminEditVinyl() {
         getVinyl();
     }, []);
 
-    const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-    }
-
     const handleAddOpenButtonClick = () => {
         setShowAddingMenu(true);
     }
@@ -142,7 +138,7 @@ export default function AdminEditVinyl() {
     }
 
     return (
-        <form className="admin_page__menu__manager" style={{width: "60%"}} onSubmit={handleSubmit}>
+        <form className="admin_page__menu__manager" style={{width: "60%"}}>
             <h1>Chỉnh sửa thông tin sản phẩm</h1>
             <Link to="/admin/vinyl" className="button__blue__with-a">Danh sách sản phẩm</Link>
             {

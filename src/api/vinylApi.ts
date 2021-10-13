@@ -18,6 +18,11 @@ export const vinylApi = {
         return axiosClient.get(url);
     },
 
+    getVinylWithoutPage: () => {
+        const url = "/vinylList";
+        return axiosClient.get(url);
+    },
+
     getVinyl: (id:number) => {
         const url = `/vinyl/${id}`;
         return axiosClient.get(url);

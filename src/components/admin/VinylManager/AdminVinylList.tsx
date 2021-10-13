@@ -7,8 +7,9 @@ import AdminNavigation from "../AdminNavigation";
 import classNames from "classnames";
 import $ from "jquery";
 import {UserContext} from "../../context/UserProvider";
+import {handleCloseRemoveNotification,handleOpenRemoveNotification} from "../AdminFunction";
 
-const defaultVinyls = [
+export const defaultVinyls = [
     {
         id: 0,
         vinylName: "",
@@ -75,23 +76,17 @@ export default function AdminVinylList() {
         getVinylList(currentPage);
     }, [currentPage]);
 
-    function handleOpenRemoveNotification(index:number) {
-        $(".oval__notification")[index].setAttribute("style", "display:block");
-    }
-
-    function handleCloseRemoveNotification(index:number) {
-        $(".oval__notification")[index].setAttribute("style", "display:none");
-    }
-
     const deleteVinyl = async (id:number, index:number)=> {
         try {
             await vinylApi.deleteVinyl(id);
             await getVinylList(currentPage);
             $(".oval__notification")[index].setAttribute("style", "display:none");
         } catch (error) {
-            if (error.response.status === 403) {
-                await refreshToken();
-                await deleteVinyl(id, index);
+            if (error.response) {
+                if (error.response.status === 403) {
+                    await refreshToken();
+                    await deleteVinyl(id, index);
+                }
             }
             console.log("error", error);
         }
@@ -139,7 +134,7 @@ export default function AdminVinylList() {
             <AdminNavigation/>
             <h1>Danh sách sản phẩm</h1>
             <Link className="button__blue__with-a margin-10px" to="/admin/vinyl/create">Tạo sản phẩm mới</Link>
-            <table  className="table_of_admin">
+            <table className="table_of_admin">
                 <tbody>
                     <tr>
                         {

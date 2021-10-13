@@ -28,6 +28,7 @@ export default function AdminCreateVinyl() {
           setArtists(fetchArtistList.data);
       } catch (error) {
           console.log("error", error);
+          console.log("getArtistList");
       }
     };
 
@@ -137,9 +138,8 @@ export default function AdminCreateVinyl() {
             if (error.response.status === 403) {
                 await refreshToken();
                 await handleAddNewVinyl();
-            } else {
-                console.log("error", error);
             }
+            console.log("error", error);
         }
     }
 
