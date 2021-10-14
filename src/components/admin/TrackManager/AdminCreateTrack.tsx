@@ -3,10 +3,12 @@ import {Link} from "react-router-dom";
 import {TrackForCreating, TrackForCreatingDefault} from "../../type/Track";
 import {Vinyl} from "../../type/Vinyl";
 import {vinylApi} from "../../../api/vinylApi";
+import $ from "jquery";
 
 export default function AdminCreateTrack() {
     const [newTrack, setNewTrack] = useState<TrackForCreating>(TrackForCreatingDefault)
     const [vinylList, setVinylList] = useState<Vinyl[]>([]);
+    const [fileAudio, setFileAudio] = useState<File>();
     const [creatingSuccessful, setCreatingSuccessful] = useState<boolean>(false);
 
     const getVinylList = async () => {
@@ -23,19 +25,24 @@ export default function AdminCreateTrack() {
     }, [])
 
     useEffect(() => {
-
+        setNewTrack({...newTrack, vinyl: vinylList[0]});
     }, [vinylList]);
     
-    const handleChange = () => {
-      
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
+        if (event.currentTarget.name === "vinyl") {
+            setNewTrack({...newTrack, vinyl: vinylList.find(vinyl => vinyl.id === parseInt(event.target.value))!});
+        } else {
+            setNewTrack({...newTrack, [event.currentTarget.name]: event.target.value});
+        }
     }
     
     const handleAddNewTrack = () => {
-        
+
     }
     
-    const handleChangeTrackPreview = () => {
-      
+    const handleChangeTrackPreview = (event:React.ChangeEvent<HTMLInputElement>) => {
+        $("#file__input--trackPreview").text(event.target.files?.[0].name!);
+        setFileAudio(event.target.files?.[0]);
     }
     
     return (
@@ -57,7 +64,7 @@ export default function AdminCreateTrack() {
             </label>
 
             <label className="has-float-label">
-                <input className="sign_up__input" id={"trackPreview"} name="thumbnail1" required type="file" accept={"audio/*"} onChange={handleChangeTrackPreview}/>
+                <input className="sign_up__input" id={"trackPreview"} name="trackPreview" required type="file" accept={"audio/*"} onChange={handleChangeTrackPreview}/>
                 <div className={"file__input"}>
                     <span id={"file__input--trackPreview"}>None</span>
                 </div>
@@ -70,7 +77,7 @@ export default function AdminCreateTrack() {
             </label>
 
             <label className="has-float-label">
-                <select name="nation" className="sign_up__input" id={"nationInput"} onChange={handleChange}>
+                <select name="vinyl" className="sign_up__input" id={"vinylInput"} onChange={handleChange}>
                     {
                         vinylList.map((vinyl, index) => {
                             return (

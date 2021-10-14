@@ -8,31 +8,7 @@ import classNames from "classnames";
 import $ from "jquery";
 import {UserContext} from "../../context/UserProvider";
 import {handleCloseRemoveNotification,handleOpenRemoveNotification} from "../AdminFunction";
-
-export const defaultVinyls = [
-    {
-        id: 0,
-        vinylName: "",
-        artist: {
-            id: 0,
-            nameArtist: ""
-        },
-        thumbnail1: "",
-        thumbnail2: "",
-        quantity: 0,
-        price: 0,
-        genres: [{
-            id: 0,
-            genreName: ""
-        }],
-        nation: {
-            id: 0,
-            nation: ""
-        },
-        discount: 0,
-        realPrice: 0
-    }
-];
+import {defaultVinyls} from "../../type/Vinyl";
 
 export default function AdminVinylList() {
     const location = useLocation();
@@ -42,7 +18,7 @@ export default function AdminVinylList() {
 
     const history = useHistory();
 
-    const [vinyls, setVinyls] = useState<Vinyl[]>(defaultVinyls);
+    const [vinyls, setVinyls] = useState<Vinyl[]>([]);
     const [vinylsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(query.get("page")===null?1:parseInt(query.get("page")!));
     const [totalPages, setTotalPages] = useState<number>(0);
@@ -59,7 +35,7 @@ export default function AdminVinylList() {
                 setTotalPages(data.totalPages);
                 setTotalElements(data.totalElements);
                 setCurrentPage(data.number + 1);
-            } else setVinyls(defaultVinyls);
+            } else setVinyls([]);
             if (data.content.length === 0 && data.totalElements > 10) {
                 history.push(`/admin/vinyl?page=${currentPage-1}`);
             }
@@ -138,7 +114,7 @@ export default function AdminVinylList() {
                 <tbody>
                     <tr>
                         {
-                            renderTableHeader(vinyls[0])
+                            renderTableHeader(defaultVinyls[0])
                         }
                     </tr>
                     {

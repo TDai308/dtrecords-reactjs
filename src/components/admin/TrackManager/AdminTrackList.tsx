@@ -2,22 +2,13 @@ import React, {useEffect, useState} from "react";
 import AdminNavigation from "../AdminNavigation";
 import {Link} from "react-router-dom";
 import {Track} from "../../type/Track";
-import {defaultVinyls} from "../VinylManager/AdminVinylList";
 import renderTableHeader from "../../table/renderTableHeader";
 import {handleCloseRemoveNotification, handleOpenRemoveNotification} from "../AdminFunction";
 import {trackApi} from "../../../api/trackApi";
-
-const defaultTracks = [
-    {
-        id: 0,
-        trackName: "",
-        artists: "",
-        vinyl: defaultVinyls[0]
-    }
-];
+import {defaultTracks} from "../../type/Track";
 
 export default function AdminTrackList() {
-    const [tracks, setTracks] = useState<Track[]>(defaultTracks);
+    const [tracks, setTracks] = useState<Track[]>([]);
 
     const getTrackList = async () => {
         try {
@@ -45,7 +36,7 @@ export default function AdminTrackList() {
                 <tbody>
                 <tr>
                     {
-                        renderTableHeader(tracks[0])
+                        renderTableHeader(defaultTracks[0])
                     }
                 </tr>
                 {
@@ -54,6 +45,7 @@ export default function AdminTrackList() {
                             <tr key={index}>
                                 <td>{track.trackName}</td>
                                 <td>{track.artists}</td>
+                                <td>{track.trackPreview}</td>
                                 <td>{track.vinyl.vinylName}</td>
                                 <td className="edit__button"><Link to={"/admin/track/edit/"+track.id}>
                                     <i className="fas fa-edit"/>

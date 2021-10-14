@@ -95,3 +95,28 @@ export const VinylForEditingDefault : VinylForEditing = {
     discount: 0,
     realPrice: 0
 }
+
+export const defaultVinyls = [
+    {
+        id: 0,
+        vinylName: "",
+        artist: {
+            id: 0,
+            nameArtist: ""
+        },
+        thumbnail1: "",
+        thumbnail2: "",
+        quantity: 0,
+        price: 0,
+        genres: [{
+            id: 0,
+            genreName: ""
+        }],
+        nation: {
+            id: 0,
+            nation: ""
+        },
+        discount: 0,
+        realPrice: 0
+    }
+];

@@ -1,10 +1,12 @@
 import {Vinyl} from "./Vinyl";
 import {VinylDefault} from "./Vinyl";
+import {defaultVinyls} from "./Vinyl";
 
 export type Track = {
     id: number;
     trackName: string;
     artists: string;
+    trackPreview: string,
     vinyl: Vinyl;
 }
 
@@ -19,3 +21,13 @@ export const TrackForCreatingDefault : TrackForCreating = {
     artists: "",
     vinyl: VinylDefault
 };
+
+export const defaultTracks = [
+    {
+        id: 0,
+        trackName: "",
+        artists: "",
+        trackPreview: "",
+        vinyl: defaultVinyls[0]
+    }
+];
