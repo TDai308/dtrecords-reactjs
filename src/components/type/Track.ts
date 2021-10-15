@@ -8,17 +8,33 @@ export type Track = {
     artists: string;
     trackPreview: string,
     vinyl: Vinyl;
-}
+};
 
 export type TrackForCreating = {
     trackName: string;
     artists: string;
     vinyl: Vinyl;
-}
+};
 
 export const TrackForCreatingDefault : TrackForCreating = {
     trackName: "",
     artists: "",
+    vinyl: VinylDefault
+};
+
+export type TrackForEditing = {
+    id: number;
+    trackName: string;
+    artists: string;
+    trackPreview: string;
+    vinyl: Vinyl;
+};
+
+export const TrackForEditingDefault : TrackForEditing = {
+    id: 0,
+    trackName: "",
+    artists: "",
+    trackPreview: "",
     vinyl: VinylDefault
 };
 

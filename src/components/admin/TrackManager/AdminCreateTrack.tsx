@@ -1,15 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {TrackForCreating, TrackForCreatingDefault} from "../../type/Track";
 import {Vinyl} from "../../type/Vinyl";
 import {vinylApi} from "../../../api/vinylApi";
 import $ from "jquery";
+import {trackApi} from "../../../api/trackApi";
+import {UserContext} from "../../context/UserProvider";
 
 export default function AdminCreateTrack() {
     const [newTrack, setNewTrack] = useState<TrackForCreating>(TrackForCreatingDefault)
     const [vinylList, setVinylList] = useState<Vinyl[]>([]);
     const [fileAudio, setFileAudio] = useState<File>();
-    const [creatingSuccessful, setCreatingSuccessful] = useState<boolean>(false);
+    const [creatingSuccessful, setCreatingSuccessful] = useState<boolean>(false)
+
+    const {refreshToken} = useContext(UserContext);
 
     const getVinylList = async () => {
         try {
@@ -36,8 +40,24 @@ export default function AdminCreateTrack() {
         }
     }
     
-    const handleAddNewTrack = () => {
-
+    const handleAddNewTrack = async () => {
+        try {
+            await trackApi.addNewTrack(newTrack, fileAudio!);
+            setCreatingSuccessful(true);
+            setNewTrack(TrackForCreatingDefault);
+            setFileAudio(undefined);
+            $("#trackPreview").val("");
+            $("#file__input--trackPreview").text("None");
+            $("#vinylInput").prop("selectedIndex", 0);
+        } catch (error) {
+            if (error.response) {
+                if (error.response.status === 403) {
+                    await refreshToken();
+                    await handleAddNewTrack();
+                }
+            }
+            console.log("error",error);
+        }
     }
     
     const handleChangeTrackPreview = (event:React.ChangeEvent<HTMLInputElement>) => {
