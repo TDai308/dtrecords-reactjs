@@ -12,6 +12,8 @@ export default function ProductDetailContent() {
 
     const {id} = useParams<{id:string}>();
 
+    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+
     const getTheVinyl = async () => {
         try {
             const fetchVinylData = await vinylApi.getVinyl(parseInt(id));
@@ -61,6 +63,45 @@ export default function ProductDetailContent() {
         }
         $(`#radio${count}`).prop("checked", true);
     },5000);
+
+    function play(audioID:number, event:React.MouseEvent<HTMLElement>) {
+        const audioPlayer = document.getElementById(audioID.toString()) as HTMLMediaElement;
+        audioPlayer.play();
+        const audios = document.getElementsByClassName('audio') as HTMLCollectionOf<HTMLMediaElement>;
+        for(let i = 0; i < audios.length; i++){
+            if(audios[i] !== audioPlayer){
+                audios[i].pause();
+                audios[i].currentTime = 0;
+            }
+        }
+        $('.fa-play-circle').each(function () {
+            if ($(this) !== $(event.target)) {
+                $(this).css({
+                    "display": "block"
+                });
+                $(this).next().css({
+                    "display": "none"
+                })
+            }
+        })
+        $(event.target).css({
+            "display": "none"
+        });
+        $(event.target).next().css({
+            "display": "block"
+        });
+    }
+    
+    function pause(audioID: number, event:React.MouseEvent<HTMLElement>) {
+        const audioPlayer = document.getElementById(audioID.toString()) as HTMLMediaElement;
+        audioPlayer.pause();
+        $(event.target).css({
+            "display": "none"
+        });
+        $(event.target).prev().css({
+            "display": "block"
+        });
+    }
 
     return (
         <div className="row sm-gutter app-content">
@@ -118,14 +159,13 @@ export default function ProductDetailContent() {
                                                 <div>{track.trackName} - {track.artists}</div>
                                             </div>
                                             <div className="album__track_play_pause">
-                                                {/*th:onclick="|play(${track.trackID},event)|"*/}
-                                                <i  className="fas fa-play-circle"/>
+                                                <i  className="fas fa-play-circle" onClick={(event) => {play(index,event)}}/>
                                                 {/*th:onclick="|pause(${track.trackID},event)|"*/}
-                                                <i className="fas fa-pause-circle" style={{
+                                                <i className="fas fa-pause-circle" onClick={(event) => {pause(index,event)}} style={{
                                                     display: "none"
                                                 }}/>
                                             </div>
-                                            <audio className="audio" id={(track.id).toString()}/>
+                                            <audio className="audio" id={index.toString()} src={`${apiUrlDefault}${track.trackPreview}`}/>
                                         </div>
                                     );
                                 })
