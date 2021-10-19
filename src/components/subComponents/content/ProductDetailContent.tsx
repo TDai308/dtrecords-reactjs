@@ -1,14 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Vinyl, VinylDefault} from "../../type/Vinyl";
 import {useParams} from "react-router-dom";
 import {vinylApi} from "../../../api/vinylApi";
 import {Track} from "../../type/Track";
 import $ from "jquery";
 import {trackApi} from "../../../api/trackApi";
+import {CartContext} from "../../context/CartProvider";
 
 export default function ProductDetailContent() {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
     const [tracks, setTracks] = useState<Track[]>([]);
+    const [quantity, setQuantity] = useState<number>(0);
+    const {addToCart} = useContext(CartContext);
 
     const {id} = useParams<{id:string}>();
 
@@ -103,6 +106,10 @@ export default function ProductDetailContent() {
         });
     }
 
+    const handleChangeQuantity = (event:React.ChangeEvent<HTMLInputElement>) => {
+        setQuantity(parseInt(event.currentTarget.value));
+    };
+
     return (
         <div className="row sm-gutter app-content">
             <div className="col l-6">
@@ -172,10 +179,17 @@ export default function ProductDetailContent() {
                         </div>
                     </div>
                     <form className="album__buy_button">
-                        <input className="album__quantity" type="number" name="quantity" defaultValue={vinyl.quantity>0?1:0} min={0} max={vinyl.quantity} disabled={vinyl.quantity===0}/>
+                        <input className="album__quantity" type="number" name="quantity" defaultValue={vinyl.quantity>0?1:0} min={0} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
                         {
                             vinyl.quantity !== 0 ?
-                                <input className="album__add_to_cart height_42px" type="submit" value="Thêm Vào Giỏ"/> :
+                                <input className="album__add_to_cart height_42px" type="button" value="Thêm Vào Giỏ" onClick={
+                                    () => {
+                                        if (quantity>0) {
+                                            addToCart({vinyl: vinyl,quantity: quantity});
+                                            $(".album__quantity").val(0);
+                                        }
+                                    }
+                                }/> :
                                 <input className="album__sold_out height_42px" type="button" value="Hết Hàng"/>
                         }
                     </form>
