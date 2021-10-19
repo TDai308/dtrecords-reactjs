@@ -7,6 +7,7 @@ import './static/icon/fontawesome/css/all.min.css';
 
 import {BrowserRouter as Router} from "react-router-dom";
 import UserProvider from "./components/context/UserProvider";
+import CartProvider from "./components/context/CartProvider";
 import DTrecords from "./components/DTrecords";
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
       <Router>
           <div className="App">
               <UserProvider>
-                  <DTrecords/>
+                  <CartProvider>
+                      <DTrecords/>
+                  </CartProvider>
               </UserProvider>
           </div>
       </Router>

@@ -160,7 +160,6 @@ export default function ProductDetailContent() {
                                             </div>
                                             <div className="album__track_play_pause">
                                                 <i  className="fas fa-play-circle" onClick={(event) => {play(index,event)}}/>
-                                                {/*th:onclick="|pause(${track.trackID},event)|"*/}
                                                 <i className="fas fa-pause-circle" onClick={(event) => {pause(index,event)}} style={{
                                                     display: "none"
                                                 }}/>
