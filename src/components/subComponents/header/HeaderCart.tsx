@@ -52,11 +52,14 @@ export default function HeaderCart() {
                                         );
                                     })
                                 }
-                                <Link to="/toCart" className="button__red__with-a">Đi đến giỏ hàng của bạn</Link>
                             </div>:
                             <p className="shopping_cart_empty">Bạn không có sản phẩm nào trong giỏ hàng.</p>
                         }
                 </div>
+                {
+                    cart.length>0 &&
+                        <Link to="/toCart" className="button__red__with-a">Đi đến giỏ hàng của bạn</Link>
+                }
             </div>
         </div>
     );

@@ -11,7 +11,10 @@ export default function ProductDetailContent() {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
     const [tracks, setTracks] = useState<Track[]>([]);
     const [quantity, setQuantity] = useState<number>(0);
+    const [count, setCount] = useState<number>(1);
     const {addToCart} = useContext(CartContext);
+
+    let defaultQuantity:number;
 
     const {id} = useParams<{id:string}>();
 
@@ -42,6 +45,7 @@ export default function ProductDetailContent() {
     useEffect(() => {
         getTrackList();
         document.title = `${vinyl.vinylName} - ${vinyl.artist.nameArtist}`;
+        setQuantity(vinyl.quantity>0?1:0);
     }, [vinyl]);
 
     const sliderImageWidth = $('#album_thumbnail__slider').width();
@@ -54,18 +58,21 @@ export default function ProductDetailContent() {
         genres.push(genre.genreName);
     });
 
-    let count = 1;
     if (count === 1) {
         $('#radio1').prop("checked", true);
     }
 
-    setInterval(function () {
-        count++;
-        if (count > 2) {
-            count=1
-        }
-        $(`#radio${count}`).prop("checked", true);
-    },5000);
+    useEffect(() => {
+        setTimeout(function () {
+            var countSlider = count+1;
+            if (countSlider > 2) {
+                countSlider = 1;
+            }
+            setCount(countSlider);
+            $(`#radio${countSlider}`).prop("checked", true);
+        },5000);
+        return () => {};
+    },[count]);
 
     function play(audioID:number, event:React.MouseEvent<HTMLElement>) {
         const audioPlayer = document.getElementById(audioID.toString()) as HTMLMediaElement;
@@ -109,6 +116,8 @@ export default function ProductDetailContent() {
     const handleChangeQuantity = (event:React.ChangeEvent<HTMLInputElement>) => {
         setQuantity(parseInt(event.currentTarget.value));
     };
+
+    defaultQuantity = vinyl.quantity>0?1:0;
 
     return (
         <div className="row sm-gutter app-content">
@@ -179,14 +188,14 @@ export default function ProductDetailContent() {
                         </div>
                     </div>
                     <form className="album__buy_button">
-                        <input className="album__quantity" type="number" name="quantity" defaultValue={vinyl.quantity>0?1:0} min={0} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
+                        <input className="album__quantity" type="number" name="quantity" value={defaultQuantity} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
                         {
                             vinyl.quantity !== 0 ?
                                 <input className="album__add_to_cart height_42px" type="button" value="Thêm Vào Giỏ" onClick={
                                     () => {
                                         if (quantity>0) {
                                             addToCart({vinyl: vinyl,quantity: quantity});
-                                            $(".album__quantity").val(0);
+                                            $(".album__quantity").val(defaultQuantity);
                                         }
                                     }
                                 }/> :

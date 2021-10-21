@@ -5,7 +5,7 @@ import {Cart} from "../type/Cart";
 const CartContextStateDefault: CartContextState = {
     cart: [],
     quantity: 0,
-    addToCart: (cartItem:Cart) => {},
+    addToCart: () => {},
     removeFromCart: () => {},
     updateQuantity: () => {}
 }
@@ -17,14 +17,26 @@ const CartProvider: FC = ({children}) => {
     const [quantity, setQuantity] = useState<number>(0);
 
     const addToCart = (cartItem:Cart) => {
-        setCart(cart.concat(cartItem));
+        setCart(prevState => {
+            const isItemInCart = prevState.find(item => item.vinyl === cartItem.vinyl);
+
+            if (isItemInCart) {
+                return prevState.map(item =>
+                    item.vinyl === cartItem.vinyl
+                        ? {...item, quantity: item.quantity+cartItem.quantity}
+                        : item
+                );
+            }
+            return [...prevState, cartItem];
+        });
     };
 
     useEffect(() => {
-        cart.forEach((item) => {
-            const totalQuantity:number = quantity + item.quantity;
-            setQuantity(totalQuantity);
+        let totalQuantity:number = 0;
+        cart.forEach(item => {
+            totalQuantity += item.quantity;
         })
+        setQuantity(totalQuantity);
     }, [cart]);
 
     const removeFromCart = () => {
