@@ -1,6 +1,7 @@
 import React, {createContext, FC, useEffect, useState} from "react";
 import {CartContextState} from "../type/CartContextState";
 import {Cart} from "../type/Cart";
+import CookieService from "../../Cookie/CookieService";
 
 const CartContextStateDefault: CartContextState = {
     cart: [],
@@ -10,10 +11,14 @@ const CartContextStateDefault: CartContextState = {
     updateQuantity: () => {}
 }
 
+const expiresAt = 60 * 24;
+
+const cartFromCookie = CookieService.get("cart");
+
 export const CartContext = createContext<CartContextState>(CartContextStateDefault);
 
 const CartProvider: FC = ({children}) => {
-    const [cart, setCart] = useState<Cart[]>([]);
+    const [cart, setCart] = useState<Cart[]>(cartFromCookie===undefined?[]:cartFromCookie);
     const [quantity, setQuantity] = useState<number>(0);
 
     const addToCart = (cartItem:Cart) => {
@@ -37,6 +42,11 @@ const CartProvider: FC = ({children}) => {
             totalQuantity += item.quantity;
         })
         setQuantity(totalQuantity);
+        let date = new Date();
+        date.setTime(date.getTime() + (expiresAt * 60 *1000));
+        const option = {path: "/", expires: date};
+        // localStorage.setItem("cart", JSON.stringify(cart));
+        CookieService.set("cart", JSON.stringify(cart), option);
     }, [cart]);
 
     const removeFromCart = () => {

@@ -6,6 +6,7 @@ import {Track} from "../../type/Track";
 import $ from "jquery";
 import {trackApi} from "../../../api/trackApi";
 import {CartContext} from "../../context/CartProvider";
+import CookieService from "../../../Cookie/CookieService";
 
 export default function ProductDetailContent() {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
