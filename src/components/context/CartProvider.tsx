@@ -23,11 +23,10 @@ const CartProvider: FC = ({children}) => {
 
     const addToCart = (cartItem:Cart) => {
         setCart(prevState => {
-            const isItemInCart = prevState.find(item => item.vinyl === cartItem.vinyl);
-
+            const isItemInCart = prevState.find(item => item.vinyl.id === cartItem.vinyl.id);
             if (isItemInCart) {
                 return prevState.map(item =>
-                    item.vinyl === cartItem.vinyl
+                    item.vinyl.id === cartItem.vinyl.id
                         ? {...item, quantity: item.quantity+cartItem.quantity}
                         : item
                 );
