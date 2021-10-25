@@ -4,6 +4,6 @@ export type CartContextState = {
     cart: Cart[];
     quantity: number;
     addToCart: (cartItem:Cart) => void;
-    removeFromCart: () => void;
+    removeFromCart: (itemID:number) => void;
     updateQuantity: () => void;
 };

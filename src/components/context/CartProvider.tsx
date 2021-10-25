@@ -44,12 +44,19 @@ const CartProvider: FC = ({children}) => {
         let date = new Date();
         date.setTime(date.getTime() + (expiresAt * 60 *1000));
         const option = {path: "/", expires: date};
-        // localStorage.setItem("cart", JSON.stringify(cart));
         CookieService.set("cart", JSON.stringify(cart), option);
     }, [cart]);
 
-    const removeFromCart = () => {
-
+    const removeFromCart = (itemID:number) => {
+        let cartArray = [...cart];
+        cartArray.forEach((item, index) => {
+            if (item.vinyl.id === itemID) {
+                console.log(2)
+                console.log(index);
+                cartArray.splice(index,1);
+            }
+        });
+        setCart(cartArray);
     };
 
     const updateQuantity = () => {

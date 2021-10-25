@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {CartContext} from "../../context/CartProvider";
 
 export default function HeaderCart() {
-    const {cart,quantity} = useContext(CartContext);
+    const {cart,quantity, removeFromCart} = useContext(CartContext);
 
     return (
         <div className="header__cart">
@@ -45,7 +45,7 @@ export default function HeaderCart() {
                                                         </div>
                                                     </div>
                                                     <div className="shopping_cart_item_delete">
-                                                        <i className="fas fa-trash-alt"/>
+                                                        <i className="fas fa-trash-alt" onClick={() => removeFromCart(cartItem.vinyl.id)}/>
                                                     </div>
                                                 </div>
                                             </div>
