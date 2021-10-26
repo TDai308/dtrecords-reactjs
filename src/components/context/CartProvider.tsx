@@ -59,8 +59,22 @@ const CartProvider: FC = ({children}) => {
         setCart(cartArray);
     };
 
-    const updateQuantity = () => {
-
+    const updateQuantity = (cartItem:Cart, quantity:number) => {
+        if (quantity === 0) {
+            removeFromCart(cartItem.vinyl.id);
+        } else {
+            setCart(prevState => {
+                const isItemInCart = prevState.find(item => item.vinyl.id === cartItem.vinyl.id);
+                if (isItemInCart) {
+                    return prevState.map(item =>
+                        item.vinyl.id === cartItem.vinyl.id
+                            ? {...item, quantity: quantity}
+                            : item
+                    );
+                }
+                return [...prevState, cartItem];
+            });
+        }
     };
 
     return (

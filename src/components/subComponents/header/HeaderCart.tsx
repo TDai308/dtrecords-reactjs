@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {CartContext} from "../../context/CartProvider";
 
 export default function HeaderCart() {
-    const {cart,quantity, removeFromCart} = useContext(CartContext);
+    const {cart,quantity, removeFromCart, updateQuantity} = useContext(CartContext);
 
     return (
         <div className="header__cart">
@@ -40,8 +40,12 @@ export default function HeaderCart() {
                                                             }>In Stock</p>
                                                         </div>
                                                         <div className="shopping_cart_item_quantity_price">
-                                                            <p className="shopping_cart_item_quantity">Q: {cartItem.quantity}</p>
-                                                            <p className="shopping_cart_item_price">P: {cartItem.quantity * cartItem.vinyl.realPrice}$</p>
+                                                            <div className="shopping_cart_item_quantity">
+                                                                <button onClick={() => updateQuantity(cartItem,cartItem.quantity-1)}>-</button>
+                                                                <p>{cartItem.quantity}</p>
+                                                                <button onClick={() => updateQuantity(cartItem,cartItem.quantity+1)}>+</button>
+                                                            </div>
+                                                            <p className="shopping_cart_item_price">Giá: {(Math.round(cartItem.quantity * cartItem.vinyl.realPrice * 100) / 100).toFixed(2)}$</p>
                                                         </div>
                                                     </div>
                                                     <div className="shopping_cart_item_delete">
