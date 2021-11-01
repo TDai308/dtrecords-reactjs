@@ -1,11 +1,55 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {CartContext} from "../context/CartProvider";
+import {UserContext} from "../context/UserProvider";
+import {CustomerInformation} from "../type/User";
+import {orderApi} from "../../api/orderApi";
+import CookieService from "../../Cookie/CookieService";
+import $ from "jquery";
 
 export default function ProceedToCheckOut() {
     const {cart, price} = useContext(CartContext);
+    const {user} = useContext(UserContext);
+    const [customerInformation, setCustomerInformation] = useState<CustomerInformation>({
+        customerName : user.name,
+        customerPhone : user.phoneNumber,
+        customerEmail : user.email,
+        customerAddress : user.address,
+    })
+
+    const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCustomerInformation({...customerInformation,[event.currentTarget.name]: event.target.value});
+    }
+    
+    const handleTheOrder = async () => {
+        try {
+            await orderApi.handleOrder(customerInformation,cart);
+            $("#successNotification").css({"display": "block"});
+            setTimeout(() => {
+                CookieService.remove("cart");
+                window.location.href = "/";
+            },5000);
+        } catch (e) {
+            console.log("error",e);
+        }
+    }
+
+    const handleGoToHomePage = () => {
+        CookieService.remove("cart");
+        window.location.href = "/";
+    }
 
     return (
         <div className={"background-signup-loggin"}>
+            <div className="oval" style={{zIndex: 1, display: "none"}} id={"successNotification"}>
+                <div className="thank_order min-width__860">
+                    <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
+                    <h2>Cảm ơn vì đã mua hàng tại Hãng Đĩa Trọng Đại</h2>
+                    <i className="fas fa-check fa-5x" style={{color: "#58EA2F"}}/>
+                    <p>Đơn hàng của bạn đã được đặt thành công và đang được xử lý. Bạn sẽ nhận được mail xác nhận
+                        đơn hàng và chúng mình sẽ gọi điện để xác nhận đơn hàng.</p>
+                    <p id={"goToHomePageLink"} onClick={handleGoToHomePage}>Trở về trang chủ</p>
+                </div>
+            </div>
             <div className="oval">
                 <form className="sign_up__form">
                     <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
@@ -16,22 +60,22 @@ export default function ProceedToCheckOut() {
                             <div className="col l-8">
                                 <div className="order__form">
                                     <label className="has-float-label">
-                                        <input className="sign_up__input" name="customerName" required type="text"/>
-                                            <span>Tên *</span>
+                                        <input className="sign_up__input" name="customerName" defaultValue={customerInformation.customerName} onChange={handleChangeInput} required type="text"/>
+                                            <span>Tên</span>
                                     </label>
 
                                     <label className="has-float-label">
-                                        <input className="sign_up__input" name="customerPhone" required type="tel" pattern="[0-9]{4}[0-9]{3}[0-9]{3}"/>
+                                        <input className="sign_up__input" name="customerPhone" defaultValue={customerInformation.customerPhone} onChange={handleChangeInput} required type="tel" pattern="[0-9]{4}[0-9]{3}[0-9]{3}"/>
                                             <span>Số Điện Thoại</span>
                                     </label>
 
                                     <label className="has-float-label">
-                                        <input className="sign_up__input" name="customerEmail" required type="email"/>
+                                        <input className="sign_up__input" name="customerEmail" defaultValue={customerInformation.customerEmail} onChange={handleChangeInput} required type="email"/>
                                             <span>Email</span>
                                     </label>
 
                                     <label className="has-float-label">
-                                        <input className="sign_up__input" name="customerAddress" required type="text"/>
+                                        <input className="sign_up__input" name="customerAddress" defaultValue={customerInformation.customerAddress} onChange={handleChangeInput} required type="text"/>
                                             <span>Địa chỉ</span>
                                     </label>
                                 </div>
@@ -73,7 +117,7 @@ export default function ProceedToCheckOut() {
                         </div>
                     </div>
 
-                    <button className="button_Login_Signup" type="button">Xác Nhận Đơn Hàng</button>
+                    <button className="button_Login_Signup" type="button" onClick={handleTheOrder}>Xác Nhận Đơn Hàng</button>
                 </form>
             </div>
         </div>

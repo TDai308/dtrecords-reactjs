@@ -18,3 +18,10 @@ export type UserForSigningUp = {
     email: string;
     address: string;
 }
+
+export type CustomerInformation = {
+    customerName: string;
+    customerPhone: string;
+    customerEmail: string;
+    customerAddress: string;
+}
