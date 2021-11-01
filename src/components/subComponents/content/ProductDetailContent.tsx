@@ -6,7 +6,6 @@ import {Track} from "../../type/Track";
 import $ from "jquery";
 import {trackApi} from "../../../api/trackApi";
 import {CartContext} from "../../context/CartProvider";
-import CookieService from "../../../Cookie/CookieService";
 
 export default function ProductDetailContent() {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
@@ -189,7 +188,7 @@ export default function ProductDetailContent() {
                         </div>
                     </div>
                     <form className="album__buy_button">
-                        <input className="album__quantity" type="number" name="quantity" value={defaultQuantity} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
+                        <input className="album__quantity" type="number" name="quantity" defaultValue={defaultQuantity} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
                         {
                             vinyl.quantity !== 0 ?
                                 <input className="album__add_to_cart height_42px" type="button" value="Thêm Vào Giỏ" onClick={

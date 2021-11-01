@@ -1600,6 +1600,7 @@
 .cart__product_quantity {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .cart__product_delete {

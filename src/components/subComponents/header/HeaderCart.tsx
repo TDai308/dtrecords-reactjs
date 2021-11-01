@@ -7,7 +7,7 @@ export default function HeaderCart() {
 
     return (
         <div className="header__cart">
-            <Link to="/toCart" className="header__cart_icon">
+            <Link to="/cart" className="header__cart_icon">
                 <i className="fas fa-shopping-cart"/>
                 {
                     quantity>0 &&
@@ -43,9 +43,9 @@ export default function HeaderCart() {
                                                             <div className="shopping_cart_item_quantity">
                                                                 <button onClick={() => updateQuantity(cartItem,cartItem.quantity-1)}>-</button>
                                                                 <p>{cartItem.quantity}</p>
-                                                                <button onClick={() => updateQuantity(cartItem,cartItem.quantity+1)}>+</button>
+                                                                <button onClick={() => updateQuantity(cartItem,cartItem.quantity+1)} disabled={cartItem.quantity===cartItem.vinyl.quantity}>+</button>
                                                             </div>
-                                                            <p className="shopping_cart_item_price">Giá: {(Math.round(cartItem.quantity * cartItem.vinyl.realPrice * 100) / 100).toFixed(2)}$</p>
+                                                            <p className="shopping_cart_item_price">Giá: {(Math.round(cartItem.quantity * cartItem.vinyl.realPrice * 100) / 100)}$</p>
                                                         </div>
                                                     </div>
                                                     <div className="shopping_cart_item_delete">
@@ -62,7 +62,7 @@ export default function HeaderCart() {
                 </div>
                 {
                     cart.length>0 &&
-                        <Link to="/toCart" className="button__red__with-a">Đi đến giỏ hàng của bạn</Link>
+                        <Link to="/cart" className="button__red__with-a">Đi đến giỏ hàng của bạn</Link>
                 }
             </div>
         </div>

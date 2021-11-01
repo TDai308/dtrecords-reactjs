@@ -8,7 +8,8 @@ const CartContextStateDefault: CartContextState = {
     quantity: 0,
     addToCart: () => {},
     removeFromCart: () => {},
-    updateQuantity: () => {}
+    updateQuantity: () => {},
+    price: 0
 }
 
 const expiresAt = 60 * 24;
@@ -20,6 +21,7 @@ export const CartContext = createContext<CartContextState>(CartContextStateDefau
 const CartProvider: FC = ({children}) => {
     const [cart, setCart] = useState<Cart[]>(cartFromCookie===undefined?[]:cartFromCookie);
     const [quantity, setQuantity] = useState<number>(0);
+    const [price, setPrice] = useState<number>(0);
 
     const addToCart = (cartItem:Cart) => {
         setCart(prevState => {
@@ -41,6 +43,13 @@ const CartProvider: FC = ({children}) => {
             totalQuantity += item.quantity;
         })
         setQuantity(totalQuantity);
+
+        let totalPrice:number = 0;
+        cart.forEach(item => {
+            totalPrice += (Math.round(item.quantity * item.vinyl.realPrice * 100) / 100);
+        })
+        setPrice(totalPrice);
+
         let date = new Date();
         date.setTime(date.getTime() + (expiresAt * 60 *1000));
         const option = {path: "/", expires: date};
@@ -51,8 +60,6 @@ const CartProvider: FC = ({children}) => {
         let cartArray = [...cart];
         cartArray.forEach((item, index) => {
             if (item.vinyl.id === itemID) {
-                console.log(2)
-                console.log(index);
                 cartArray.splice(index,1);
             }
         });
@@ -84,7 +91,8 @@ const CartProvider: FC = ({children}) => {
                 quantity,
                 addToCart,
                 removeFromCart,
-                updateQuantity
+                updateQuantity,
+                price
             }
         }>
             {children}
