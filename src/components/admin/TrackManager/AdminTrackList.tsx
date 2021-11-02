@@ -34,29 +34,29 @@ export default function AdminTrackList() {
             <Link className="button__blue__with-a margin-10px" to="/admin/track/create">Tạo sản phẩm mới</Link>
             <table className="table_of_admin">
                 <tbody>
-                <tr>
+                    <tr>
+                        {
+                            renderTableHeader(defaultTracks[0])
+                        }
+                    </tr>
                     {
-                        renderTableHeader(defaultTracks[0])
+                        tracks.map((track, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{track.trackName}</td>
+                                    <td>{track.artists}</td>
+                                    <td>{track.trackPreview}</td>
+                                    <td>{track.vinyl.vinylName}</td>
+                                    <td className="edit__button"><Link to={"/admin/track/edit/"+track.id}>
+                                        <i className="fas fa-edit"/>
+                                    </Link></td>
+                                    <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>
+                                        <i className="fas fa-trash-alt"/>
+                                    </td>
+                                </tr>
+                            );
+                        })
                     }
-                </tr>
-                {
-                    tracks.map((track, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{track.trackName}</td>
-                                <td>{track.artists}</td>
-                                <td>{track.trackPreview}</td>
-                                <td>{track.vinyl.vinylName}</td>
-                                <td className="edit__button"><Link to={"/admin/track/edit/"+track.id}>
-                                    <i className="fas fa-edit"/>
-                                </Link></td>
-                                <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>
-                                    <i className="fas fa-trash-alt"/>
-                                </td>
-                            </tr>
-                        );
-                    })
-                }
                 </tbody>
             </table>
             {
