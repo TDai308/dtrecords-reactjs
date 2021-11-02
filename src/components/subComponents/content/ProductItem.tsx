@@ -9,7 +9,10 @@ export default function ProductItem(vinyl:Vinyl) {
     });
 
     return (
-        <Link to={`/product/${vinyl.id}`} className="home_produce__item">
+        <Link to={{
+            pathname: `/product/${vinyl.id}`,
+            state: {quantity: vinyl.quantity}
+        }} className="home_produce__item">
             <div className="item__thumbnail_sale_box">
                 <img className="home_produce__item__thumbnail" src={`http://localhost:8080/${vinyl.thumbnail1}`} alt={vinyl.vinylName}/>
                 <img className="home_produce__item__thumbnail2" src={`http://localhost:8080/${vinyl.thumbnail2}`} alt={vinyl.vinylName}/>

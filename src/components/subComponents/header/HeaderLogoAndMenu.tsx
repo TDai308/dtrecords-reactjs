@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
 import ProductMenu from "./ProductMenu";
 import BlogMenu from "./BlogMenu";
+import {CartContext} from "../../context/CartProvider";
 
 const HeaderLogoAndMenu = () => {
     const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;

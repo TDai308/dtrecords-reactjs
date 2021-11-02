@@ -7,7 +7,7 @@ import $ from "jquery";
 import {trackApi} from "../../../api/trackApi";
 import {CartContext} from "../../context/CartProvider";
 
-export default function ProductDetailContent() {
+export default function ProductDetailContent(props:any) {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
     const [tracks, setTracks] = useState<Track[]>([]);
     const [quantity, setQuantity] = useState<number>(0);
@@ -117,7 +117,7 @@ export default function ProductDetailContent() {
         setQuantity(parseInt(event.currentTarget.value));
     };
 
-    defaultQuantity = vinyl.quantity>0?1:0;
+    defaultQuantity = props.location.state.quantity>0?1:0;
 
     return (
         <div className="row sm-gutter app-content">

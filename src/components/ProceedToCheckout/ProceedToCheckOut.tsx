@@ -3,11 +3,10 @@ import {CartContext} from "../context/CartProvider";
 import {UserContext} from "../context/UserProvider";
 import {CustomerInformation} from "../type/User";
 import {orderApi} from "../../api/orderApi";
-import CookieService from "../../Cookie/CookieService";
 import $ from "jquery";
 
 export default function ProceedToCheckOut() {
-    const {cart, price} = useContext(CartContext);
+    const {cart, price, removeAllCart} = useContext(CartContext);
     const {user} = useContext(UserContext);
     const [customerInformation, setCustomerInformation] = useState<CustomerInformation>({
         customerName : user.name,
@@ -25,16 +24,16 @@ export default function ProceedToCheckOut() {
             await orderApi.handleOrder(customerInformation,cart);
             $("#successNotification").css({"display": "block"});
             setTimeout(() => {
-                CookieService.remove("cart");
+                removeAllCart();
                 window.location.href = "/";
-            },5000);
+            },2000);
         } catch (e) {
             console.log("error",e);
         }
     }
 
     const handleGoToHomePage = () => {
-        CookieService.remove("cart");
+        removeAllCart();
         window.location.href = "/";
     }
 
