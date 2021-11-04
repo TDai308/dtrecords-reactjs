@@ -81,13 +81,10 @@ export default function AdminArtistList() {
                             <tr key={index}>
                                 <td>
                                     <img style={{
-                                        width: "40%"
+                                        width: "25%"
                                     }} src={`http://localhost:3000/images/artistImg/${artist.nameArtist}.png`} alt={`${artist.nameArtist}`}/>
                                 </td>
                                 <td>{artist.nameArtist}</td>
-                                {/*<td className="edit__button"><Link to={"/admin/track/edit/"+track.id}>*/}
-                                {/*    <i className="fas fa-edit"/>*/}
-                                {/*</Link></td>*/}
                                 <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>
                                     <i className="fas fa-trash-alt"/>
                                 </td>

@@ -4,6 +4,7 @@ import AdminMenu from "./AdminMenu";
 import AdminVinyl from "./VinylManager/AdminVinyl";
 import AdminTrack from "./TrackManager/AdminTrack";
 import AdminArtist from "./ArtistManager/AdminArtist";
+import AdminOrder from "./OrderManager/AdminOrder";
 
 export default function AdminPage() {
     return (
@@ -16,6 +17,7 @@ export default function AdminPage() {
             <Route path="/admin/vinyl" component={AdminVinyl}/>
             <Route path="/admin/track" component={AdminTrack}/>
             <Route path="/admin/artist" component={AdminArtist}/>
+            <Route path="/admin/order" component={AdminOrder}/>
         </div>
     );
 }
