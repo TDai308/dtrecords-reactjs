@@ -4,6 +4,7 @@ import {Order} from "../../type/Order";
 import {orderApi} from "../../../api/orderApi";
 import {UserContext} from "../../context/UserProvider";
 import $ from "jquery";
+import {handleCloseRemoveNotification, handleOpenRemoveNotification} from "../AdminFunction";
 
 export default function AdminOrderList() {
     const {refreshToken} = useContext(UserContext);
@@ -50,6 +51,20 @@ export default function AdminOrderList() {
             if (error.response.status === 403) {
                 refreshToken();
                 await handleUpdateTheOrder(orderId,index);
+            }
+            console.log("error", error);
+        }
+    }
+
+    const deleteOrder = async (orderId:number, index:number) => {
+        try {
+            await orderApi.deleteOrder(orderId);
+            await getOrderList();
+            $(".oval__notification")[index].setAttribute("style", "display:none");
+        } catch (error) {
+            if (error.response.status === 403) {
+                refreshToken();
+                await deleteOrder(orderId, index);
             }
             console.log("error", error);
         }
@@ -103,13 +118,29 @@ export default function AdminOrderList() {
                                             display: "flex"
                                         }} disabled>Lưu</button>
                                     </td>
-                                    <td className="delete__button">Xóa</td>
+                                    <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>Xóa</td>
                                 </tr>
                             );
                         })
                     }
                 </tbody>
             </table>
+            {
+                orders.map((order, index) => {
+                    return (
+                        <div key={index} className="oval__notification">
+                            <div className="admin_page__notification_delete">
+                                <p>Bạn có chắc muốn xóa???</p>
+                                <p>{order.orderCode} - {order.vinyl.vinylName}/{order.vinyl.artist.nameArtist}</p>
+                                <div className="admin_page__notification_delete_btn">
+                                    <button className="button__red__with-a" onClick={() => handleCloseRemoveNotification(index)}>Không</button>
+                                    <button className="button__blue__with-a" onClick={() => deleteOrder(order.id,index)}>Xóa</button>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })
+            }
         </div>
     );
 }

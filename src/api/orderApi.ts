@@ -29,5 +29,14 @@ export const orderApi = {
                 'Authorization': "Bearer "+ localStorage.getItem("access_token")
             }
         })
+    },
+
+    deleteOrder: (orderId: number) => {
+        const url = `/admin/order/${orderId}`;
+        return axiosClient.delete(url,{
+            headers: {
+                'Authorization': "Bearer "+ localStorage.getItem("access_token")
+            }
+        })
     }
 };
