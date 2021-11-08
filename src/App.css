@@ -1163,6 +1163,12 @@
   display: flex;
 }
 
+.save_button_success {
+  background: #4BB543;
+  color: white;
+  border: rgba(255, 255, 255, 0.38) 2px solid;
+}
+
 .delete__button {
   cursor: pointer;
 }

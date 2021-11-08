@@ -26,23 +26,30 @@ export default function AdminOrderList() {
         getOrderList();
     }, [])
 
-    function handleDeliverySelectorChange(event:  React.ChangeEvent<HTMLSelectElement>, orderDelivety: string, index: number) {
-        if (event.target.value !== orderDelivety) {
-            $(".save_button")[index].removeAttribute("disabled");
-        } else $(".save_button")[index].setAttribute("disabled", "disabled");
+    function handleDeliverySelectorChange(event:  React.ChangeEvent<HTMLSelectElement>, orderDelivery: string, orderId: number, index: number) {
+        if (event.target.value !== orderDelivery) {
+            let saveButton = $(`#saveButton${index}`);
+            saveButton.prop('disabled',false);
+            saveButton.on("click",() => handleUpdateTheOrder(orderId, index));
+        } else $(`#saveButton${index}`).prop('disabled',true);
     }
 
-    function handleUpdateTheOrder(orderId:number, index:number) {
-        console.log("hahahah");
-        console.log(orderId);
-        console.log(index);
-        console.log("hahahah");
+    const handleUpdateTheOrder = async (orderId:number, index:number) => {
         try {
-            orderApi.updateDeliveryTheOrder(orderId,(($(`#selector${index}`).val())!).toString());
+            await orderApi.updateDeliveryTheOrder(orderId,(($(`#selector${index}`).val())!).toString());
+            await getOrderList();
+            let saveButton = $(`#saveButton${index}`);
+            saveButton.addClass("save_button_success");
+            saveButton.html("Lưu <i style='margin-left: 3px' class=\"fas fa-check\"></i>");
+            setTimeout(function () {
+                saveButton.prop('disabled',true);
+                saveButton.html("Lưu");
+                saveButton.removeClass("save_button_success");
+            },2000);
         } catch (error) {
             if (error.response.status === 403) {
                 refreshToken();
-                handleUpdateTheOrder(orderId,index);
+                await handleUpdateTheOrder(orderId,index);
             }
             console.log("error", error);
         }
@@ -81,7 +88,7 @@ export default function AdminOrderList() {
                                     <td>{order.dateTime}</td>
                                     <td>
                                         <form className="save_form">
-                                            <select id={`selector${index}`} className="delivery" defaultValue={order.delivery} onChange={(event) => handleDeliverySelectorChange(event,order.delivery, index)}>
+                                            <select id={`selector${index}`} className="delivery" defaultValue={order.delivery} onChange={(event) => handleDeliverySelectorChange(event,order.delivery,order.id, index)}>
                                                 <option value="Đang xử lý">Đang xử lý</option>
                                                 <option value="Đang gửi đến dịch vụ vận chuyển">Đang gửi đến dịch vụ vận chuyển</option>
                                                 <option value="Đang giao hàng">Đang giao hàng</option>
@@ -91,7 +98,10 @@ export default function AdminOrderList() {
                                         </form>
                                     </td>
                                     <td>
-                                        <button className="save_button" onClick={() => handleUpdateTheOrder(order.id,index)} disabled>Lưu</button>
+                                        <button id={`saveButton${index}`} style={{
+                                            borderRadius: "5px",
+                                            display: "flex"
+                                        }} disabled>Lưu</button>
                                     </td>
                                     <td className="delete__button">Xóa</td>
                                 </tr>
