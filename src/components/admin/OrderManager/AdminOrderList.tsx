@@ -118,7 +118,7 @@ export default function AdminOrderList() {
                                             display: "flex"
                                         }} disabled>Lưu</button>
                                     </td>
-                                    <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>Xóa</td>
+                                    <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}><i className="fas fa-trash-alt"/></td>
                                 </tr>
                             );
                         })

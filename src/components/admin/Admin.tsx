@@ -8,10 +8,14 @@ export default function Admin() {
 
     let adminPage;
     if (isLogged) {
-        user.roles.forEach(role => {
+        user.roles.every(function (role) {
             if (role.roleName === "ROLE_ADMIN") {
                 adminPage = <AdminPage/>;
-            } else adminPage = <ErrorPage/>;
+                return false;
+            } else {
+                adminPage = <ErrorPage/>;
+                return true;
+            }
         })
     } else adminPage = <ErrorPage/>;
 

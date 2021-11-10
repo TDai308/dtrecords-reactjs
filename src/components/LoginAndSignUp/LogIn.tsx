@@ -12,6 +12,13 @@ export default function LogIn() {
     const history = useHistory();
     const {setIsLogged} = useContext(UserContext);
 
+    useEffect(() => {
+        if (email.charAt(email.length - 1) === ' ') {
+            const emailWithSpace = email;
+            setEmail(emailWithSpace.substring(0, emailWithSpace.length-1));
+        }
+    }, [email]);
+
     const setParameter = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "email") {
             setEmail(event.target.value);

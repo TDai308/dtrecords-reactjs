@@ -5,6 +5,7 @@ import AdminVinyl from "./VinylManager/AdminVinyl";
 import AdminTrack from "./TrackManager/AdminTrack";
 import AdminArtist from "./ArtistManager/AdminArtist";
 import AdminOrder from "./OrderManager/AdminOrder";
+import AdminCustomer from "./CustomerManager/AdminCustomer";
 
 export default function AdminPage() {
     return (
@@ -18,6 +19,7 @@ export default function AdminPage() {
             <Route path="/admin/track" component={AdminTrack}/>
             <Route path="/admin/artist" component={AdminArtist}/>
             <Route path="/admin/order" component={AdminOrder}/>
+            <Route path="/admin/customer" component={AdminCustomer}/>
         </div>
     );
 }
