@@ -14,8 +14,7 @@ export default function LogIn() {
 
     useEffect(() => {
         if (email.charAt(email.length - 1) === ' ') {
-            const emailWithSpace = email;
-            setEmail(emailWithSpace.substring(0, emailWithSpace.length-1));
+            setEmail(email.substring(0, email.length-1));
         }
     }, [email]);
 

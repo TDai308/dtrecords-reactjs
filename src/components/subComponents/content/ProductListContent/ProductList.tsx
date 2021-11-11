@@ -21,10 +21,16 @@ export default function ProductList() {
     const [productOption, setProductOption] = useState<string|undefined>(productsOption===undefined?undefined:productsOption);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [totalElements, setTotalElements] = useState<number>(0);
+    const [search, setSearch] = useState<string|null>(query.get("s")===null?null:query.get("s"));
 
     const getVinyls = async () => {
         try {
-            const fetchVinylList = await vinylApi.getVinylList(currentPage,sortByAndDir,productsOption);
+            let fetchVinylList
+            if (search === null) {
+                fetchVinylList = await vinylApi.getVinylList(currentPage,sortByAndDir,productsOption);
+            } else {
+                fetchVinylList = await vinylApi.getVinylsSearch(currentPage,sortByAndDir,search);
+            }
             const {data} = fetchVinylList;
             if (data.content.length > 0) {
                 setVinyls(data.content);
@@ -44,7 +50,8 @@ export default function ProductList() {
             setProductOption(productsOption);
         } else setProductOption(undefined);
         setCurrentPage(query.get("page")===null?1:parseInt(query.get("page")!));
-        setSortByAndDir(query.get("sort")===null&&query.get("direction")===null?null:`sort=${query.get("sort")!}&direction=${query.get("direction")!}`)
+        setSortByAndDir(query.get("sort")===null&&query.get("direction")===null?null:`sort=${query.get("sort")!}&direction=${query.get("direction")!}`);
+        setSearch(query.get("s")===null?null:query.get("s"));
     },[location]);
 
     useEffect(() => {
@@ -94,7 +101,9 @@ export default function ProductList() {
     }
 
     const handleSortProducts = (event:React.ChangeEvent<HTMLSelectElement>) => {
-        history.push(`${currentPath}?${event.target.value}`);
+        if (search === null) {
+            history.push(`${currentPath}?${event.target.value}`);
+        } else history.push(`${currentPath}?s=${search}&${event.target.value}`);
     }
 
     return (

@@ -18,6 +18,14 @@ export const vinylApi = {
         return axiosClient.get(url);
     },
 
+    getVinylsSearch: (page:number,sort:string|null, search:string) => {
+        let url : string;
+        if (sort == null) {
+            url = `/vinyls?s=${search}&page=${page-1}&size=${size}`;
+        } else url = `/vinyls?s=${search}&page=${page-1}&size=${size}&${sort}`;
+        return axiosClient.get(url);
+    },
+
     getVinylWithoutPage: () => {
         const url = "/vinylList";
         return axiosClient.get(url);
