@@ -7,9 +7,8 @@ import classNames from "classnames";
 
 export default function ProductList() {
     const location = useLocation();
-    let query = new URLSearchParams(location.search);
-
     const history = useHistory();
+    let query = new URLSearchParams(location.search);
 
     const {productsOption} = useParams<{productsOption:string}>();
     const currentPath = window.location.pathname;
@@ -65,7 +64,7 @@ export default function ProductList() {
                 history.push(`${currentPath}?page=${firstPage}&${sortByAndDir}`);
             } else history.push(`${currentPath}?page=${firstPage}`);
         }
-    }
+    };
 
     const handlePrevPage = () => {
         let prevPage = 1;
@@ -74,7 +73,7 @@ export default function ProductList() {
                 history.push(`${currentPath}?page=${currentPage - prevPage}&${sortByAndDir}`);
             } else history.push(`${currentPath}?page=${currentPage - prevPage}`);
         }
-    }
+    };
 
     const handleLastPage = () => {
         let condition = Math.ceil(totalElements/ vinylsPerPage);
@@ -83,7 +82,7 @@ export default function ProductList() {
                 history.push(`${currentPath}?page=${condition}&${sortByAndDir}`);
             } else history.push(`${currentPath}?page=${condition}`);
         }
-    }
+    };
 
     const handleNextPage = () => {
         if (currentPage < Math.ceil(totalElements / vinylsPerPage)) {
@@ -91,20 +90,66 @@ export default function ProductList() {
                 history.push(`${currentPath}?page=${currentPage + 1}&${sortByAndDir}`);
             } else history.push(`${currentPath}?page=${currentPage + 1}`);
         }
-    }
+    };
 
     const handleChangePage = (event :  React.ChangeEvent<HTMLInputElement>) => {
         let targetPage = parseInt(event.target.value);
         if (sortByAndDir !== null) {
             history.push(`${currentPath}?page=${targetPage}&${sortByAndDir}`);
         } else history.push(`${currentPath}?page=${targetPage}`);
-    }
+    };
 
     const handleSortProducts = (event:React.ChangeEvent<HTMLSelectElement>) => {
         if (search === null) {
             history.push(`${currentPath}?${event.target.value}`);
         } else history.push(`${currentPath}?s=${search}&${event.target.value}`);
-    }
+    };
+
+    const renderCategory = () => {
+        return (
+            <div className="home_produce__category__pagination display_flex--space-between">
+                <div>
+                    Showing Page {currentPage} of {totalPages}
+                </div>
+
+                <div className={"display_flex--space-between"}>
+                    <div className={"display_flex--center pagination__buttons"}>
+                        <button disabled={currentPage === 1} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={handleFirstPage}>
+                            <i className="fas fa-angle-double-left"/> First
+                        </button>
+                        <button disabled={currentPage === 1} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={handlePrevPage}>
+                            <i className="fas fa-angle-left"/> Prev
+                        </button>
+                    </div>
+
+                    <input type="number" name={"currentPage"} className={"pagination__inputPage"} style={
+                        {
+                            background: "var(--background-color)"
+                        }
+                    } value={currentPage} max={totalPages} min={1} onChange={handleChangePage}/>
+
+                    <div className={"display_flex--center pagination__buttons"}>
+                        <button disabled={currentPage === totalPages} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={handleNextPage}>
+                            <i className="fas fa-angle-right"/> Next
+                        </button>
+                        <button disabled={currentPage === totalPages} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={handleLastPage}>
+                            <i className="fas fa-angle-double-right"/> Last
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+    
+    const renderVinylList = ():JSX.Element[] => {
+        return vinyls.map((vinyl,index) => {
+            return (
+                <div key={index} className={"col l-3"}>
+                    <ProductItem vinyl={vinyl}/>
+                </div>
+            );
+        })
+    };
 
     return (
         <div className="home_produce">
@@ -120,64 +165,27 @@ export default function ProductList() {
                         </select>
                     </form>
                 </div>
-                {totalElements > 12 &&
-                <div>
-                    <button disabled={currentPage === 1} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={handlePrevPage}>
-                        <i className="fas fa-angle-left"/> Prev
-                    </button>
-                    <button disabled={currentPage === totalPages} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={handleNextPage}>
-                        <i className="fas fa-angle-right"/> Next
-                    </button>
-                </div>
+                {
+                    totalElements > 12 &&
+                        <div>
+                            <button disabled={currentPage === 1} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={handlePrevPage}>
+                                <i className="fas fa-angle-left"/> Prev
+                            </button>
+                            <button disabled={currentPage === totalPages} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={handleNextPage}>
+                                <i className="fas fa-angle-right"/> Next
+                            </button>
+                        </div>
                 }
             </div>
             <div className="home_produce__list">
                 <div className="grid__row">
                     {
-                        vinyls.map((vinyl,index) => {
-                        return(
-                          <div key={index} className={"col l-3"}>
-                              {
-                                ProductItem(vinyl)
-                              }
-                          </div>
-                        );
-                    })
+                        renderVinylList()
                     }
                 </div>
                 {
                     totalElements > 12 &&
-                    <div className="home_produce__category__pagination display_flex--space-between">
-                        <div>
-                            Showing Page {currentPage} of {totalPages}
-                        </div>
-
-                        <div className={"display_flex--space-between"}>
-                            <div className={"display_flex--center pagination__buttons"}>
-                                <button disabled={currentPage === 1} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={handleFirstPage}>
-                                    <i className="fas fa-angle-double-left"/> First
-                                </button>
-                                <button disabled={currentPage === 1} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== 1})} onClick={handlePrevPage}>
-                                    <i className="fas fa-angle-left"/> Prev
-                                </button>
-                            </div>
-
-                            <input type="number" name={"currentPage"} className={"pagination__inputPage"} style={
-                                {
-                                    background: "var(--background-color)"
-                                }
-                            } value={currentPage} max={totalPages} min={1} onChange={handleChangePage}/>
-
-                            <div className={"display_flex--center pagination__buttons"}>
-                                <button disabled={currentPage === totalPages} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={handleNextPage}>
-                                    <i className="fas fa-angle-right"/> Next
-                                </button>
-                                <button disabled={currentPage === totalPages} className={classNames("pagination__button",{"cursor-pointer pagination__button--hover" : currentPage !== totalPages})} onClick={handleLastPage}>
-                                    <i className="fas fa-angle-double-right"/> Last
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                        renderCategory()
                 }
             </div>
         </div>

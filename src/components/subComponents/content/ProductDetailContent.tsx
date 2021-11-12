@@ -6,15 +6,13 @@ import {Track} from "../../type/Track";
 import $ from "jquery";
 import {trackApi} from "../../../api/trackApi";
 import {CartContext} from "../../context/CartProvider";
+import AlbumThumbnailSlider from "./ProductDetailContent/AlbumThumbnailSlider";
 
 export default function ProductDetailContent(props:any) {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
     const [tracks, setTracks] = useState<Track[]>([]);
     const [quantity, setQuantity] = useState<number>(0);
-    const [count, setCount] = useState<number>(1);
     const {addToCart} = useContext(CartContext);
-
-    let defaultQuantity:number;
 
     const {id} = useParams<{id:string}>();
 
@@ -48,31 +46,10 @@ export default function ProductDetailContent(props:any) {
         setQuantity(vinyl.quantity>0?1:0);
     }, [vinyl]);
 
-    const sliderImageWidth = $('#album_thumbnail__slider').width();
-    $('.slider__image').css({
-        'height': sliderImageWidth + 'px'
-    });
-
     const genres: string[] = [];
     vinyl.genres.forEach(genre => {
         genres.push(genre.genreName);
     });
-
-    if (count === 1) {
-        $('#radio1').prop("checked", true);
-    }
-
-    useEffect(() => {
-        setTimeout(function () {
-            var countSlider = count+1;
-            if (countSlider > 2) {
-                countSlider = 1;
-            }
-            setCount(countSlider);
-            $(`#radio${countSlider}`).prop("checked", true);
-        },5000);
-        return () => {};
-    },[count]);
 
     function play(audioID:number, event:React.MouseEvent<HTMLElement>) {
         const audioPlayer = document.getElementById(audioID.toString()) as HTMLMediaElement;
@@ -117,25 +94,12 @@ export default function ProductDetailContent(props:any) {
         setQuantity(parseInt(event.currentTarget.value));
     };
 
-    defaultQuantity = props.location.state.quantity>0?1:0;
+    let defaultQuantity:number = props.location.state.quantity>0?1:0;
 
     return (
         <div className="row sm-gutter app-content">
             <div className="col l-6">
-                <div className="album_thumbnail__slider" id="album_thumbnail__slider">
-                    <input type="radio" name="radio-btn" id="radio1"/>
-                    <input type="radio" name="radio-btn" id="radio2"/>
-                    <img className="slider__image first" src={`http://localhost:8080/${vinyl.thumbnail1}`} alt={vinyl.vinylName}/>
-                    <img className="slider__image" src={`http://localhost:8080/${vinyl.thumbnail2}`} alt={vinyl.vinylName}/>
-                    <div className="slider__navigation_auto">
-                        <div className="auto-btn1"/>
-                        <div className="auto-btn2"/>
-                    </div>
-                    <div className="slider__navigation_manual">
-                        <label htmlFor="radio1" className="manual-btn"/>
-                        <label htmlFor="radio2" className="manual-btn"/>
-                    </div>
-                </div>
+                <AlbumThumbnailSlider thumbnail1={vinyl.thumbnail1} thumbnail2={vinyl.thumbnail2} vinylName={vinyl.vinylName}/>
             </div>
             <div className="col l-6">
                 <div className="album_information">

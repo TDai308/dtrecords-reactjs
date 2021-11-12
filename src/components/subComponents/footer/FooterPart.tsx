@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {footerNavigationLink} from "../../HomePage/Footer";
+import {footerNavigationLink} from "../../MainPage/Footer";
 
 export default function FooterPart(headingFooter:string, footerNavigationLink: footerNavigationLink[]) {
     return (

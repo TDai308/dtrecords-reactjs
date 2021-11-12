@@ -2,7 +2,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {Vinyl} from "../../type/Vinyl";
 
-export default function ProductItem(vinyl:Vinyl) {
+interface ProductItemInterface {
+    vinyl: Vinyl
+}
+
+const ProductItem : React.FC<ProductItemInterface> = ({vinyl}) => {
     const genres: string[] = [];
     vinyl.genres.forEach(genre => {
         genres.push(genre.genreName);
@@ -65,3 +69,5 @@ export default function ProductItem(vinyl:Vinyl) {
         </Link>
 );
 }
+
+export default ProductItem;

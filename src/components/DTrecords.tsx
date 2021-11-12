@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import {Route, Switch} from "react-router-dom";
-import homePage from "./HomePage/homePage";
+import homePage from "./MainPage/homePage";
 import LogIn from "./LoginAndSignUp/LogIn";
 import SignUp from "./LoginAndSignUp/SignUp";
 import ProceedToCheckOut from "./ProceedToCheckout/ProceedToCheckOut";

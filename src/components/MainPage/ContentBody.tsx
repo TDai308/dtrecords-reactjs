@@ -4,7 +4,7 @@ import {Route, Switch} from "react-router-dom";
 import HomeContent from "../subComponents/content/HomeContent";
 import ProductListContent from "../subComponents/content/ProductListContent";
 import ProductDetailContent from "../subComponents/content/ProductDetailContent";
-import SearchInput from "../subComponents/SearchInput";
+import SearchInput from "../subComponents/content/SearchInput";
 import Cart from "../subComponents/content/Cart";
 
 const ContentBody = () => {
@@ -18,9 +18,9 @@ const ContentBody = () => {
                 <Switch>
                     <Route path="/" exact component={HomeContent}/>
                     <Route path="/products" exact component={ProductListContent}/>
-                    <Route path="/cart" exact component={Cart}/>
                     <Route path="/products/:productsOption" exact component={ProductListContent}/>
                     <Route path="/product/:id" exact component={ProductDetailContent}/>
+                    <Route path="/cart" exact component={Cart}/>
                 </Switch>
             </div>
         </div>
