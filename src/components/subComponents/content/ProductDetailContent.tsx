@@ -46,11 +46,6 @@ export default function ProductDetailContent(props:any) {
         setQuantity(vinyl.quantity>0?1:0);
     }, [vinyl]);
 
-    const genres: string[] = [];
-    vinyl.genres.forEach(genre => {
-        genres.push(genre.genreName);
-    });
-
     function play(audioID:number, event:React.MouseEvent<HTMLElement>) {
         const audioPlayer = document.getElementById(audioID.toString()) as HTMLMediaElement;
         audioPlayer.play();
@@ -96,6 +91,90 @@ export default function ProductDetailContent(props:any) {
 
     let defaultQuantity:number = props.location.state.quantity>0?1:0;
 
+    const renderAlbumArtist = ():JSX.Element => {
+        return (
+            <div className="album__artist">
+                <div className="album__artist_img_name">
+                    <img src={`http://localhost:3000/images/artistImg/${vinyl.artist.nameArtist}.png`} alt={vinyl.artist.nameArtist} className="album__artist_img"/>
+                    <p className="album__artist_name">{vinyl.artist.nameArtist}</p>
+                </div>
+                <div className="album__like">
+
+                </div>
+            </div>
+        );
+    };
+
+    const renderAlbumInformationAndPrice = ():JSX.Element => {
+        const genres: string[] = [];
+        vinyl.genres.forEach(genre => {
+            genres.push(genre.genreName);
+        });
+        return (
+            <div className="album__name_price">
+                <h1 className="album__name">{vinyl.vinylName}</h1>
+                <h2 className="album__nation_genre">{vinyl.nation.nation} - {genres.toString()}</h2>
+                <div className={"produce_price"}>
+                    <div>
+                        <span className={vinyl.discount === 0?"produce_price_not_sale":"produce_sale_price"}>{vinyl.realPrice} $</span>
+                        {
+                            vinyl.discount !==0 &&
+                            <span className="produce_old_price">{vinyl.price} $</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const renderTrackListPlayer = ():JSX.Element => {
+        return (
+            <div className="album__track-list_player">
+                <h2>Danh Sách Các Bài Hát - Preview</h2>
+                <div className="album__track-list">
+                    {
+                        tracks.map((track, index) => {
+                            return (
+                                <div className="album__track-list__player" key={index}>
+                                    <div className="album__track_name">
+                                        <div>{track.trackName} - {track.artists}</div>
+                                    </div>
+                                    <div className="album__track_play_pause">
+                                        <i  className="fas fa-play-circle" onClick={(event) => {play(index,event)}}/>
+                                        <i className="fas fa-pause-circle" onClick={(event) => {pause(index,event)}} style={{
+                                            display: "none"
+                                        }}/>
+                                    </div>
+                                    <audio className="audio" id={index.toString()} src={`${apiUrlDefault}${track.trackPreview}`}/>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+        );
+    };
+
+    const renderBuyButton = ():JSX.Element => {
+        return (
+            <form className="album__buy_button">
+                <input className="album__quantity" type="number" name="quantity" defaultValue={defaultQuantity} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
+                {
+                    vinyl.quantity !== 0 ?
+                        <input className="album__add_to_cart height_42px" type="button" value="Thêm Vào Giỏ" onClick={
+                            () => {
+                                if (quantity>0) {
+                                    addToCart({vinyl: vinyl,quantity: quantity});
+                                    $(".album__quantity").val(defaultQuantity);
+                                }
+                            }
+                        }/> :
+                        <input className="album__sold_out height_42px" type="button" value="Hết Hàng"/>
+                }
+            </form>
+        );
+    };
+
     return (
         <div className="row sm-gutter app-content">
             <div className="col l-6">
@@ -103,69 +182,10 @@ export default function ProductDetailContent(props:any) {
             </div>
             <div className="col l-6">
                 <div className="album_information">
-                    <div className="album__artist">
-                        <div className="album__artist_img_name">
-                            <img src={`http://localhost:3000/images/artistImg/${vinyl.artist.nameArtist}.png`} alt={vinyl.artist.nameArtist} className="album__artist_img"/>
-                            <p className="album__artist_name">{vinyl.artist.nameArtist}</p>
-                        </div>
-                        <div className="album__like">
-
-                        </div>
-                    </div>
-                    <div className="album__name_price">
-                        <h1 className="album__name">{vinyl.vinylName}</h1>
-                        <h2 className="album__nation_genre">{vinyl.nation.nation} - {genres.toString()}</h2>
-                        <div className={"produce_price"}>
-                            {
-                                vinyl.discount === 0 ?
-                                    <div>
-                                        <span className="produce_price_not_sale">{vinyl.price} $</span>
-                                    </div> :
-                                    <div>
-                                        <span className="produce_sale_price">{vinyl.realPrice} $</span>
-                                        <span className="produce_old_price">{vinyl.price} $</span>
-                                    </div>
-                            }
-                        </div>
-                    </div>
-                    <div className="album__track-list_player">
-                        <h2>Danh Sách Các Bài Hát - Preview</h2>
-                        <div className="album__track-list">
-                            {
-                                tracks.map((track, index) => {
-                                    return (
-                                        <div className="album__track-list__player" key={index}>
-                                            <div className="album__track_name">
-                                                <div>{track.trackName} - {track.artists}</div>
-                                            </div>
-                                            <div className="album__track_play_pause">
-                                                <i  className="fas fa-play-circle" onClick={(event) => {play(index,event)}}/>
-                                                <i className="fas fa-pause-circle" onClick={(event) => {pause(index,event)}} style={{
-                                                    display: "none"
-                                                }}/>
-                                            </div>
-                                            <audio className="audio" id={index.toString()} src={`${apiUrlDefault}${track.trackPreview}`}/>
-                                        </div>
-                                    );
-                                })
-                            }
-                        </div>
-                    </div>
-                    <form className="album__buy_button">
-                        <input className="album__quantity" type="number" name="quantity" defaultValue={defaultQuantity} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
-                        {
-                            vinyl.quantity !== 0 ?
-                                <input className="album__add_to_cart height_42px" type="button" value="Thêm Vào Giỏ" onClick={
-                                    () => {
-                                        if (quantity>0) {
-                                            addToCart({vinyl: vinyl,quantity: quantity});
-                                            $(".album__quantity").val(defaultQuantity);
-                                        }
-                                    }
-                                }/> :
-                                <input className="album__sold_out height_42px" type="button" value="Hết Hàng"/>
-                        }
-                    </form>
+                    {renderAlbumArtist()}
+                    {renderAlbumInformationAndPrice()}
+                    {renderTrackListPlayer()}
+                    {renderBuyButton()}
                 </div>
             </div>
         </div>

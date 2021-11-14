@@ -40,16 +40,13 @@ const ProductItem : React.FC<ProductItemInterface> = ({vinyl}) => {
                     <span title={vinyl.nation.nation}>{vinyl.nation.nation}</span> - <span title={genres.toString()}>{genres.toString()}</span>
                 </div>
                 <div className="produce_price">
-                    {
-                        vinyl.discount !== 0 ?
-                            <div>
-                                <span className="produce_price_not_sale">{vinyl.realPrice}$</span>
-                            </div> :
-                            <div>
-                                <span className="produce_sale_price">{vinyl.realPrice}$  </span>
-                                <span className="produce_old_price">{vinyl.price}$</span>
-                            </div>
-                    }
+                    <div>
+                        <span className={vinyl.discount === 0?"produce_price_not_sale":"produce_sale_price"}>{vinyl.realPrice}$  </span>
+                        {
+                            vinyl.discount !== 0 &&
+                            <span className="produce_old_price">{vinyl.price}$</span>
+                        }
+                    </div>
                 </div>
                 <div className="produce_condition">
                     {
