@@ -18,6 +18,16 @@ export const vinylApi = {
         return axiosClient.get(url);
     },
 
+    getBestSellerVinyls: () => {
+        const url = "/vinylList/top10BestSeller";
+        return axiosClient.get(url);
+    },
+
+    getSaleOffVinyls: () => {
+        const url = "/vinylList/saleOffVinyls";
+        return axiosClient.get(url);
+    },
+
     getVinylsSearch: (page:number,sort:string|null, search:string) => {
         let url : string;
         if (sort == null) {

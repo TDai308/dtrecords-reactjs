@@ -3,9 +3,7 @@ import AdminNavigation from "../AdminNavigation";
 import {User} from "../../type/User";
 import {userApi} from "../../../api/userApi";
 import {UserContext} from "../../context/UserProvider";
-import {Link} from "react-router-dom";
 import {handleCloseRemoveNotification, handleOpenRemoveNotification} from "../AdminFunction";
-import axiosClient from "../../../api/axiosClient";
 
 export default function AdminCustomerList() {
     const [customers, setCustomer] = useState<User[]>([]);
@@ -43,7 +41,6 @@ export default function AdminCustomerList() {
     }
 
     const handleSettingAdminRole = async (customerId:number) => {
-        console.log("hahaha");
         try {
             await userApi.setAdminRole(customerId);
             await getCustomerList();
@@ -57,7 +54,6 @@ export default function AdminCustomerList() {
     }
 
     const handleRemovingAdminRole = async (customerId:number) => {
-        console.log("heheheh");
         try {
             await userApi.removeAdminRole(customerId);
             await getCustomerList();
