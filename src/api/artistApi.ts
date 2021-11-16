@@ -6,6 +6,11 @@ export const artistApi = {
         return axiosClient.get(url);
     },
 
+    get5RandomArtists: () => {
+        const url = "/artists/random5Artists";
+        return axiosClient.get(url);
+    },
+
     addNewArtist: (newArtist:string) => {
         const url = "/admin/artist";
         const data = new FormData();

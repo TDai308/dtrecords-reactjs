@@ -2,15 +2,17 @@ import React, {useEffect, useState} from "react";
 import VideoTopAlbum from "./HomeContent/VideoTopAlbum";
 import {Vinyl} from "../../type/Vinyl";
 import {vinylApi} from "../../../api/vinylApi";
-import ProductsContentRow from "./productsContentRow";
 import {Genre} from "../../type/Genre";
-import GenresItem from "./HomeContent/GenresItem";
 import {genreApi} from "../../../api/genreApi";
-import {Link} from "react-router-dom";
+import ProductsContent from "./HomeContent/ProductsContent";
+import {Artist} from "../../type/Artist";
+import Banner from "./HomeContent/Banner";
+import {artistApi} from "../../../api/artistApi";
 
 export default function HomeContent() {
     const [productContents, setProductContents] = useState<{productTitle:string,vinyls:Vinyl[]}[]>([]);
     const [genres, setGenres] = useState<Genre[]>([]);
+    const [artists, setArtists] = useState<Artist[]>([]);
 
     useEffect(() => {
         document.title = "DTrecords";
@@ -53,74 +55,31 @@ export default function HomeContent() {
         }
     };
 
+    const get5RandomArtist = async () => {
+       try {
+           const fetch5RandomArtist = await artistApi.get5RandomArtists();
+           setArtists(fetch5RandomArtist.data);
+       } catch (error) {
+           console.log("error", error);
+       }
+    }
+
     useEffect(() => {
         getBestSellerVinyls();
         getSaleOffVinyls();
         getGenres();
+        get5RandomArtist();
     }, []);
-
-    const renderProductContentRows = (): JSX.Element[] => {
-        return productContents.map((productContent, index) => {
-            return (
-                <ProductsContentRow key={index} productTitle={productContent.productTitle} vinyls={productContent.vinyls} index={index}/>
-            );
-        })
-    }
-
-    const renderGenresList = (): JSX.Element[] => {
-        return genres.map((genre,index) => {
-            return (
-                <div className="col l-4">
-                    <GenresItem genre={genre}/>
-                </div>
-            );
-        })
-    }
-
-    const renderGenresContent = ():JSX.Element => {
-      return (
-          <div className="container__content_product--genres">
-              <div className="container__content_product--selling__title-link">
-                  <h3 className="container__content_product--selling__title">Thể loại</h3>
-              </div>
-              <div className="grid__row">
-                  <div className="col l-4">
-                      <Link className="genres_box" to="/products">
-                          <div className="genres_box__image_genres">
-                              <img src={"http://localhost:8080/images/genres/AllGenre.jpg"} alt="genre" className="genres_box__img"/>
-                          </div>
-                          <p className="genres_box__title">All</p>
-                      </Link>
-                  </div>
-                  {
-                      renderGenresList()
-                  }
-              </div>
-          </div>
-    );
-    };
-
-    const productsContent = (): JSX.Element => {
-        return (
-            <div className={"container__content_product"}>
-                {
-                    renderProductContentRows()
-                }
-                {
-                    renderGenresContent()
-                }
-            </div>
-        );
-    };
 
     return (
         <div>
             <VideoTopAlbum/>
             <div className={"row sm-gutter container__content_product--main"}>
                 <div className={"col l-8"}>
-                    {
-                        productsContent()
-                    }
+                    <ProductsContent productContents={productContents} genres={genres}/>
+                </div>
+                <div className={"col l-4"}>
+                    <Banner artists={artists}/>
                 </div>
             </div>
         </div>
