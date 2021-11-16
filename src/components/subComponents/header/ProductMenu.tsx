@@ -37,23 +37,23 @@ const ProductMenu = () => {
             headerTitle: "Thể Loại",
             ProductMenuList: [
                 {
-                    url: "/products/popVinyl",
+                    url: "/products/PopVinyl",
                     title: "Pop"
                 },
                 {
-                    url: "/products/rockVinyl",
+                    url: "/products/RockVinyl",
                     title: "Rock"
                 },
                 {
-                    url: "/products/r&bVinyl",
+                    url: "/products/R&BVinyl",
                     title: "R&B"
                 },
                 {
-                    url: "/products/hiphopVinyl",
+                    url: "/products/HipHopVinyl",
                     title: "HipHop"
                 },
                 {
-                    url: "/products/countryVinyl",
+                    url: "/products/CountryVinyl",
                     title: "Country"
                 },
                 {

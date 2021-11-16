@@ -25,35 +25,35 @@ export default function Category() {
             linkCategory: [
                 {
                     title: "Pop",
-                    url: "/products/popVinyl"
+                    url: "/products/PopVinyl"
                 },
                 {
                     title: "Rock",
-                    url: "/products/rockVinyl"
+                    url: "/products/RockVinyl"
                 },
                 {
                     title: "R&B",
-                    url: "/products/r&bVinyl"
+                    url: "/products/R&BVinyl"
                 },
                 {
                     title: "HipHop",
-                    url: "/products/hiphopVinyl"
+                    url: "/products/HipHopVinyl"
                 },
                 {
                     title: "Country",
-                    url: "/products/countryVinyl"
+                    url: "/products/CountryVinyl"
                 },
                 {
                     title: "EDM",
-                    url: "/products/edmVinyl"
+                    url: "/products/EDMVinyl"
                 },
                 {
                     title: "Indie",
-                    url: "/products/indieVinyl"
+                    url: "/products/IndieVinyl"
                 },
                 {
                     title: "Jazz",
-                    url: "/products/jazzVinyl"
+                    url: "/products/JazzVinyl"
                 }
             ]
         }
