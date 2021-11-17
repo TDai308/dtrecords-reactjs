@@ -24,7 +24,7 @@ const ProductsContent: React.FC<productsContent> = ({productContents, genres}) =
     const renderGenresList = (): JSX.Element[] => {
         return genres.map((genre,index) => {
             return (
-                <div className="col l-4">
+                <div className="col l-4" key={index}>
                     <GenresItem genre={genre}/>
                 </div>
             );
