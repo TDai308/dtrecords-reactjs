@@ -63,12 +63,12 @@ const Footer = () => {
             headingFooter: "Liên hệ",
             footerNavigationLink: [
                 {
-                    url: "https://www.facebook.com/dai.tran.99/",
+                    url: "",
                     title: "Facebook",
                     icon: <i className="fab fa-facebook-f"/>
                 },
                 {
-                    url: "https://www.instagram.com/tdai308/",
+                    url: "",
                     title: "Instagram",
                     icon: <i className="fab fa-instagram"/>
                 }
