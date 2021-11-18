@@ -7,9 +7,11 @@ import $ from "jquery";
 import {trackApi} from "../../../api/trackApi";
 import {CartContext} from "../../context/CartProvider";
 import AlbumThumbnailSlider from "./ProductDetailContent/AlbumThumbnailSlider";
+import ProductsContentRow from "./productsContentRow";
 
 export default function ProductDetailContent(props:any) {
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
+    const [productContents, setProductContents] = useState<{productTitle:string,vinyls:Vinyl[]}[]>([]);
     const [tracks, setTracks] = useState<Track[]>([]);
     const [quantity, setQuantity] = useState<number>(0);
     const {addToCart} = useContext(CartContext);
@@ -38,6 +40,8 @@ export default function ProductDetailContent(props:any) {
 
     useEffect(() => {
         getTheVinyl();
+        getVinylsSameArtist();
+        getVinylsSameGenre();
     }, []);
 
     useEffect(() => {
@@ -73,7 +77,7 @@ export default function ProductDetailContent(props:any) {
             "display": "block"
         });
     }
-    
+
     function pause(audioID: number, event:React.MouseEvent<HTMLElement>) {
         const audioPlayer = document.getElementById(audioID.toString()) as HTMLMediaElement;
         audioPlayer.pause();
@@ -155,6 +159,41 @@ export default function ProductDetailContent(props:any) {
         );
     };
 
+    const getVinylsSameArtist = async () => {
+      try {
+          const fetchVinylsSameArtist = await vinylApi.getVinylsSameArtist(parseInt(id));
+          let vinylSameArtist : Vinyl[] = fetchVinylsSameArtist.data;
+          if (vinylSameArtist.length !== 0) {
+              setProductContents(prevState => {
+                  return [...prevState, {
+                      productTitle: `Những Album khác của ${vinyl.artist.nameArtist}`,
+                      vinyls: vinylSameArtist
+                  }]
+              });
+          }
+      } catch (error) {
+          console.log("error", error)
+      }
+    };
+
+    const getVinylsSameGenre = async () => {
+        try {
+            const fetchVinylsSameGenre = await vinylApi.getVinylsSameGenre(parseInt(id));
+            let vinylSameGenre : Vinyl[] = fetchVinylsSameGenre.data;
+            if (vinylSameGenre.length !== 0) {
+                setProductContents(prevState => {
+                    return [...prevState, {
+                        productTitle: "Những Album khác bạn có thể thích",
+                        vinyls: vinylSameGenre
+                    }]
+                });
+            }
+        } catch (error) {
+            console.log("error", error);
+
+        }
+    };
+
     const renderBuyButton = ():JSX.Element => {
         return (
             <form className="album__buy_button">
@@ -175,19 +214,52 @@ export default function ProductDetailContent(props:any) {
         );
     };
 
-    return (
-        <div className="row sm-gutter app-content">
-            <div className="col l-6">
-                <AlbumThumbnailSlider thumbnail1={vinyl.thumbnail1} thumbnail2={vinyl.thumbnail2} vinylName={vinyl.vinylName}/>
-            </div>
-            <div className="col l-6">
-                <div className="album_information">
-                    {renderAlbumArtist()}
-                    {renderAlbumInformationAndPrice()}
-                    {renderTrackListPlayer()}
-                    {renderBuyButton()}
+    const renderVinylContent = ():JSX.Element => {
+      return (
+          <div className="row sm-gutter app-content">
+              <div className="col l-6">
+                  <AlbumThumbnailSlider thumbnail1={vinyl.thumbnail1} thumbnail2={vinyl.thumbnail2} vinylName={vinyl.vinylName}/>
+              </div>
+              <div className="col l-6">
+                  <div className="album_information">
+                      {renderAlbumArtist()}
+                      {renderAlbumInformationAndPrice()}
+                      {renderTrackListPlayer()}
+                      {renderBuyButton()}
+                  </div>
+              </div>
+          </div>
+      );
+    }
+
+    const renderProductContentRows = (): JSX.Element[] => {
+        return productContents.map((productContent, index) => {
+            return (
+                <div className={"col l-12"} key={index}>
+                    <ProductsContentRow productTitle={productContent.productTitle} vinyls={productContent.vinyls} index={index}/>
                 </div>
+            );
+        })
+    };
+
+    const renderProductContentList = (): JSX.Element => {
+        return (
+            <div className={"row sm-gutter"}>
+                {
+                    renderProductContentRows()
+                }
             </div>
+        );
+    }
+
+    return (
+        <div>
+            {
+                renderVinylContent()
+            }
+            {
+                renderProductContentList()
+            }
         </div>
     );
 }

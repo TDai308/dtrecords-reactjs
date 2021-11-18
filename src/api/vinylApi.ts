@@ -28,6 +28,16 @@ export const vinylApi = {
         return axiosClient.get(url);
     },
 
+    getVinylsSameArtist: (idVinyl:number) => {
+        const url = `/vinylList/${idVinyl}/vinylsSameArtist`;
+        return axiosClient.get(url);
+    },
+
+    getVinylsSameGenre: (idVinyl:number) => {
+        const url = `/vinylList/${idVinyl}/theSameGenreVinyls`;
+        return axiosClient.get(url);
+    },
+
     getVinylsSearch: (page:number,sort:string|null, search:string) => {
         let url : string;
         if (sort == null) {

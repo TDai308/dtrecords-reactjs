@@ -7,7 +7,8 @@ import GenresItem from "./GenresItem";
 
 interface productsContent {
     productContents: {
-        productTitle:string,vinyls:Vinyl[]
+        productTitle:string,
+        vinyls:Vinyl[]
     }[],
     genres: Genre[]
 }

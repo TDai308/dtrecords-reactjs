@@ -12,6 +12,7 @@ interface ProductsContentRowInterface {
 
 const ProductsContentRow:React.FC<ProductsContentRowInterface> = ({productTitle, vinyls, index}) => {
     const vinylWidth = $("#vinyl_item").outerWidth();
+    console.log(vinylWidth);
 
     const renderProductListRow = ():JSX.Element[] => {
         return vinyls.map((vinyl,index) => {
@@ -44,14 +45,17 @@ const ProductsContentRow:React.FC<ProductsContentRowInterface> = ({productTitle,
                     renderProductListRow()
                 }
             </div>
-            <div className="container__content_product--selling-list__scrollbar">
-                <button className="product--selling-list--scroll_btn-left" onClick={() => scrollLeft(index)}>
-                    <i className="fas fa-chevron-left"/>
-                </button>
-                <button className="product--selling-list--scroll_btn-right" onClick={() => scrollRight(index)}>
-                    <i className="fas fa-chevron-right"/>
-                </button>
-            </div>
+            {
+                vinyls.length > 4 &&
+                    <div className="container__content_product--selling-list__scrollbar">
+                        <button className="product--selling-list--scroll_btn-left" onClick={() => scrollLeft(index)}>
+                            <i className="fas fa-chevron-left"/>
+                        </button>
+                        <button className="product--selling-list--scroll_btn-right" onClick={() => scrollRight(index)}>
+                            <i className="fas fa-chevron-right"/>
+                        </button>
+                    </div>
+            }
         </div>
 );
 }
