@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Vinyl, VinylDefault} from "../../type/Vinyl";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {vinylApi} from "../../../api/vinylApi";
 import {Track} from "../../type/Track";
 import $ from "jquery";
@@ -10,11 +10,13 @@ import AlbumThumbnailSlider from "./ProductDetailContent/AlbumThumbnailSlider";
 import ProductsContentRow from "./productsContentRow";
 
 export default function ProductDetailContent(props:any) {
+    // có thể lấy dữ liệu vinyl dc gửi qua state của location trc khi chuyển đến Link này props.location.state.vinyl
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
     const [productContents, setProductContents] = useState<{productTitle:string,vinyls:Vinyl[]}[]>([]);
     const [tracks, setTracks] = useState<Track[]>([]);
     const [quantity, setQuantity] = useState<number>(0);
     const {addToCart} = useContext(CartContext);
+    const location = useLocation();
 
     const {id} = useParams<{id:string}>();
 
@@ -40,14 +42,16 @@ export default function ProductDetailContent(props:any) {
 
     useEffect(() => {
         getTheVinyl();
-        getVinylsSameArtist();
-        getVinylsSameGenre();
-    }, []);
+        // setVinyl(props.location.state.vinyl);
+        setProductContents([]);
+    }, [location]);
 
     useEffect(() => {
         getTrackList();
         document.title = `${vinyl.vinylName} - ${vinyl.artist.nameArtist}`;
         setQuantity(vinyl.quantity>0?1:0);
+        getVinylsSameArtist();
+        getVinylsSameGenre();
     }, [vinyl]);
 
     function play(audioID:number, event:React.MouseEvent<HTMLElement>) {
@@ -161,7 +165,7 @@ export default function ProductDetailContent(props:any) {
 
     const getVinylsSameArtist = async () => {
       try {
-          const fetchVinylsSameArtist = await vinylApi.getVinylsSameArtist(parseInt(id));
+          const fetchVinylsSameArtist = await vinylApi.getVinylsSameArtist(vinyl.id);
           let vinylSameArtist : Vinyl[] = fetchVinylsSameArtist.data;
           if (vinylSameArtist.length !== 0) {
               setProductContents(prevState => {
@@ -178,7 +182,7 @@ export default function ProductDetailContent(props:any) {
 
     const getVinylsSameGenre = async () => {
         try {
-            const fetchVinylsSameGenre = await vinylApi.getVinylsSameGenre(parseInt(id));
+            const fetchVinylsSameGenre = await vinylApi.getVinylsSameGenre(vinyl.id);
             let vinylSameGenre : Vinyl[] = fetchVinylsSameGenre.data;
             if (vinylSameGenre.length !== 0) {
                 setProductContents(prevState => {

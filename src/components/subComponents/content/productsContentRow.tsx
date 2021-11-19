@@ -11,8 +11,6 @@ interface ProductsContentRowInterface {
 }
 
 const ProductsContentRow:React.FC<ProductsContentRowInterface> = ({productTitle, vinyls, index}) => {
-    const vinylWidth = $("#vinyl_item").outerWidth();
-    console.log(vinylWidth);
 
     const renderProductListRow = ():JSX.Element[] => {
         return vinyls.map((vinyl,index) => {
@@ -26,12 +24,18 @@ const ProductsContentRow:React.FC<ProductsContentRowInterface> = ({productTitle,
 
     const scrollLeft = (key:number) => {
         let scrollBar = $(`#scrollBar${key}`);
-        scrollBar.scrollLeft(scrollBar.scrollLeft()! - vinylWidth!);
+        scrollBar.animate({
+            scrollLeft: scrollBar.scrollLeft()! - $("#vinyl_item").outerWidth()!
+        }, 100)
     };
+
+    // có thể sử dụng next và prev để cuộn scrollBar đến vị trí của 1 vinyl_item chỉ định nhưng gặp lỗi
 
     const scrollRight = (key:number) => {
         let scrollBar = $(`#scrollBar${key}`);
-        scrollBar.scrollLeft(scrollBar.scrollLeft()! + vinylWidth!);
+        scrollBar.animate({
+            scrollLeft: scrollBar.scrollLeft()! + $("#vinyl_item").outerWidth()!
+        }, 100)
     };
 
     return (
