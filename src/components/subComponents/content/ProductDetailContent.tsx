@@ -38,7 +38,60 @@ export default function ProductDetailContent(props:any) {
         } catch (error) {
             console.log("error",error);
         }
-    }
+    };
+
+    const getVinylsSameArtist = async () => {
+        try {
+            const fetchVinylsSameArtist = await vinylApi.getVinylsSameArtist(vinyl.id);
+            let vinylSameArtist : Vinyl[] = fetchVinylsSameArtist.data;
+            if (vinylSameArtist.length !== 0) {
+                setProductContents(prevState => {
+                    return [...prevState, {
+                        productTitle: `Những Album khác của ${vinyl.artist.nameArtist}`,
+                        vinyls: vinylSameArtist
+                    }]
+                });
+            }
+        } catch (error) {
+            console.log("error", error)
+        }
+    };
+
+    const getVinylsSameGenre = async () => {
+        try {
+            const fetchVinylsSameGenre = await vinylApi.getVinylsSameGenre(vinyl.id);
+            let vinylSameGenre : Vinyl[] = fetchVinylsSameGenre.data;
+            if (vinylSameGenre.length !== 0) {
+                setProductContents(prevState => {
+                    return [...prevState, {
+                        productTitle: "Những Album khác bạn có thể thích",
+                        vinyls: vinylSameGenre
+                    }]
+                });
+            }
+        } catch (error) {
+            console.log("error", error);
+
+        }
+    };
+
+    const getVinylsSameNation = async () => {
+        try {
+            const fetchVinylsSameNation = await vinylApi.getVinylsSameNation(vinyl.nation.id,vinyl.id);
+            let vinylsSameNation : Vinyl[] = fetchVinylsSameNation.data;
+            if (vinylsSameNation.length !== 0) {
+                setProductContents(prevState => {
+                    return [...prevState, {
+                        productTitle: "Những Album tương tự",
+                        vinyls: vinylsSameNation
+                    }]
+                });
+            }
+        } catch (error) {
+            console.log("error", error);
+
+        }
+    };
 
     useEffect(() => {
         getTheVinyl();
@@ -52,6 +105,7 @@ export default function ProductDetailContent(props:any) {
         setQuantity(vinyl.quantity>0?1:0);
         getVinylsSameArtist();
         getVinylsSameGenre();
+        getVinylsSameNation();
     }, [vinyl]);
 
     function play(audioID:number, event:React.MouseEvent<HTMLElement>) {
@@ -161,41 +215,6 @@ export default function ProductDetailContent(props:any) {
                 </div>
             </div>
         );
-    };
-
-    const getVinylsSameArtist = async () => {
-      try {
-          const fetchVinylsSameArtist = await vinylApi.getVinylsSameArtist(vinyl.id);
-          let vinylSameArtist : Vinyl[] = fetchVinylsSameArtist.data;
-          if (vinylSameArtist.length !== 0) {
-              setProductContents(prevState => {
-                  return [...prevState, {
-                      productTitle: `Những Album khác của ${vinyl.artist.nameArtist}`,
-                      vinyls: vinylSameArtist
-                  }]
-              });
-          }
-      } catch (error) {
-          console.log("error", error)
-      }
-    };
-
-    const getVinylsSameGenre = async () => {
-        try {
-            const fetchVinylsSameGenre = await vinylApi.getVinylsSameGenre(vinyl.id);
-            let vinylSameGenre : Vinyl[] = fetchVinylsSameGenre.data;
-            if (vinylSameGenre.length !== 0) {
-                setProductContents(prevState => {
-                    return [...prevState, {
-                        productTitle: "Những Album khác bạn có thể thích",
-                        vinyls: vinylSameGenre
-                    }]
-                });
-            }
-        } catch (error) {
-            console.log("error", error);
-
-        }
     };
 
     const renderBuyButton = ():JSX.Element => {
