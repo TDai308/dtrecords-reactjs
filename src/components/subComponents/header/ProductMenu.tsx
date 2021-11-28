@@ -2,68 +2,68 @@ import React from "react";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
 
+export const headerMenu = [
+    {
+        headerTitle: "Sản Phẩm",
+        ProductMenuList: [
+            {
+                url: "/products/saleProducts",
+                title: "Sản phẩm giảm giá"
+            },
+            {
+                url: "/products/under10Dollars",
+                title: "Dưới $10"
+            },
+            {
+                url: "/products/under20Dollars",
+                title: "Dưới $20"
+            },
+            {
+                url: "/products/under30Dollars",
+                title: "Dưới $30"
+            },
+            {
+                url: "/products/over30Dollars",
+                title: "Trên $30"
+            },
+            {
+                url: "/products",
+                title: "Tất cả sản phẩm"
+            }
+        ]
+    },
+    {
+        headerTitle: "Thể Loại",
+        ProductMenuList: [
+            {
+                url: "/products/PopVinyl",
+                title: "Pop"
+            },
+            {
+                url: "/products/RockVinyl",
+                title: "Rock"
+            },
+            {
+                url: "/products/R&BVinyl",
+                title: "R&B"
+            },
+            {
+                url: "/products/HipHopVinyl",
+                title: "HipHop"
+            },
+            {
+                url: "/products/CountryVinyl",
+                title: "Country"
+            },
+            {
+                url: "/products",
+                title: "Xem toàn bộ thể loại"
+            }
+        ]
+    }
+];
+
 const ProductMenu = () => {
-    const headerMenu = [
-        {
-            headerTitle: "Sản Phẩm",
-            ProductMenuList: [
-                {
-                    url: "/products/saleProducts",
-                    title: "Sản phẩm giảm giá"
-                },
-                {
-                    url: "/products/under10Dollars",
-                    title: "Dưới $10"
-                },
-                {
-                    url: "/products/under20Dollars",
-                    title: "Dưới $20"
-                },
-                {
-                    url: "/products/under30Dollars",
-                    title: "Dưới $30"
-                },
-                {
-                    url: "/products/over30Dollars",
-                    title: "Trên $30"
-                },
-                {
-                    url: "/products",
-                    title: "Tất cả sản phẩm"
-                }
-            ]
-        },
-        {
-            headerTitle: "Thể Loại",
-            ProductMenuList: [
-                {
-                    url: "/products/PopVinyl",
-                    title: "Pop"
-                },
-                {
-                    url: "/products/RockVinyl",
-                    title: "Rock"
-                },
-                {
-                    url: "/products/R&BVinyl",
-                    title: "R&B"
-                },
-                {
-                    url: "/products/HipHopVinyl",
-                    title: "HipHop"
-                },
-                {
-                    url: "/products/CountryVinyl",
-                    title: "Country"
-                },
-                {
-                    url: "/products",
-                    title: "Xem toàn bộ thể loại"
-                }
-            ]
-        }
-    ];
-    
     const renderHeaderMenu = (): JSX.Element[] => {
         return headerMenu.map((menu, index) => {
             return(
@@ -85,7 +85,6 @@ const ProductMenu = () => {
                 </li>
             );
         })
-
     }
 
     return(

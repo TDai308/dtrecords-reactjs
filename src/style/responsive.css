@@ -1,0 +1,27 @@
+/*mobile and table*/
+@media (max-width: 1023px) {
+    .header__logo_menu {
+        display: none;
+    }
+
+    .header__logo_menu--Mobile-Tablet {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header__menu-link {
+        color: black;
+        font-size: 24px;
+    }
+}
+
+/*tablet*/
+@media (min-width: 740px) and (max-width: 1023px) {
+
+}
+
+/*mobile*/
+@media (max-width: 739px) {
+
+}

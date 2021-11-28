@@ -1,18 +1,18 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const BlogMenu = () => {
-    const BlogMenuList = [
-        {
-            url: "/",
-            title: "News!"
-        },
-        {
-            url: "/",
-            title: "Top100!"
-        }
-    ];
+export const BlogMenuList = [
+    {
+        url: "/",
+        title: "News!"
+    },
+    {
+        url: "/",
+        title: "Top100!"
+    }
+];
 
+const BlogMenu = () => {
     const renderBlogNewList = (): JSX.Element[] => {
         return BlogMenuList.map((BlogItem, index) => {
             return(
