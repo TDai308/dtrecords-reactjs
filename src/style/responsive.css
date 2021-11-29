@@ -1,5 +1,12 @@
 /*mobile and table*/
 @media (max-width: 1023px) {
+    .button__blue__with-a,
+    .button__black__with-a,
+    .button__red__with-a {
+        height: 70px;
+        line-height: 70px;
+    }
+
     .header__logo_menu {
         display: none;
     }
@@ -9,10 +16,7 @@
         align-items: center;
         justify-content: center;
     }
-}
 
-/*tablet*/
-@media (min-width: 740px) and (max-width: 1023px) {
     .header__account__link {
         font-size: 35px;
     }
@@ -45,10 +49,56 @@
         display: block!important;
     }
 
+    .header__menu__Account-SaleOff div {
+        padding: 20px;
+        background: white;
+    }
 
+    .header__menu__Account-SaleOff .button__red__with-a {
+        background: white;
+        color: var(--red-color);
+        border: var(--red-color) solid 2px;
+        margin: 0;
+    }
+
+    .header__menu__Account-Mobile-Tablet .button__red__with-a {
+        background: var(--red-color);
+        color: white;
+        border: unset;
+    }
+
+    .header__menu__Account-SaleOff .button__black__with-a {
+        background: white;
+        color: black;
+        border: black solid 2px;
+    }
+
+    .header__menu__Account-SaleOff .header__login-signup .button__black__with-a,
+    .header__menu__Account-SaleOff .header__login-signup .button__blue__with-a {
+        margin: 0;
+        width: 48%;
+    }
+}
+
+/*tablet*/
+@media (min-width: 740px) and (max-width: 1023px) {
+    .header__menu__Account-SaleOff .header__login-signup {
+        display: none;
+    }
 }
 
 /*mobile*/
 @media (max-width: 739px) {
+    .header__account_cart .header__account,
+    .header__account_cart .header__login-signup{
+        display: none;
+    }
 
+    .header__menu__Account-SaleOff .header__login-signup {
+        display: flex;
+    }
+
+    .header__nav {
+        padding: 0 20px;
+    }
 }

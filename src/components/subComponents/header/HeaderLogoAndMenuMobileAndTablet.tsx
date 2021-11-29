@@ -16,7 +16,7 @@ const HeaderLogoAndMenuMobileAndTablet = ():JSX.Element => {
             </div>
             <MenuOnMobileTablet/>
 
-            <Link to="/">
+            <Link to="/" style={{"lineHeight": "0"}}>
                 <img src={`${apiUrlDefault}images/logos/logoInMobileTablet.png`} alt="DTRecords"/>
             </Link>
         </div>
