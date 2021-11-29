@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
-import classNames from "classnames";
 import ProductMenu from "./ProductMenu";
 import BlogMenu from "./BlogMenu";
 
@@ -9,23 +8,11 @@ const HeaderLogoAndMenu = () => {
 
     const logoSrc = `${apiUrlDefault}images/logos/logo.png`;
 
-    // const [showMenu,setShowMenu] = useState(false);
-    //
-    // const handleHoverMenu = () => {
-    //     setShowMenu(!showMenu);
-    // }
-    //
-    // const [showBlog,setShowBlog] = useState(false);
-    //
-    // const handleHoverBlog = () => {
-    //     setShowBlog(!showBlog);
-    // }
-
     return(
         <div className="header__logo_menu">
             <div>
                 <Link to="/">
-                    <img src={logoSrc} alt="DTRecords"/>
+                    <img src={logoSrc} alt="DTRecords" style={{width: "240px"}}/>
                 </Link>
             </div>
             <div className="header__menu">
