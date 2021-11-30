@@ -7,14 +7,14 @@ const HeaderLogoAndMenuMobileAndTablet = ():JSX.Element => {
 
     return (
         <div className={"header__logo_menu--Mobile-Tablet"}>
-            <input type="checkbox" hidden id={"showMenuOnMobileAndTablet"}/>
             <div className={"header__menu-bar"}>
+                <input type="checkbox" hidden id={"showMenuOnMobileAndTablet"}/>
                 <label htmlFor="showMenuOnMobileAndTablet">
                     <i className="fas fa-bars"/>
                     <i className="fas fa-times" style={{display:"none"}}/>
                 </label>
+                <MenuOnMobileTablet/>
             </div>
-            <MenuOnMobileTablet/>
 
             <Link to="/" style={{"lineHeight": "0"}}>
                 <img src={`${apiUrlDefault}images/logos/logoInMobileTablet.png`} alt="DTRecords"/>

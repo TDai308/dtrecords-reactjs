@@ -7,7 +7,7 @@ import LoginSignup from "./LoginSignup";
 import {UserContext} from "../../context/UserProvider";
 
 const MenuOnMobileTablet = () => {
-    const {user, isLogged, logOut} = useContext(UserContext);
+    const {isLogged, logOut} = useContext(UserContext);
 
     const handleOpenProductMenu = (event: React.ChangeEvent<HTMLInputElement>) => {
         const productMenu = $("#handleShowProductMenu");
