@@ -83,10 +83,8 @@ const Footer = () => {
                     {
                         footerColumn.map((column,index) => {
                             return (
-                                <div key={index} className="col l-3">
-                                    {
-                                        FooterPart(column.headingFooter,column.footerNavigationLink)
-                                    }
+                                <div key={index} className="col l-3 m-6 c-12">
+                                    <FooterPart headingFooter={column.headingFooter} footerNavigationLink={column.footerNavigationLink}/>
                                 </div>
                             );
                         })

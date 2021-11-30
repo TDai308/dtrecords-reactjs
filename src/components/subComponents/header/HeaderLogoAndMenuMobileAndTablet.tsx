@@ -14,6 +14,10 @@ const HeaderLogoAndMenuMobileAndTablet = ():JSX.Element => {
                     <i className="fas fa-times" style={{display:"none"}}/>
                 </label>
                 <MenuOnMobileTablet/>
+                <label htmlFor="showMenuOnMobileAndTablet" className={"oval"} style={{
+                    display: "none",
+                    animation: "productMenuAppear ease-in .2s"
+                }}/>
             </div>
 
             <Link to="/" style={{"lineHeight": "0"}}>

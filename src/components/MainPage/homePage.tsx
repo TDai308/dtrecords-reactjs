@@ -7,7 +7,7 @@ export default function homePage() {
     return (
         <div>
             <Header/>
-            {/*<ContentBody/>*/}
+            <ContentBody/>
             <Footer/>
         </div>
     );

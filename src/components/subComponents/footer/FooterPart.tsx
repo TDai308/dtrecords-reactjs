@@ -2,7 +2,12 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {footerNavigationLink} from "../../MainPage/Footer";
 
-export default function FooterPart(headingFooter:string, footerNavigationLink: footerNavigationLink[]) {
+interface FooterPartInterface {
+    headingFooter: string;
+    footerNavigationLink: footerNavigationLink[]
+}
+
+const FooterPart:React.FC<FooterPartInterface> = ({headingFooter, footerNavigationLink}) => {
     return (
         <div className="footer__part">
             <h2>{headingFooter}</h2>
@@ -18,3 +23,5 @@ export default function FooterPart(headingFooter:string, footerNavigationLink: f
         </div>
     );
 }
+
+export default FooterPart;

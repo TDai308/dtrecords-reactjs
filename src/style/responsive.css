@@ -38,17 +38,16 @@
         padding: 0 0 22.41px 0;
     }
 
-    #showMenuOnMobileAndTablet:checked ~ .header__menu-bar label i:nth-of-type(1) {
+    #showMenuOnMobileAndTablet:checked ~ label i:nth-of-type(1) {
         display: none;
     }
 
-    #showMenuOnMobileAndTablet:checked ~ .header__menu-bar label i:nth-of-type(2) {
+    #showMenuOnMobileAndTablet:checked ~ label i:nth-of-type(2) {
         display: block!important;
     }
 
     .header__menu__Account-SaleOff div {
         padding: 20px;
-        background: white;
     }
 
     .header__menu__Account-SaleOff .button__red__with-a {
@@ -104,5 +103,9 @@
     .header__menu__Account-SaleOff .button__red__with-a {
         height: 70px;
         line-height: 70px;
+    }
+
+    .footer__part {
+        text-align: center;
     }
 }
