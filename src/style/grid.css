@@ -16,6 +16,10 @@
     margin-right: -4px;
 }
 
+.row.no-wrap {
+    flex-wrap: unset;
+}
+
 .row.no-gutters {
     margin-left: 0;
     margin-right: 0;

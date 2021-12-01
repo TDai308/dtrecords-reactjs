@@ -62,6 +62,10 @@
         color: black;
         border: black solid 2px;
     }
+
+    .container__content_product .container__content_artist__Mobile_tablet {
+        display: block;
+    }
 }
 
 /*tablet*/
@@ -107,5 +111,17 @@
 
     .footer__part {
         text-align: center;
+    }
+
+    .container {
+        padding: 30px 10px;
+    }
+
+    .container__header {
+        display: none;
+    }
+
+    #all-genres {
+        display: none;
     }
 }

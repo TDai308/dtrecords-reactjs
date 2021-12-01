@@ -75,10 +75,10 @@ export default function HomeContent() {
         <div>
             <VideoTopAlbum/>
             <div className={"row sm-gutter container__content_product--main"}>
-                <div className={"col l-8"}>
-                    <ProductsContent productContents={productContents} genres={genres}/>
+                <div className={"col l-8 m-12 c-12"}>
+                    <ProductsContent productContents={productContents} genres={genres} artists={artists}/>
                 </div>
-                <div className={"col l-4"}>
+                <div className={"col l-4 m-0 c-0"}>
                     <Banner artists={artists}/>
                 </div>
             </div>

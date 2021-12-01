@@ -40,12 +40,12 @@ const ContentArtist:React.FC<contentArtist> = ({artists}) => {
 
     return (
         <div className="container__content_artist">
-        <h2 className="container__content_artist-title">Nghệ sỹ</h2>
-    {
-        renderArtistList()
-    }
-    </div>
-);
+            <h2 className="container__content_artist-title">Nghệ sỹ</h2>
+            {
+                renderArtistList()
+            }
+        </div>
+    );
 }
 
 export default ContentArtist;

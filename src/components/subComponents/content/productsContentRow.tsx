@@ -15,7 +15,7 @@ const ProductsContentRow:React.FC<ProductsContentRowInterface> = ({productTitle,
     const renderProductListRow = ():JSX.Element[] => {
         return vinyls.map((vinyl,index) => {
             return (
-                <div className={"col l-3"} id={"vinyl_item"} key={index}>
+                <div className={"col l-3 m-4 c-6"} id={"vinyl_item"} key={index}>
                     <ProductItem vinyl={vinyl}/>
                 </div>
             );
@@ -44,7 +44,7 @@ const ProductsContentRow:React.FC<ProductsContentRowInterface> = ({productTitle,
                 <h3 className="container__content_product--selling__title">{productTitle}</h3>
                 <Link className="container__content_product--selling__link" to="/products">Shop All</Link>
             </div>
-            <div id={`scrollBar${index}`} className="grid__row--no_wrap container__content_product--selling-list">
+            <div id={`scrollBar${index}`} className="row sm-gutter no-wrap container__content_product--selling-list">
                 {
                     renderProductListRow()
                 }

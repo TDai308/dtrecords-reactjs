@@ -255,6 +255,7 @@
   .container__content_artist__link:hover {
     background: #f7f7f7;
     color: var(--black-color);
+    line-height: 0;
   }
 
   .category__item__link:hover {
@@ -557,7 +558,7 @@
 
 .search_bar__input {
   border: none;
-  height: 100%;
+  height: 50px;
   padding: 6px 12px;
   width: 300%;
   outline: none;
@@ -575,6 +576,7 @@
   cursor: pointer;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
+  padding: 0 12px 0 6px;
 }
 
 .container__video_top_album {
@@ -583,6 +585,10 @@
 
 .container__content_product--main {
   margin-top: 30px;
+}
+
+.container__content_product .container__content_artist__Mobile_tablet {
+  display: none;
 }
 
 .container__content_product--selling-list {
@@ -663,7 +669,8 @@
   color: var(--blue-color);
 }
 
-.container__content_artist {
+.container__content_artist,
+.container__content_artist__Mobile_tablet {
   padding: 8px 15px;
   background: white;
   border-radius: 5px;
@@ -1060,8 +1067,7 @@
 /*footer*/
 .footer {
   background: white;
-  /*24px*/
-  padding: var(--header-height) 15px;
+  padding: 24px 15px;
   font-size: 20px;
 }
 
@@ -1164,6 +1170,7 @@
 .album__artist_img_name {
   display: flex;
   align-items: center;
+  max-width: 65%;
 }
 
 .album__artist_img {
@@ -1175,7 +1182,12 @@
 
 .album__artist_name {
   font-weight: 500;
-  margin: 0;
+  line-height: 65px;
+  word-break: break-all;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .album__like {
