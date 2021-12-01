@@ -30,6 +30,8 @@
     .product_menu {
         background: white;
         padding: unset;
+        overflow-x: auto;
+        max-height: 49vmax;
     }
 
     .product_menu__selector {
@@ -85,9 +87,21 @@
 
 /*mobile*/
 @media (max-width: 739px) {
+    :root {
+        --font-link: 5vw;
+    }
+
     .header__account_cart .header__account,
     .header__account_cart .header__login-signup{
         display: none;
+    }
+
+    .header__menu-link {
+        font-size: var(--font-link);
+    }
+
+    .product__selector__header {
+        font-size: 1.2rem;
     }
 
     .header__menu__Account-SaleOff .header__login-signup {

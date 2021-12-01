@@ -58,7 +58,7 @@ const ProductMenu = () => {
                 },
                 {
                     url: "/products",
-                    title: "Xem toàn bộ thể loại"
+                    title: "Tất cả thể loại"
                 }
             ]
         }
