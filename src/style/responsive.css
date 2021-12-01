@@ -66,6 +66,14 @@
     .container__content_product .container__content_artist__Mobile_tablet {
         display: block;
     }
+
+    .container__content_product--selling-list {
+        overflow-x: scroll;
+    }
+
+    .container__content_product--selling-list::-webkit-scrollbar{
+        display: none;
+    }
 }
 
 /*tablet*/
