@@ -76,6 +76,42 @@
     .container__content_product--selling-list::-webkit-scrollbar{
         display: none;
     }
+
+    .home_produce__category {
+        display: none;
+    }
+
+    .home_produce__category__pagination__information {
+        display: none;
+    }
+
+    .home_produce__category__pagination {
+        justify-content: center;
+    }
+
+    .category__list {
+        display: flex;
+    }
+
+    .category__list>li {
+        width: 50%;
+        text-align: center;
+        border-top: unset;
+    }
+
+    .home_produce__category--mobile-tablet h3 {
+        font-size: 2rem;
+        margin: 10px 0;
+    }
+
+    .category__item__link {
+        font-size: 30px;
+        line-height: 3.5rem;
+    }
+
+    .home_produce__category--mobile-tablet {
+        display: flex;
+    }
 }
 
 /*tablet*/
@@ -145,5 +181,17 @@
 
     #all-genres {
         display: none;
+    }
+
+    .category__pagination {
+        display: none;
+    }
+
+    .home_produce__category__pagination {
+        margin-top: 30px;
+    }
+
+    .category__pagination--mobile-and-tablet {
+        display: flex;
     }
 }

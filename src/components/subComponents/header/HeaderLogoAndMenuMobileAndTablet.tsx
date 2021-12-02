@@ -1,9 +1,15 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Link, useLocation} from "react-router-dom";
 import MenuOnMobileTablet from "./MenuOnMobileTablet";
+import $ from "jquery";
 
 const HeaderLogoAndMenuMobileAndTablet = ():JSX.Element => {
     const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const location = useLocation();
+
+    useEffect(() => {
+        $("#showMenuOnMobileAndTablet").prop("checked", false);
+    }, [location]);
 
     return (
         <div className={"header__logo_menu--Mobile-Tablet"}>

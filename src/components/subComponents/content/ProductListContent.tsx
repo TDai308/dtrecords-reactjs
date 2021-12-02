@@ -18,11 +18,11 @@ const ProductListContent = () => {
 
     return (
         <div className={"row sm-gutter"}>
-            <div className={"col l-3"}>
+            <div className={"col l-3 m-0 c-0"}>
                 <Category/>
                 <AlbumBanner srcImages={srcImages}/>
             </div>
-            <div className={"col l-9 sm-gutter"}>
+            <div className={"col l-9 m-12 c-12"}>
                 <ProductList/>
             </div>
         </div>
