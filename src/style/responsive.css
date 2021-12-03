@@ -112,6 +112,10 @@
     .home_produce__category--mobile-tablet {
         display: flex;
     }
+
+    .header__logo_menu--Mobile-Tablet .oval {
+        top: unset;
+    }
 }
 
 /*tablet*/
