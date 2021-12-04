@@ -865,11 +865,11 @@
   justify-items: center;
 }
 
-.sort__selector {
+.sort__selector,
+.album__quantity {
   border: none;
   outline: none;
   background: none;
-  width: 100%;
   border-bottom: 1px solid;
 }
 
@@ -1316,7 +1316,8 @@
 
 .album__track-list {
   max-height: 125px;
-  padding: 5px;
+  margin: 5px 0;
+  padding-right: 5px;
   overflow-y: auto;
 }
 .album__track-list::-webkit-scrollbar-track,
@@ -1348,7 +1349,17 @@
 .album__track-list__player {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   line-height: 25px;
+}
+
+.album__track_name {
+ word-break:break-all;
+ display: -webkit-box;
+ overflow: hidden;
+ -webkit-box-orient: vertical;
+ -webkit-line-clamp: 1;
+  margin: 0;
 }
 
 .album__track_play_pause {
@@ -1363,11 +1374,10 @@
 }
 
 .album__quantity {
-  width: 10%;
+  width: 13%;
   margin-right: 15px;
-  padding: 8px 10px;
-  font-size: 15px;
-  color: var(--gray-coler);
+  padding: 5px 10px;
+  font-size: 20px;
 }
 
 .album__add_to_cart,

@@ -198,4 +198,16 @@
     .category__pagination--mobile-and-tablet {
         display: flex;
     }
+
+    .container__content_product--selling__link {
+        display: none;
+    }
+
+    .album__track-list::-webkit-scrollbar,
+    .shopping_cart_list::-webkit-scrollbar,
+    .order_cart::-webkit-scrollbar
+    {
+        width: 10px;
+        background-color: #F5F5F5;
+    }
 }

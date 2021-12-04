@@ -147,9 +147,19 @@ export default function ProductDetailContent(props:any) {
         });
     }
 
-    const handleChangeQuantity = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setQuantity(parseInt(event.currentTarget.value));
     };
+
+    const handleAddToCart = () => {
+        if (quantity>0 && quantity<=vinyl.quantity) {
+            addToCart({vinyl: vinyl,quantity: quantity});
+            $(".album__quantity").val(defaultQuantity);
+        } else {
+            alert(`Có ${vinyl.quantity} sản phẩm thôi`);
+            $(".album__quantity").val(defaultQuantity);
+        }
+    }
 
     let defaultQuantity:number = props.location.state.quantity>0?1:0;
 
@@ -198,9 +208,7 @@ export default function ProductDetailContent(props:any) {
                         tracks.map((track, index) => {
                             return (
                                 <div className="album__track-list__player" key={index}>
-                                    <div className="album__track_name">
-                                        <div>{track.trackName} - {track.artists}</div>
-                                    </div>
+                                    <p className={"album__track_name"}>{track.trackName} - {track.artists}</p>
                                     <div className="album__track_play_pause">
                                         <i  className="fas fa-play-circle" onClick={(event) => {play(index,event)}}/>
                                         <i className="fas fa-pause-circle" onClick={(event) => {pause(index,event)}} style={{
@@ -217,20 +225,28 @@ export default function ProductDetailContent(props:any) {
         );
     };
 
+    const renderOptionQuantityList = () => {
+        let optionQuantity = [];
+        if (vinyl.quantity > 0) {
+            for (let quantity = 1; quantity <= vinyl.quantity; quantity++) {
+                optionQuantity.push(<option value={quantity}>{quantity}</option>);
+            }
+        } else optionQuantity.push(<option value={0}>0</option>);
+        return optionQuantity;
+    };
+
     const renderBuyButton = ():JSX.Element => {
         return (
             <form className="album__buy_button">
-                <input className="album__quantity" type="number" name="quantity" defaultValue={defaultQuantity} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}/>
+                <select className={"album__quantity"} name="quantity" defaultValue={defaultQuantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}>
+                    {
+                        renderOptionQuantityList()
+                    }
+                </select>
+                {/*<input className="album__quantity" type="number" name="quantity" defaultValue={defaultQuantity} min={1} max={vinyl.quantity} disabled={vinyl.quantity===0}/>*/}
                 {
                     vinyl.quantity !== 0 ?
-                        <input className="album__add_to_cart height_42px" type="button" value="Thêm Vào Giỏ" onClick={
-                            () => {
-                                if (quantity>0) {
-                                    addToCart({vinyl: vinyl,quantity: quantity});
-                                    $(".album__quantity").val(defaultQuantity);
-                                }
-                            }
-                        }/> :
+                        <input className="album__add_to_cart height_42px" type="button" value="Thêm Vào Giỏ" onClick={handleAddToCart}/> :
                         <input className="album__sold_out height_42px" type="button" value="Hết Hàng"/>
                 }
             </form>
@@ -240,10 +256,10 @@ export default function ProductDetailContent(props:any) {
     const renderVinylContent = ():JSX.Element => {
       return (
           <div className="row sm-gutter app-content">
-              <div className="col l-6">
+              <div className="col l-6 m-12 c-12">
                   <AlbumThumbnailSlider thumbnail1={vinyl.thumbnail1} thumbnail2={vinyl.thumbnail2} vinylName={vinyl.vinylName}/>
               </div>
-              <div className="col l-6">
+              <div className="col l-6 m-12 c-12">
                   <div className="album_information">
                       {renderAlbumArtist()}
                       {renderAlbumInformationAndPrice()}
@@ -258,7 +274,7 @@ export default function ProductDetailContent(props:any) {
     const renderProductContentRows = (): JSX.Element[] => {
         return productContents.map((productContent, index) => {
             return (
-                <div className={"col l-12"} key={index}>
+                <div className={"col l-12 m-12 c-12"} key={index}>
                     <ProductsContentRow productTitle={productContent.productTitle} vinyls={productContent.vinyls} index={index}/>
                 </div>
             );
