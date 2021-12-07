@@ -154,14 +154,9 @@ export default function ProductDetailContent(props:any) {
     const handleAddToCart = () => {
         if (quantity>0 && quantity<=vinyl.quantity) {
             addToCart({vinyl: vinyl,quantity: quantity});
-            $(".album__quantity").val(defaultQuantity);
-        } else {
-            alert(`Có ${vinyl.quantity} sản phẩm thôi`);
-            $(".album__quantity").val(defaultQuantity);
+            setQuantity(1);
         }
     }
-
-    let defaultQuantity:number = props.location.state.quantity>0?1:0;
 
     const renderAlbumArtist = ():JSX.Element => {
         return (
@@ -238,7 +233,7 @@ export default function ProductDetailContent(props:any) {
     const renderBuyButton = ():JSX.Element => {
         return (
             <form className="album__buy_button">
-                <select className={"album__quantity"} name="quantity" defaultValue={defaultQuantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}>
+                <select className={"album__quantity"} name="quantity" value={quantity} disabled={vinyl.quantity===0} onChange={handleChangeQuantity}>
                     {
                         renderOptionQuantityList()
                     }

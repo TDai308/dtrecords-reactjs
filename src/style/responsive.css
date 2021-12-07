@@ -116,6 +116,14 @@
     .header__logo_menu--Mobile-Tablet .oval {
         top: unset;
     }
+
+    .cart__product_items {
+        margin-left: unset;
+    }
+
+    .cart__title {
+        margin-left: unset;
+    }
 }
 
 /*tablet*/
@@ -209,5 +217,21 @@
     {
         width: 10px;
         background-color: #F5F5F5;
+    }
+
+    .album__buy_button {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        flex-direction: row-reverse;
+        left: 0;
+        z-index: 1;
+        background: var(--background-color);
+        padding: 10px;
+    }
+
+    .album__quantity {
+        margin-right: unset;
+        margin-left: 10px;
     }
 }

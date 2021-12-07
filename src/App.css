@@ -1416,7 +1416,6 @@
   right: 0;
   bottom: 0;
   background: rgba(72,72,72,0.5);
-  z-index: -1;
 }
 
 .sign_up__form,
@@ -1871,7 +1870,11 @@
 .cart__product_quantity {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.cart__product_quantity p {
+  margin: 0 10px;
 }
 
 .cart__product_delete {

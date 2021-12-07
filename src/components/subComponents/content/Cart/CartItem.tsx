@@ -17,15 +17,13 @@ const CartItem: React.FC<ShoppingCartInterface> = ({cartItem, updateQuantity, re
                 <h3>Vinyl Record</h3>
                 <div className="cart__product_name">{cartItem.vinyl.vinylName} - {cartItem.vinyl.artist.nameArtist}</div>
                 <div className="cart__product_quantity_and_price">
-                    <div className="cart__product_quantity" style={{
-                        width: "15%"
-                    }}>
+                    <div className="cart__product_quantity">
                         <button onClick={() => updateQuantity(cartItem,cartItem.quantity-1)}>-</button>
-                        <p style={{margin: "0"}}>{cartItem.quantity}</p>
+                        <p>{cartItem.quantity}</p>
                         <button onClick={() => updateQuantity(cartItem,cartItem.quantity+1)} disabled={cartItem.quantity===cartItem.vinyl.quantity}>+</button>
                     </div>
                     <div className="cart__product_price" >
-                        <div>Price: {cartItem.quantity * cartItem.vinyl.realPrice}$</div>
+                        <div>Price: {(Math.round(cartItem.quantity * cartItem.vinyl.realPrice * 100) / 100)}$</div>
                     </div>
                 </div>
                 <div className="cart__product_delete">

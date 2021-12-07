@@ -6,6 +6,8 @@ import CartItem from "./Cart/CartItem";
 const Cart = (): JSX.Element => {
     const {cart, price, updateQuantity, removeFromCart} = useContext(CartContext);
 
+    document.title = "Cart";
+
     const renderCartList = (): JSX.Element[] => {
         return cart.map((cartItem, index) => {
             return (
@@ -43,13 +45,13 @@ const Cart = (): JSX.Element => {
                     <div>
                         <h1 className="cart__title">Giỏ hàng của bạn</h1>
                         <div className="row sm-gutter app-content">
-                            <div className="col l-9">
+                            <div className="col l-9 m-12 c-12">
                                 {
                                     renderCartList()
                                 }
                             </div>
 
-                            <div className="col l-3">
+                            <div className="col l-3 m-12 c-12">
                                 {
                                     renderCartTotalPrice()
                                 }

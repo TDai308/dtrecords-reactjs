@@ -22,7 +22,8 @@ const HeaderLogoAndMenuMobileAndTablet = ():JSX.Element => {
                 <MenuOnMobileTablet/>
                 <label htmlFor="showMenuOnMobileAndTablet" className={"oval"} style={{
                     display: "none",
-                    animation: "productMenuAppear ease-in .2s"
+                    animation: "productMenuAppear ease-in .2s",
+                    zIndex: -1
                 }}/>
             </div>
 
