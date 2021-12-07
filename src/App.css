@@ -1435,6 +1435,10 @@
   align-items: center;
 }
 
+.sign_up__form {
+  text-align: center;
+}
+
 .table_of_admin {
   border-radius: 5px;
   width: 100%;
@@ -1637,14 +1641,9 @@
 .has-float-label {
   margin: 20px 0 0;
   position: relative;
-  flex: 1;
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-
-.has-float-label:first-of-type {
-  margin-top: 10px;
 }
 
 .has-float-label i {

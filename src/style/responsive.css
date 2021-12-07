@@ -131,6 +131,10 @@
     .header__menu__Account-SaleOff .header__login-signup {
         display: none;
     }
+
+    .sign_up__form {
+        min-width: 600px;
+    }
 }
 
 /*mobile*/
@@ -233,5 +237,35 @@
     .album__quantity {
         margin-right: unset;
         margin-left: 10px;
+    }
+
+    .sign_up__form {
+        border-radius: unset;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        transform: unset;
+        min-width: unset;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 812px;
+    }
+
+    .name_phoneNumber_input {
+        margin-top: unset;
+        flex-direction: column;
+    }
+
+    .name_phoneNumber_input .has-float-label {
+        width: 100% !important;
+        margin-top: 20px !important;
+    }
+
+    .oval {
+        overflow-y: auto;
     }
 }

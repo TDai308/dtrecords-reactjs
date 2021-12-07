@@ -3,6 +3,7 @@ import SuccessfulLogging from "./SuccessfulLogging";
 import  {useHistory} from 'react-router-dom'
 import {tokenApi} from "../../api/tokenApi";
 import {UserContext} from "../context/UserProvider";
+import {Link} from "react-router-dom";
 
 export default function LogIn() {
     const [email, setEmail] = useState("");
@@ -22,10 +23,6 @@ export default function LogIn() {
         if (event.target.name === "email") {
             setEmail(event.target.value);
         } else setPassword(event.target.value);
-    };
-
-    const handleSignUp = () => {
-        window.location.href = "/signup";
     };
 
     useEffect(() => {
@@ -49,6 +46,10 @@ export default function LogIn() {
         event.preventDefault();
     };
 
+    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+
+    const logoSrc = `${apiUrlDefault}images/logos/logo-black.png`;
+
     return(
         <div className="background-signup-loggin">
             <div className="oval">
@@ -56,7 +57,7 @@ export default function LogIn() {
                     logged ?
                         <SuccessfulLogging/> :
                         <form className="sign_up__form" onSubmit={handleSubmit}>
-                            <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
+                            <img src={logoSrc} alt="DTRecords" style={{width: "240px"}}/>
                             <h2>Chào Mừng Quay Trở Lại.</h2>
                             <p className="log-in__title">Đăng nhập để tận hưởng những dịch vụ tốt</p>
                             <label className="has-float-label">
@@ -77,9 +78,11 @@ export default function LogIn() {
                                 </div>
                             }
                             <button className="button_Login_Signup" onClick={login} type="submit">Đăng Nhập</button>
-                            <span className="margin-10px">Hoặc</span>
-                            <button type="button" className="button_Login_Signup" onClick={handleSignUp}>Đăng Ký
-                            </button>
+                            <span className="margin-20px-top">
+                                Nếu bạn chưa có tài khoản! <Link to={"/signup"} style={{
+                                    color:"var(--cyan-color)"
+                            }}> Đăng ký</Link>
+                            </span>
                         </form>
                 }
             </div>
