@@ -37,11 +37,15 @@ export default function ProceedToCheckOut() {
         window.location.href = "/";
     }
 
+    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+
+    const logoSrc = `${apiUrlDefault}images/logos/logo-black.png`;
+
     return (
         <div className={"background-signup-loggin"}>
             <div className="oval" style={{zIndex: 1, display: "none"}} id={"successNotification"}>
-                <div className="thank_order min-width__860">
-                    <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
+                <div className="thank_order">
+                    <img src={logoSrc} alt="DTRecords" style={{width: "240px"}}/>
                     <h2>Cảm ơn vì đã mua hàng tại Hãng Đĩa Trọng Đại</h2>
                     <i className="fas fa-check fa-5x" style={{color: "#58EA2F"}}/>
                     <p>Đơn hàng của bạn đã được đặt thành công và đang được xử lý. Bạn sẽ nhận được mail xác nhận
@@ -51,12 +55,13 @@ export default function ProceedToCheckOut() {
             </div>
             <div className="oval">
                 <form className="sign_up__form">
-                    <h1 className="sign_up__header">Hãng Đĩa Trọng Đại</h1>
+                    <img src={logoSrc} alt="DTRecords" style={{width: "240px"}}/>
+
                     <h2>Kiểm Tra Đơn Hàng Của Bạn.</h2>
 
                     <div className="grid">
                         <div className="row sm-gutter app-content">
-                            <div className="col l-8">
+                            <div className="col l-8 m-12 c-12">
                                 <div className="order__form">
                                     <label className="has-float-label">
                                         <input className="sign_up__input" name="customerName" defaultValue={customerInformation.customerName} onChange={handleChangeInput} required type="text"/>
@@ -79,7 +84,7 @@ export default function ProceedToCheckOut() {
                                     </label>
                                 </div>
                             </div>
-                            <div className="col l-4">
+                            <div className="col l-4 m-12 c-12">
                                 <div className="order_cart">
                                     {
                                         cart.map((item, inex) => {

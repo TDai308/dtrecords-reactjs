@@ -124,6 +124,10 @@
     .cart__title {
         margin-left: unset;
     }
+
+    .order_cart {
+        margin-top: 10px;
+    }
 }
 
 /*tablet*/
@@ -132,7 +136,8 @@
         display: none;
     }
 
-    .sign_up__form {
+    .sign_up__form,
+    .thank_order {
         min-width: 600px;
     }
 }
@@ -239,7 +244,8 @@
         margin-left: 10px;
     }
 
-    .sign_up__form {
+    .sign_up__form,
+    .thank_order {
         border-radius: unset;
         position: absolute;
         top: 0;

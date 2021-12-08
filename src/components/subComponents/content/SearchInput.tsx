@@ -23,6 +23,7 @@ export default function SearchInput() {
 
     const handleChangingSearchInput = (event :  React.ChangeEvent<HTMLInputElement>) => {
         setSearchVinyl(event.target.value);
+        console.log("hahahaha");
     }
 
     const handlePressToSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {

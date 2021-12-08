@@ -29,10 +29,6 @@ code {
   box-sizing: inherit;
 }
 
-.min-width__860 {
-  min-width: 860px !important;
-}
-
 html {
   font-size: 18px;
   line-height: 1.2rem;

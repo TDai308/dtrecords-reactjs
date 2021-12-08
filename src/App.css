@@ -1615,6 +1615,10 @@
   text-align: center;
 }
 
+.thank_order h2 {
+  text-align: center;
+}
+
 .thank_order #goToHomePageLink {
   cursor: pointer;
   color: var(--red-color);
@@ -1924,6 +1928,7 @@
 
 .order_cart {
   height: 210px;
+  padding-right: 10px;
   overflow-y: auto;
 }
 
