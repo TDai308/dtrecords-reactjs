@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import SuccessfulLogging from "./SuccessfulLogging";
-import  {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import {tokenApi} from "../../api/tokenApi";
 import {UserContext} from "../context/UserProvider";
 import {Link} from "react-router-dom";
