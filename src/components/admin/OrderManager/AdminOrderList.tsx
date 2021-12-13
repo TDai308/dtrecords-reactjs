@@ -25,6 +25,7 @@ export default function AdminOrderList() {
 
     useEffect(() => {
         getOrderList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     function handleDeliverySelectorChange(event:  React.ChangeEvent<HTMLSelectElement>, orderDelivery: string, orderId: number, index: number) {

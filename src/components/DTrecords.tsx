@@ -19,7 +19,7 @@ export default function DTrecords() {
         if (isLogged) {
             loadUserInformation();
         }
-    }, [isLogged]);
+    }, [isLogged]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Switch>

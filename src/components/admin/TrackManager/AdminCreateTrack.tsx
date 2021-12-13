@@ -30,7 +30,7 @@ export default function AdminCreateTrack() {
 
     useEffect(() => {
         setNewTrack({...newTrack, vinyl: vinylList[0]});
-    }, [vinylList]);
+    }, [vinylList]); // eslint-disable-line react-hooks/exhaustive-deps
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {
         if (event.currentTarget.name === "vinyl") {

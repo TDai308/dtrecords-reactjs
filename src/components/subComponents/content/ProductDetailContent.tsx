@@ -9,7 +9,7 @@ import {CartContext} from "../../context/CartProvider";
 import AlbumThumbnailSlider from "./ProductDetailContent/AlbumThumbnailSlider";
 import ProductsContentRow from "./productsContentRow";
 
-export default function ProductDetailContent(props:any) {
+export default function ProductDetailContent() {
     // có thể lấy dữ liệu vinyl dc gửi qua state của location trc khi chuyển đến Link này props.location.state.vinyl
     const [vinyl, setVinyl] = useState<Vinyl>(VinylDefault);
     const [productContents, setProductContents] = useState<{productTitle:string,vinyls:Vinyl[]}[]>([]);
@@ -97,6 +97,7 @@ export default function ProductDetailContent(props:any) {
         getTheVinyl();
         // setVinyl(props.location.state.vinyl);
         setProductContents([]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
 
     useEffect(() => {
@@ -106,6 +107,7 @@ export default function ProductDetailContent(props:any) {
         getVinylsSameArtist();
         getVinylsSameGenre();
         getVinylsSameNation();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [vinyl]);
 
     function play(audioID:number, event:React.MouseEvent<HTMLElement>) {

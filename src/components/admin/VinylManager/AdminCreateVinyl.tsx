@@ -59,11 +59,13 @@ export default function AdminCreateVinyl() {
     useEffect(() => {
         setNewVinyl({...newVinyl, artist: artists[0]});
         VinylForCreatingDefault.artist = artists[0];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [artists]);
 
     useEffect(() => {
         setNewVinyl({...newVinyl, nation: nations[0]});
         VinylForCreatingDefault.nation = nations[0];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nations]);
 
     const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {

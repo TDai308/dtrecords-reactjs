@@ -4,7 +4,6 @@ import {Genre} from "../../../type/Genre";
 import ProductsContentRow from "../productsContentRow";
 import {Link} from "react-router-dom";
 import GenresItem from "./GenresItem";
-import ContentArtist from "./ContentArtist";
 import {Artist} from "../../../type/Artist";
 
 interface productsContent {

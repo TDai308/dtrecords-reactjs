@@ -46,10 +46,12 @@ export default function AdminVinylList() {
 
     useEffect(() => {
         setCurrentPage(query.get("page")===null?1:parseInt(query.get("page")!));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[location]);
 
     useEffect(() => {
         getVinylList(currentPage);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage]);
 
     const deleteVinyl = async (id:number, index:number)=> {

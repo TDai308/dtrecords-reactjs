@@ -40,6 +40,7 @@ export default function AdminEditTrack() {
     useEffect(() => {
        getVinylList();
        getTrack();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>) => {

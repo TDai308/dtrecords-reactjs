@@ -24,8 +24,9 @@ export default function AdminCustomerList() {
 
     useEffect(() => {
         getCustomerList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
     const deleteCustomer = async (customerId:number, index:number) => {
         try {
             await userApi.deleteUser(customerId);

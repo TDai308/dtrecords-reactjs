@@ -55,11 +55,11 @@ export default function ProductList() {
         setSearch(query.get("s")===null?null:query.get("s"));
         $("#productFilters").prop("checked", false);
         $("#productSort").prop("checked", false);
-    },[location]);
+    },[location]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         getVinyls();
-    },[currentPage,sortByAndDir,productOption]);
+    },[currentPage,sortByAndDir,productOption]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleFirstPage = () => {
         let firstPage = 1;
