@@ -5,11 +5,11 @@ import AlbumBanner from "./HomeContent/AlbumBanner";
 
 const ProductListContent = () => {
     const srcImages:string[] = [
-        "http://localhost:8080/images/thumbnails/5.jpg",
-        "http://localhost:8080/images/thumbnails/6.jpg",
-        "http://localhost:8080/images/thumbnails/7.jpg",
-        "http://localhost:8080/images/thumbnails/8.jpg",
-        "http://localhost:8080/images/thumbnails/9.jpg"
+        "https://dtrecords-api.herokuapp.com/images/thumbnails/5.jpg",
+        "https://dtrecords-api.herokuapp.com/images/thumbnails/6.jpg",
+        "https://dtrecords-api.herokuapp.com/images/thumbnails/7.jpg",
+        "https://dtrecords-api.herokuapp.com/images/thumbnails/8.jpg",
+        "https://dtrecords-api.herokuapp.com/images/thumbnails/9.jpg"
     ];
 
     useEffect(() => {

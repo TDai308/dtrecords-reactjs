@@ -27,7 +27,7 @@ export default function HeaderCart() {
                                 justifyContent: "center",
                                 alignItems: "center"
                             }}>
-                                <img src="http://localhost:8080/images/image/cartEmpty.png" alt="shoppingCartEmpty" style={{
+                                <img src="https://dtrecords-api.herokuapp.com/images/image/cartEmpty.png" alt="shoppingCartEmpty" style={{
                                     margin: "10px 0",
                                     width: "20%"
                                 }}/>

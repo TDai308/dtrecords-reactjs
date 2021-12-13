@@ -45,7 +45,7 @@ const ProductsContent: React.FC<productsContent> = ({productContents, genres,art
                     <div className="col l-4 m-4 c-6" id={"all-genres"}>
                         <Link className="genres_box" to="/products">
                             <div className="genres_box__image_genres">
-                                <img src={"http://localhost:8080/images/genres/AllGenre.jpg"} alt="genre" className="genres_box__img"/>
+                                <img src={"https://dtrecords-api.herokuapp.com/images/genres/AllGenre.jpg"} alt="genre" className="genres_box__img"/>
                             </div>
                             <p className="genres_box__title">All</p>
                         </Link>
@@ -63,7 +63,7 @@ const ProductsContent: React.FC<productsContent> = ({productContents, genres,art
             return (
                 <div className="container__content_artist-infor" key={index}>
                     <div className="album__artist_img_name">
-                        <img src={`http://localhost:8080/images/artistImage/${artist.nameArtist}.png`} alt={artist.nameArtist} className="album__artist_img"/>
+                        <img src={`https://dtrecords-api.herokuapp.com/images/artistImage/${artist.nameArtist}.png`} alt={artist.nameArtist} className="album__artist_img"/>
                         <Link to="/" className="album__artist_name">{artist.nameArtist}</Link>
                     </div>
                     <div className="album__artist_find">

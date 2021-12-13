@@ -35,8 +35,8 @@ const AlbumThumbnailSlider:React.FC<AlbumThumbnail> = ({thumbnail1, thumbnail2, 
         <div className="album_thumbnail__slider" id="album_thumbnail__slider">
             <input type="radio" name="radio-btn" id="radio1"/>
             <input type="radio" name="radio-btn" id="radio2"/>
-            <img className="slider__image first" src={`http://localhost:8080/${thumbnail1}`} alt={vinylName}/>
-            <img className="slider__image" src={`http://localhost:8080/${thumbnail2}`} alt={vinylName}/>
+            <img className="slider__image first" src={`https://dtrecords-api.herokuapp.com/${thumbnail1}`} alt={vinylName}/>
+            <img className="slider__image" src={`https://dtrecords-api.herokuapp.com/${thumbnail2}`} alt={vinylName}/>
             <div className="slider__navigation_auto">
                 <div className="auto-btn1"/>
                 <div className="auto-btn2"/>

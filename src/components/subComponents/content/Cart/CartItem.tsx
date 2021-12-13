@@ -11,7 +11,7 @@ const CartItem: React.FC<ShoppingCartInterface> = ({cartItem, updateQuantity, re
     return (
         <div className="cart__product_items">
             <div className="cart__product_img">
-                <img src={`http://localhost:8080/${cartItem.vinyl.thumbnail1}`} alt={cartItem.vinyl.vinylName}/>
+                <img src={`https://dtrecords-api.herokuapp.com/${cartItem.vinyl.thumbnail1}`} alt={cartItem.vinyl.vinylName}/>
             </div>
             <div className="cart__product_infor">
                 <h3>Vinyl Record</h3>
