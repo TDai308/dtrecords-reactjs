@@ -7,6 +7,9 @@ export default function Account() {
 
     return (
         <div className="header__account">
+            <Link to="/admin" className="header__account__link">
+                <i className="fas fa-user-circle"/>
+            </Link>
             <Link to="/" className="header__account__link">
                 <i className="fas fa-user-circle"/>
             </Link>
