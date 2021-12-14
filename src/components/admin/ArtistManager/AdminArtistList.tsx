@@ -82,7 +82,7 @@ export default function AdminArtistList() {
                                 <td>
                                     <img style={{
                                         width: "25%"
-                                    }} src={`https://dtrecords-api.herokuapp.com/images/artistImg/${artist.nameArtist}.png`} alt={`${artist.nameArtist}`}/>
+                                    }} src={`https://dtrecords-api.herokuapp.com/images/artistImage/${artist.nameArtist}.png`} alt={`${artist.nameArtist}`}/>
                                 </td>
                                 <td>{artist.nameArtist}</td>
                                 <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>
