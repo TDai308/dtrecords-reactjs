@@ -42,9 +42,9 @@ export default function SignUp() {
         event.preventDefault();
     };
 
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
 
-    const logoSrc = `${apiUrlDefault}images/logos/logo-black.png`;
+    const logoSrc = `${UrlDefault}images/logos/logo-black.png`;
 
     return (
         <div className="background-signup-loggin">

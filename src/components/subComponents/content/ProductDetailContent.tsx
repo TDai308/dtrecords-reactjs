@@ -20,7 +20,7 @@ export default function ProductDetailContent() {
 
     const {id} = useParams<{id:string}>();
 
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
 
     const getTheVinyl = async () => {
         try {
@@ -212,7 +212,7 @@ export default function ProductDetailContent() {
                                             display: "none"
                                         }}/>
                                     </div>
-                                    <audio className="audio" id={index.toString()} src={`${apiUrlDefault}${track.trackPreview}`}/>
+                                    <audio className="audio" id={index.toString()} src={`${UrlDefault}${track.trackPreview}`}/>
                                 </div>
                             );
                         })
@@ -226,9 +226,9 @@ export default function ProductDetailContent() {
         let optionQuantity = [];
         if (vinyl.quantity > 0) {
             for (let quantity = 1; quantity <= vinyl.quantity; quantity++) {
-                optionQuantity.push(<option value={quantity}>{quantity}</option>);
+                optionQuantity.push(<option key={quantity} value={quantity}>{quantity}</option>);
             }
-        } else optionQuantity.push(<option value={0}>0</option>);
+        } else optionQuantity.push(<option key={0} value={0}>0</option>);
         return optionQuantity;
     };
 

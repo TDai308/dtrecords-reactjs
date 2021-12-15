@@ -44,7 +44,7 @@ export default function AdminCreateTrack() {
         try {
             await trackApi.addNewTrack(newTrack, fileAudio!);
             setCreatingSuccessful(true);
-            setNewTrack(TrackForCreatingDefault);
+            setNewTrack({...TrackForCreatingDefault,vinyl : vinylList[0]});
             setFileAudio(undefined);
             $("#trackPreview").val("");
             $("#file__input--trackPreview").text("None");
