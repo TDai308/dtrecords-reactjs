@@ -3,11 +3,12 @@ import React from "react";
 import {ShoppingCartInterface} from "../content/Cart/CartItem";
 
 const ShoppingCartItem: React.FC<ShoppingCartInterface> = ({cartItem, updateQuantity, removeFromCart}) => {
+    const UrlDefault = process.env["REACT_APP_URL"];
 
     return (
         <div className="shopping_cart_item">
             <div className="shopping_cart_item_img">
-                <img src={`https://dtrecords-api.herokuapp.com/${cartItem.vinyl.thumbnail1}`} alt={cartItem.vinyl.vinylName}/>
+                <img src={`${UrlDefault}${cartItem.vinyl.thumbnail1}`} alt={cartItem.vinyl.vinylName}/>
             </div>
             <div className="shopping_cart_item_infor_delete">
                 <div className="shopping_cart_item_infor">

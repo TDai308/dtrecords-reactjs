@@ -4,7 +4,7 @@ import MenuOnMobileTablet from "./MenuOnMobileTablet";
 import $ from "jquery";
 
 const HeaderLogoAndMenuMobileAndTablet = ():JSX.Element => {
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
     const location = useLocation();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const HeaderLogoAndMenuMobileAndTablet = ():JSX.Element => {
             </div>
 
             <Link to="/" style={{"lineHeight": "0"}}>
-                <img src={`${apiUrlDefault}images/logos/logoInMobileTablet.png`} alt="DTRecords"/>
+                <img src={`${UrlDefault}images/logos/logoInMobileTablet.png`} alt="DTRecords"/>
             </Link>
         </div>
     );

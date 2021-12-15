@@ -17,7 +17,7 @@ export default function AdminEditTrack() {
 
     const {id} = useParams<{id:string}>();
 
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
 
     const getVinylList = async () => {
         try {
@@ -93,7 +93,7 @@ export default function AdminEditTrack() {
             <label className="has-float-label">
                 <input className="sign_up__input" id={"trackPreview"} name="trackPreview" required type="file" accept={"audio/*"} onChange={handleChangeTrackPreview}/>
                 <div className={"file__input"}>
-                    <span id={"file__input--trackPreview"}>{apiUrlDefault}{track.trackPreview}</span>
+                    <span id={"file__input--trackPreview"}>{UrlDefault}{track.trackPreview}</span>
                 </div>
                 <label htmlFor="trackPreview">
                     <i className="fas fa-upload"/> Choose a file...

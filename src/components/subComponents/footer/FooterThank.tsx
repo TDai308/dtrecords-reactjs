@@ -1,9 +1,9 @@
 import React from "react";
 
 export default function FooterThank() {
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
 
-    const logoImageSrc = `${apiUrlDefault}images/logos/coollogo_com-1546772.png`;
+    const logoImageSrc = `${UrlDefault}images/logos/coollogo_com-1546772.png`;
 
     return (
         <div className="footer__thanks">

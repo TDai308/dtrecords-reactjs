@@ -6,6 +6,8 @@ import ShoppingCartList from "./ShoppingCartList";
 export default function HeaderCart() {
     const {cart,quantity, removeFromCart, updateQuantity, price} = useContext(CartContext);
 
+    const UrlDefault = process.env["REACT_APP_URL"];
+
     return (
         <div className="header__cart">
             <Link to="/cart" className="header__cart_icon">
@@ -27,7 +29,7 @@ export default function HeaderCart() {
                                 justifyContent: "center",
                                 alignItems: "center"
                             }}>
-                                <img src="https://dtrecords-api.herokuapp.com/images/image/cartEmpty.png" alt="shoppingCartEmpty" style={{
+                                <img src={`${UrlDefault}images/image/cartEmpty.png`} alt="shoppingCartEmpty" style={{
                                     margin: "10px 0",
                                     width: "20%"
                                 }}/>

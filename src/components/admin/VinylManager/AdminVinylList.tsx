@@ -14,7 +14,7 @@ export default function AdminVinylList() {
     const location = useLocation();
     let query = new URLSearchParams(location.search);
 
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
 
     const history = useHistory();
 
@@ -131,12 +131,12 @@ export default function AdminVinylList() {
                                     <td>{vinyl.artist.nameArtist}</td>
                                     <td>
                                         <div className={"adminPageVinyl__imageVinyl__box"}>
-                                            <img className={"adminPageVinyl__imageVinyl"} id={"thumbnail1"} src={`${apiUrlDefault}${vinyl.thumbnail1}`} alt="thumbnail1"/>
+                                            <img className={"adminPageVinyl__imageVinyl"} id={"thumbnail1"} src={`${UrlDefault}${vinyl.thumbnail1}`} alt="thumbnail1"/>
                                         </div>
                                     </td>
                                     <td>
                                         <div className={"adminPageVinyl__imageVinyl__box"}>
-                                            <img className={"adminPageVinyl__imageVinyl"} id={"thumbnail2"} src={`${apiUrlDefault}${vinyl.thumbnail2}`} alt="thumbnail2"/>
+                                            <img className={"adminPageVinyl__imageVinyl"} id={"thumbnail2"} src={`${UrlDefault}${vinyl.thumbnail2}`} alt="thumbnail2"/>
                                         </div>
                                     </td>
                                     <td>{vinyl.quantity}</td>

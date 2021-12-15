@@ -12,7 +12,7 @@ import {UserContext} from "../../context/UserProvider";
 import $ from "jquery";
 
 export default function AdminEditVinyl() {
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
 
     const [vinyl,setVinyl] = useState<VinylForEditing>(VinylForEditingDefault)
     const [artists, setArtists] = useState<Artist[]>([]);
@@ -167,7 +167,7 @@ export default function AdminEditVinyl() {
             <label className="has-float-label">
                 <input className="sign_up__input" id={"thumbnail1"} name="thumbnail1" required type="file" accept={"image/png, image/jpeg"} onChange={handleChangeImage}/>
                 <div className={"file__input"}>
-                    <span id={"file__input--thumbnail1"}>{apiUrlDefault}{vinyl.thumbnail1}</span>
+                    <span id={"file__input--thumbnail1"}>{UrlDefault}{vinyl.thumbnail1}</span>
                 </div>
                 <label htmlFor="thumbnail1">
                     <i className="fas fa-upload"/> Choose a file...
@@ -180,7 +180,7 @@ export default function AdminEditVinyl() {
             <label className="has-float-label">
                 <input className="sign_up__input" id={"thumbnail2"} name="thumbnail2" required type="file" accept={"image/png, image/jpeg"} onChange={handleChangeImage}/>
                 <div className={"file__input"}>
-                    <span id={"file__input--thumbnail2"}>{apiUrlDefault}{vinyl.thumbnail2}</span>
+                    <span id={"file__input--thumbnail2"}>{UrlDefault}{vinyl.thumbnail2}</span>
                 </div>
                 <label htmlFor="thumbnail2">
                     <i className="fas fa-upload"/> Choose a file...

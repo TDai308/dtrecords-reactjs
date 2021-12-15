@@ -4,9 +4,9 @@ import ProductMenu from "./ProductMenu";
 import BlogMenu from "./BlogMenu";
 
 const HeaderLogoAndMenu = () => {
-    const apiUrlDefault = process.env.REACT_APP_API_URL_DEFAULT;
+    const UrlDefault = process.env["REACT_APP_URL"];
 
-    const logoSrc = `${apiUrlDefault}images/logos/logo.png`;
+    const logoSrc = `${UrlDefault}images/logos/logo.png`;
 
     return(
         <div className="header__logo_menu">

@@ -1,0 +1,2 @@
+localhost: http://localhost:8080/
+heroku: https://dtrecords-api.herokuapp.com/

@@ -8,10 +8,13 @@ export interface ShoppingCartInterface {
 }
 
 const CartItem: React.FC<ShoppingCartInterface> = ({cartItem, updateQuantity, removeFromCart}) => {
+
+    const UrlDefault = process.env["REACT_APP_URL"];
+
     return (
         <div className="cart__product_items">
             <div className="cart__product_img">
-                <img src={`https://dtrecords-api.herokuapp.com/${cartItem.vinyl.thumbnail1}`} alt={cartItem.vinyl.vinylName}/>
+                <img src={`${UrlDefault}${cartItem.vinyl.thumbnail1}`} alt={cartItem.vinyl.vinylName}/>
             </div>
             <div className="cart__product_infor">
                 <h3>Vinyl Record</h3>

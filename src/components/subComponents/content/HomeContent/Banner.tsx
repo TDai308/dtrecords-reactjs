@@ -9,11 +9,11 @@ interface banner {
 
 const Banner:React.FC<banner> = ({artists}) => {
     const srcImages:string[] = [
-        "https://dtrecords-api.herokuapp.com/images/thumbnails/0.jpg",
-        "https://dtrecords-api.herokuapp.com/images/thumbnails/1.jpg",
-        "https://dtrecords-api.herokuapp.com/images/thumbnails/2.jpg",
-        "https://dtrecords-api.herokuapp.com/images/thumbnails/3.jpg",
-        "https://dtrecords-api.herokuapp.com/images/thumbnails/4.jpg"
+        "images/thumbnails/0.jpg",
+        "images/thumbnails/1.jpg",
+        "images/thumbnails/2.jpg",
+        "images/thumbnails/3.jpg",
+        "images/thumbnails/4.jpg"
     ];
 
     return (

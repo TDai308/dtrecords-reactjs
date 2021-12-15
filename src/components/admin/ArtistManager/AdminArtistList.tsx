@@ -11,6 +11,8 @@ export default function AdminArtistList() {
     }[]>([]);
     const [newArtist, setNewArtist] = useState<string>("");
 
+    const UrlDefault = process.env["REACT_APP_URL"];
+
     const getArtistList = async () => {
        try {
            const fetchArtistList = await artistApi.getArtists();
@@ -82,7 +84,7 @@ export default function AdminArtistList() {
                                 <td>
                                     <img style={{
                                         width: "25%"
-                                    }} src={`https://dtrecords-api.herokuapp.com/images/artistImage/${artist.nameArtist}.png`} alt={`${artist.nameArtist}`}/>
+                                    }} src={`${UrlDefault}images/artistImage/${artist.nameArtist}.png`} alt={`${artist.nameArtist}`}/>
                                 </td>
                                 <td>{artist.nameArtist}</td>
                                 <td className="delete__button" onClick={() => handleOpenRemoveNotification(index)}>

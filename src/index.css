@@ -164,11 +164,11 @@ a {
 .background-signup-loggin {
   overflow: auto;
   height: 100vh;
-  background: url("https://dtrecords-api.herokuapp.com/images/logos/coollogo_com-242333430.png") round;
+  background: url("http://localhost:8080/images/logos/coollogo_com-242333430.png") round;
 }
 
 .background-error-404 {
-  background: url("https://dtrecords-api.herokuapp.com/images/admin/glitch-error-404-page_23-2148105404.jpg") round;
+  background: url("http://localhost:8080/images/admin/glitch-error-404-page_23-2148105404.jpg") round;
   background-size: 20%;
   position: fixed;
   top: 0;

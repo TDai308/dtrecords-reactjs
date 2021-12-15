@@ -8,6 +8,8 @@ interface contentArtist {
 }
 
 const ContentArtist:React.FC<contentArtist> = ({artists}) => {
+    const UrlDefault = process.env["REACT_APP_URL"];
+
     const handleMouseEnter = (index: number) => {
         $(`#artist${index}`).css({
             "color":"var(--pink-color)",
@@ -27,7 +29,7 @@ const ContentArtist:React.FC<contentArtist> = ({artists}) => {
             return (
                 <div className="container__content_artist-infor" key={index}>
                     <div className="album__artist_img_name">
-                        <img src={`https://dtrecords-api.herokuapp.com/images/artistImage/${artist.nameArtist}.png`} alt={artist.nameArtist} className="album__artist_img"/>
+                        <img src={`${UrlDefault}images/artistImage/${artist.nameArtist}.png`} alt={artist.nameArtist} className="album__artist_img"/>
                         <Link id={`artist${index}`} to="" className="album__artist_name" onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave(index)}>{artist.nameArtist}</Link>
                     </div>
                     <div className="album__artist_find">
