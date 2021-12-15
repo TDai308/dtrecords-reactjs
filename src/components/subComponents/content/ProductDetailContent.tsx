@@ -164,7 +164,7 @@ export default function ProductDetailContent() {
         return (
             <div className="album__artist">
                 <div className="album__artist_img_name">
-                    <img src={`${UrlDefault}/images/artistImg/${vinyl.artist.nameArtist}.png`} alt={vinyl.artist.nameArtist} className="album__artist_img"/>
+                    <img src={`${UrlDefault}images/artistImage/${vinyl.artist.nameArtist}.png`} alt={vinyl.artist.nameArtist} className="album__artist_img"/>
                     <p className="album__artist_name">{vinyl.artist.nameArtist}</p>
                 </div>
                 <div className="album__like">
